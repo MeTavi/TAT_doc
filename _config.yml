@@ -8,7 +8,7 @@ repo_url: null  # This should remove the link
 repo_label: "View on GitHub"
 
 aux_links:
-  Template Repository: https://github.com/tmr-tau/transit_analytics_tools
+  View on GitHub: https://github.com/tmr-tau/transit_analytics_tools
 
 # External navigation links
 nav_external_links:
