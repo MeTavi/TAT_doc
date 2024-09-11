@@ -1,5 +1,7 @@
 ---
-title: Layout
+layout: default
+title: Sample Code
+parent: Code
 nav_order: 2
 ---
 

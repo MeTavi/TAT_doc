@@ -1,6 +1,7 @@
 ---
+layout: default
 title: Setup Userguide
-nav_order: 2
+nav_order: 3
 ---
 
 # Set up Userguide
