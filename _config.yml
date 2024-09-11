@@ -9,3 +9,8 @@ repo_label: "View on GitHub"
 
 aux_links:
   Template Repository: https://github.com/tmr-tau/transit_analytics_tools
+
+# External navigation links
+nav_external_links:
+  - title: View on GitHub
+    url: https://github.com/tmr-tau/transit_analytics_tools
