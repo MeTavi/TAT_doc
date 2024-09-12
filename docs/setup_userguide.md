@@ -13,15 +13,3 @@ nav_order: 3
 {:toc}
 
 ---
-
-## Topic One
-
-```python
-# template code
-import pandas as pd
-
-df = pd.DataFrame()
-```
-
-## Topic 2
-Describing everything you can.
