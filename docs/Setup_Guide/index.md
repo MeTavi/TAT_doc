@@ -5,7 +5,7 @@ nav_order: 2
 has_toc: false  # Disable the automatic Table of Contents
 ---
 
-# Seting up the process
+# Setting up the process
 {: .no_toc }
 ## Table of contents
 {: .no_toc .text-delta }
