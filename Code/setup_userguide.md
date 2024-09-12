@@ -1,8 +1,12 @@
----
-layout: default
-title: Setup Guide
-nav_order: 2
----
+[//]: # (---)
+
+[//]: # (layout: default)
+
+[//]: # (title: Setup Guide)
+
+[//]: # (nav_order: 2)
+
+[//]: # (---)
 
 # Seting up the process
 {: .no_toc }
@@ -48,43 +52,42 @@ GitHub Desktop will download the repository and set it up on your local machine.
 1. Open your command prompt (or terminal).
 2. Navigate to the directory where you want to clone the repository.
 3. Run the following command:
-   ```bash
-   git clone https://github.com/tmr-tau/transit_analytics_tools.git
-   ```
+
+    ```bash
+    git clone https://github.com/tmr-tau/transit_analytics_tools.git
+    ```
 This will download the repository and create a folder named `transit_analytics_tools` in your current directory.
 Now, you can navigate into the repository folder and start working with the project.
 
-### Set up folder structure and place the raw data in the appropriate folders:
+### Setting Up the Raw Data Directory
 When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory.
 ```text
-+-- Transit_Analytics_Tools_2024
-|   +-- 1_raw_data
-|   |   +-- 1_hastus
-|   |   +-- 2_ gtfs
-|   |   +-- 3_ticketing
-|   +-- 2_input_data
-|   |   +-- 1_reference_tables
-|   |   +-- 2_corridor_definition
-|   |   +-- 3_hastus
-|   |   +-- 4_gtfs
-|   |   +-- 5_transactions
-|   |   +-- 6_trip_stop_timing
-|   +-- 3_etl
-|   |   +-- assets
-|   |   +-- process
-|   |   +-- src
-|   +-- 4_outputs
-|   |   +-- 1_stop_to_stop_outputs
-|   |   +-- 2_travel_time_split
-|   |   +-- 3_corridor_explorer
-|   |   +-- 4_bcap
+    +-- Transit_Analytics_Tools_2024
+    |   +-- 1_raw_data
+    |   |   +-- 1_hastus
+    |   |   +-- 2_ gtfs
+    |   |   +-- 3_ticketing
+    |   +-- 2_input_data
+    |   |   +-- 1_reference_tables
+    |   |   +-- 2_corridor_definition
+    |   |   +-- 3_hastus
+    |   |   +-- 4_gtfs
+    |   |   +-- 5_transactions
+    |   |   +-- 6_trip_stop_timing
+    |   +-- 3_etl
+    |   |   +-- assets
+    |   |   +-- process
+    |   |   +-- src
+    |   +-- 4_outputs
+    |   |   +-- 1_stop_to_stop_outputs
+    |   |   +-- 2_travel_time_split
+    |   |   +-- 3_corridor_explorer
+    |   |   +-- 4_bcap
 ```
 
 ### Setting Up the Python Environment
 
-To set up the Python environment for this project, there is a batch file that automates the process of creating a new virtual environment and installing all the required libraries. Follow the steps below to get started.
-
-#### Steps:
+To set up the Python environment for this project, there is a batch file that automates the process of creating a new virtual environment and installing all the required libraries. Follow the steps below to get started:
 
 1. Navigate to the `3_etl` folder within the project directory:
 

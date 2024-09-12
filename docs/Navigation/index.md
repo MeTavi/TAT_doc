@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Navigation
-nav_order: 5
+nav_order: 3
 has_toc: false  # Disable the automatic Table of Contents
 
 ---
