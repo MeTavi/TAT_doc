@@ -34,6 +34,8 @@ descriptions and additional documentation, please refer to the other documentati
 To clone the repository, you can use either GitHub Desktop or the command line.
 
 #### Option 1: Using GitHub Desktop
+
+
 1. Open **GitHub Desktop**.
 2. Go to **File** > **Clone Repository**.
 3. In the "URL" tab, paste the repository URL:
@@ -45,7 +47,9 @@ To clone the repository, you can use either GitHub Desktop or the command line.
 
 GitHub Desktop will download the repository and set it up on your local machine.
 
-#### Option 2: Using the Command Line
+#### Option 2: Using the Command Line  
+
+
 1. Open your command prompt (or terminal).
 2. Navigate to the directory where you want to clone the repository.
 3. Run the following command:
@@ -57,7 +61,8 @@ This will download the repository and create a folder named `transit_analytics_t
 Now, you can navigate into the repository folder and start working with the project.
 
 ### Setting Up the Raw Data Directory
-When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory.
+
+When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory. 
 ```text
     +-- Transit_Analytics_Tools_2024
     |   +-- 1_raw_data
@@ -123,6 +128,11 @@ Once the environment is set up, you can activate it by running the following com
   ```
 
 ### Check and confirm the configuration files
+
 Ensure that the configuration file contains the full absolute path to the src folder. All other folders are set up with relative paths, so no further updates are needed as long as the folder structure remains consistent.
 
 After placing the raw data in the appropriate folder locations as described above, check the configuration file to ensure that the file names defined for each raw data item are up to date. If any input file names have changed, update the configuration file accordingly.
+
+## More information
+for more information refer to :
+- [Data requirements](data_requirements) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.

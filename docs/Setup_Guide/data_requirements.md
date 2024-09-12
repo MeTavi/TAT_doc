@@ -124,3 +124,4 @@ The Data Preparation module is responsible for transforming raw data into input 
 Once the itinerary data has been processed, the spatial itinerary data is prepared by joining the spatial objects (from the full network) with the corresponding itinerary data. This ensures that the geospatial details are integrated into the itineraries, making the process of reading the spatial network much easier, as only the part of the network relevant to the region of interest is loaded into memory, rather than the full network.
 4. Ticketing Data Preparation
 The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
+
