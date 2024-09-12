@@ -87,7 +87,7 @@ When the repository is cloned, it includes a high-level folder structure with em
     |   |   +-- 4_bcap
 ```
 
-There are three main datasets that must be provided for the process, as outlined below and further explained in the [data requirements](data_requirements) section:
+There are three main datasets that must be provided for the process, as outlined below and further explained in the [data requirements](data_requirement) section:
 1. HASTUS Data: This includes three key items:
     - Itineraries 
     - Street segment network 
@@ -151,4 +151,4 @@ After placing the raw data in the appropriate folder locations as described abov
 
 ## More information
 for more information refer to :
-- [Data requirements](data_requirements) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
+- [Data requirements](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.

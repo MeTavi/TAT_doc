@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Data Requirements
+title: Data Requirement
 parent: Setup Guide
 nav_order: 2
 ---
-# Seting up the process
+# Data Requirement
 {: .no_toc }
 ## Table of contents
 {: .no_toc .text-delta }
@@ -13,7 +13,7 @@ nav_order: 2
 {:toc}
 
 ---
-# Data Requirement
+# High-level folder structure
 The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
 
 ```shell
@@ -37,23 +37,20 @@ The raw data comes mainly from three different sources:
 HASTUS extracts, including itineraries, network data, and stop locations, are used to transfer transit metrics estimated at the stop-to-stop level to the underlying road network.
 
 For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
-1. **Itineraries**
-
-- **Folder Name**: `1_itineraries`
-- **File Naming Convention**: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
-- **Example**:
-```sh
-    1_raw_data/
-    ├── 1_hastus/
-    │   └── [YYYYMMDD]/
-    │      └── 1_itineraries/
-    │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
-    │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
-    │           └── ...
-  
-  __note__: region_1 and region_2 are indicative of different regions.
-   ```
-2. **Network**
+1. Itineraries
+- Folder Name: `1_itineraries`
+- File Naming Convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
+- Example:
+    ```sh
+        1_raw_data/
+        ├── 1_hastus/
+        │   └── [YYYYMMDD]/
+        │      └── 1_itineraries/
+        │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
+        │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
+        │           └── ...
+    ```
+2. Network
 
 - **Folder Name**: `2_streetsegment_network`
 - **Required Shapefiles**: Underlying street segments used within HASTUS at different resolutions covering the whole of Queensland.
@@ -80,14 +77,14 @@ For each analysis period, the user must store these three data items in a new fo
     │          └── (related .dbf and .shx files)
     ```
 
-3. **Stops**
+3. Stops
 
-- **Folder Name**: `3_stops`
-- **Required Files**:
+- Folder Name: `3_stops`
+- Required Files:
     - `stops_location.txt`
     - `stops_main.txt`
     - `stops_period.txt`
-- **Example**:
+- Example:
     ```sh
     1_raw_data/
     ├── 1_hastus/
@@ -140,6 +137,7 @@ Ticketing data includes transactions and trip stop timing data for each month.
     │      └── tripstoptiming_daily_202403.csv
     ```
 ## Reference tables
+
 Data from different sources may use varying conventions to refer to the same service details. For example, the direction names used in the Transactions and Trip Stop Timing Report may differ. Transactions might use Northbound, Southbound, Eastbound, or Westbound, while the Trip Stop Timing data might use North, South, East, and West. Similarly, operators name in the GTFS data may differ from those used in the ticketing data.
 
 To combine scheduling data (GTFS) with ticketing data (transactions and trip stop timing data), reference tables are employed within the ETL process. These tables act as look-up mechanisms that align data from different sources. They also facilitate the exclusion of certain services or invalid ticket types efficiently and transparently. It is important to maintain the reference tables in line with the input ticketing data. This section details the role of the reference tables and highlights key checks to perform when new data sources become available.
