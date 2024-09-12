@@ -56,7 +56,7 @@ Now, you can navigate into the repository folder and start working with the proj
 
 ### Set up folder structure and place the raw data in the appropriate folders:
    When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory.
-    ```shell
+    ```text
     +-- Transit_Analytics_Tools_2024
     |   +-- 1_raw_data
     |   |   +-- 1_hastus
@@ -117,12 +117,12 @@ To set up the Python environment for this project, there is a batch file that au
 Once the environment is set up, you can activate it by running the following command:
 
 - **Windows**:
-  ```shell
+  ```text
   env\Scripts\activate
   ```
 
 - **Mac/Linux**:
-  ```shell
+  ```text
   source env/bin/activate
   ```
 
