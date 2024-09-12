@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Page One
+title: Page Three
 parent: Setup Guide
 nav_order: 2
 ---

@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd21dbc1-fe9b-43fe-a3cf-d982b44189aa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../docs/Setup_Guide/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Setup_Guide/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/Setup_Guide/page_three.md" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/Setup_Guide/page_three.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,13 +37,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/mtavi/Library/Mobile Documents/com~apple~CloudDocs/Documents/Uncategorised/Work/testing_doc/docs/Setup_Guide"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mtavi/Library/Mobile Documents/com~apple~CloudDocs/Documents/Uncategorised/Work/testing_doc/docs/Setup_Guide&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../docs/Setup_Guide" />
