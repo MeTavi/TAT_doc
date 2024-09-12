@@ -37,9 +37,6 @@ data.
 
 ## Prerequisites
 
-1. **Raw Data Files**: Raw data files are not stored within the repository. Ensure you have the access to the raw data
-   files required for processing.
-2. **Folder Structure**: A template of empty folders in the required structure is created when cloning the repository,
-   however, the user should set it up (rename the folders based on the period being analysed). A more description can be
-   found in the proceeding section titled "Folder Structure".
+1. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
+2. **Folder Structure**: A template of empty folders in the required structure is created when cloning the repository; however, the user should set it up by renaming the folders based on the period being analysed. More details can be found in the following section titled 'Folder Structure.'.
 3. **Git account**: Access to TMR-TAU Git account.
