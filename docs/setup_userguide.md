@@ -80,10 +80,6 @@ Now, you can navigate into the repository folder and start working with the proj
     |   |   +-- 4_bcap
     ```
 
-### Set up the python environment
-Here’s a Markdown instruction for the user guide to set up the Python environment:
-
-```markdown
 ### Setting Up the Python Environment
 
 To set up the Python environment for this project, there is a batch file that automates the process of creating a new virtual environment and installing all the required libraries. Follow the steps below to get started.
