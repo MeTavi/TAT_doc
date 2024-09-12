@@ -1,4 +1,5 @@
 ---
+layout: default
 title: Page One
 parent: Navigation
 nav_order: 2
