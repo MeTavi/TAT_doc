@@ -15,3 +15,7 @@ The default page layout supports various navigation features:
 * section heading links for **in-page navigation**, with an optional **back-to-top** link.
 
 See the following pages for how to specify these features, with illustrative examples.
+
+## Setting second title
+
+Some second level information is here.
