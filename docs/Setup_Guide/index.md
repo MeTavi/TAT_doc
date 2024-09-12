@@ -87,6 +87,19 @@ When the repository is cloned, it includes a high-level folder structure with em
     |   |   +-- 4_bcap
 ```
 
+There are three main datasets that must be provided for the process, as outlined below and further explained in the [data requirements](data_requirements) section:
+1. HASTUS Data: This includes three key items:
+    - Itineraries 
+    - Street segment network 
+    - Stops Location
+2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
+3. Ticketing Data: This consists of two key data items:
+   - Transaction data 
+   - Trip stop timing reports 
+{: .note }
+The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date acts as the version identifier and is consistently used across the folder structure and workflow. The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the proceeding sections.
+
+
 ### Setting Up the Python Environment
 
 To set up the Python environment for this project, there is a batch file that automates the process of creating a new virtual environment and installing all the required libraries. Follow the steps below to get started:

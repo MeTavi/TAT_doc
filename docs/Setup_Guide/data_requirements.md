@@ -4,7 +4,15 @@ title: Data Requirements
 parent: Setup Guide
 nav_order: 2
 ---
+# Seting up the process
+{: .no_toc }
+## Table of contents
+{: .no_toc .text-delta }
 
+1. TOC
+{:toc}
+
+---
 # Data Requirement
 The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
 
@@ -25,19 +33,112 @@ The ETL process relies on a well-defined set of data. The data comes in a raw fo
 ## Raw Data Sources
 
 The raw data comes mainly from three different sources:
+### HASTUS data
+HASTUS extracts, including itineraries, network data, and stop locations, are used to transfer transit metrics estimated at the stop-to-stop level to the underlying road network.
 
-1. HASTUS data extracts including the itineraries, network and stop locations. These data are used to transfer the
-   tarnsit metrics estimated at the stop to stop level to the underlying road network.
-2. GTFS data. It is used to capture scheduled services within the analysis period.
-3. Ticketing (transactions and trip stop timings report). This captures the details on the actual trips and is the main
-   source for estimated load and estimated travel time that is reported at different level of aggregations in the final
-   visulaisaitons.
+For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
+1. **Itineraries**
 
+- **Folder Name**: `1_itineraries`
+- **File Naming Convention**: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
+- **Example**:
+    ```sh
+    1_raw_data/
+    ├── 1_hastus/
+    │   └── [YYYYMMDD]/
+    │      └── 1_itineraries/
+    │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
+    │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
+    │           └── ...
+  
+  __note__: region_1 and region_2 are indicative of different regions.
+    ```
+2. **Network**
+
+- **Folder Name**: `2_streetsegment_network`
+- **Required Shapefiles**: Underlying street segments used within HASTUS at different resolutions covering the whole of Queensland.
+- **File Naming Convention**:
+    - `production_streetsegment_high.shp`
+    - `production_streetsegment_medium.shp`
+    - `production_streetsegment_low.shp`
+- **Example**:
+    ```sh
+    1_raw_data/
+    ├── 1_hastus/
+    │   └── [YYYYMMDD]/
+    │      └── 1_itineraries/
+    │      └── 2_streetsgment_network/
+    │          ├── production_streetsegment_high.shp
+    │          ├── production_streetsegment_high.dbf
+    │          ├── production_streetsegment_high.shx
+    │          ├── production_streetsegment_medium.shp
+    │          ├── production_streetsegment_medium.dbf
+    │          ├── production_streetsegment_medium.shx
+    │          ├── production_streetsegment_low.shp
+    │          ├── production_streetsegment_low.dbf
+    │          └── production_streetsegment_low.shx    
+    │          └── (related .dbf and .shx files)
+    ```
+
+3. **Stops**
+
+- **Folder Name**: `3_stops`
+- **Required Files**:
+    - `stops_location.txt`
+    - `stops_main.txt`
+    - `stops_period.txt`
+- **Example**:
+    ```sh
+    1_raw_data/
+    ├── 1_hastus/
+    │   └── [YYYYMMDD]/
+    │      └── 1_itineraries/
+    │      └── 2_streetsgment_network/
+    │      └── 3_stops/
+    │          ├── stops_location.txt
+    │          ├── stops_main.txt
+    │          └── stops_period.txt
+    ```
+
+
+### GTFS data 
+It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data is
+
+- **Folder Name**: `2_gtfs\2_cubic`
+- **Folder Structure**: `<YYYYMMDD>`.
+- **File Naming Convention**: `<region>_GTFS.zip`
+- **NOTE**: The region names must be explicitly included in the file names, as the process iterates through the regions. 
+    ```sh
+    1_raw_data/
+    ├── 1_hastus/
+    ├── 2_gtfs/
+    │   └── 2_cubic/
+    │       └──[YYYYMMDD]/
+    │          ├── region1_GTFS.zip
+    │          ├── region2_GTFS.zip
+    │          └── ...
+    ```
+
+### Ticketing data 
+Ticketing data includes transactions and trip stop timing data for each month. This captures the details on the actual trips and is the main source for estimated load and estimated travel time that is reported at different level of aggregations in the final visualisation.
 The ETL process is designed to validate, read and transform the raw data into the input data. This process is heavily
 relying on the data schema that is defined for each data item above. If any change to the content of the raw data is
 detected, the schema for that data item needs to be updated accordingly. Below section provide more information on each
 data item.
+Ticketing data includes transactions and trip stop timing data for each month.
 
+- **Folder Structure**: `<YYYYMM>`
+- **File Naming Convention**: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
+- **Example**:
+    ```sh
+    data/
+    ├── 1_hastus/
+    ├── 2_gtfs/
+    ├── 3_ticketing/
+    │   └──[YYYYMMDD]/
+    │      ├── transactions_daily_202403.csv
+    │      └── tripstoptiming_daily_202403.csv
+    ```
 ## Reference tables
 Data from different sources may use varying conventions to refer to the same service details. For example, the direction names used in the Transactions and Trip Stop Timing Report may differ. Transactions might use Northbound, Southbound, Eastbound, or Westbound, while the Trip Stop Timing data might use North, South, East, and West. Similarly, operators name in the GTFS data may differ from those used in the ticketing data.
 
