@@ -17,18 +17,18 @@ nav_order: 2
 The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
 
 ```shell
-+-- transit_analytics_tools
-|   +-- 1_raw_data
-|   |   +-- 1_hastus
-|   |   +-- 2_ gtfs
-|   |   +-- 3_ticketing
-|   +-- 2_input_data
-|   |   +-- 1_reference_tables
-|   |   +-- 2_corridor_definition
-|   |   +-- 3_hastus
-|   |   +-- 4_gtfs
-|   |   +-- 5_transactions
-|   |   +-- 6_trip_stop_timing
+    +-- transit_analytics_tools
+    |   +-- 1_raw_data
+    |   |   +-- 1_hastus
+    |   |   +-- 2_ gtfs
+    |   |   +-- 3_ticketing
+    |   +-- 2_input_data
+    |   |   +-- 1_reference_tables
+    |   |   +-- 2_corridor_definition
+    |   |   +-- 3_hastus
+    |   |   +-- 4_gtfs
+    |   |   +-- 5_transactions
+    |   |   +-- 6_trip_stop_timing
 ```
 ## Raw Data Sources
 
@@ -42,7 +42,7 @@ For each analysis period, the user must store these three data items in a new fo
 - **Folder Name**: `1_itineraries`
 - **File Naming Convention**: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
 - **Example**:
-    ```sh
+```sh
     1_raw_data/
     ├── 1_hastus/
     │   └── [YYYYMMDD]/
@@ -52,7 +52,7 @@ For each analysis period, the user must store these three data items in a new fo
     │           └── ...
   
   __note__: region_1 and region_2 are indicative of different regions.
-    ```
+   ```
 2. **Network**
 
 - **Folder Name**: `2_streetsegment_network`
