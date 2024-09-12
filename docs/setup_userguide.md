@@ -13,26 +13,24 @@ nav_order: 2
 {:toc}
 
 ---
-## Introduction
+
+## Prerequisites
+
+1. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
+2. **Folder Structure**: A template of empty folders in the required structure is created when cloning the repository; however, the user should set it up by renaming the folders based on the period being analysed. More details can be found in the following section titled 'Folder Structure.'.
+3. **Git account**: Access to TMR-TAU Git account.
+
+## Instruction
 
 The overall ETL is composed of multiple stages where the raw data are prepared into inputs and then curated at multiple
 stages before producing the outputs that are used for visualisation. This section of the document provides a
 step-by-step guide to setting up and running the Transit Analytic ETL process. This guide is intended for new users
 setting up this process on a local PC. For detailed
-descriptions and additional documentation, please refer to the other relevant documents mentioned herein this document.
+descriptions and additional documentation, please refer to the other documentation sections. Following is the steps required to be undertaken:
 
-The user should follow the below steps where each is further described in this document:
-
-### Clone the repository
-Here is the section written in Markdown:
-
-```markdown
 ### Cloning the Repository
 
-To clone the repository, you can use either GitHub Desktop or the command line. The repository URL is:
-
-```
-https://github.com/tmr-tau/transit_analytics_tools.git
+To clone the repository, you can use either GitHub Desktop or the command line.
 
 #### Option 1: Using GitHub Desktop
 1. Open **GitHub Desktop**.
@@ -83,18 +81,52 @@ Now, you can navigate into the repository folder and start working with the proj
     ```
 
 ### Set up the python environment
-### Check and confirm the configuration files:
+Here’s a Markdown instruction for the user guide to set up the Python environment:
 
+```markdown
+### Setting Up the Python Environment
 
+To set up the Python environment for this project, there is a batch file that automates the process of creating a new virtual environment and installing all the required libraries. Follow the steps below to get started.
 
-This document is not dealing with technical stages involved in data transformation, or the design of the ETL process,
-instead it intends to
-guide a
-new user on how to set up the process for the first time before running the ETL tool for a new analysis period with new
-data.
+#### Steps:
 
-## Prerequisites
+1. Navigate to the `3_etl` folder within the project directory:
 
-1. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
-2. **Folder Structure**: A template of empty folders in the required structure is created when cloning the repository; however, the user should set it up by renaming the folders based on the period being analysed. More details can be found in the following section titled 'Folder Structure.'.
-3. **Git account**: Access to TMR-TAU Git account.
+   ```shell
+   transit_analytic_tools\3_etl
+   ```
+
+2. Run the batch file called `setup.bat`. This will create a Python virtual environment and install the necessary dependencies:
+   - Double-click the `setup.bat` file to run it.
+   - Alternatively, you can run it from the command line:
+     ```shell
+     transit_analytic_tools\3_ETL\setup.bat
+     ```
+     The `setup.bat` file runs the following commands to set up the environment:
+
+      ```shell
+      python -m venv env        # Creates a virtual environment in the 'env' folder
+      source env/bin/activate   # Activates the virtual environment
+      pip install -r requirements.txt  # Installs the required libraries from the requirements.txt file
+      ```
+
+      After running the `setup.bat` file, you will have a fully configured Python environment with all necessary libraries installed.
+
+3. Activating the Environment
+
+Once the environment is set up, you can activate it by running the following command:
+
+- **Windows**:
+  ```shell
+  env\Scripts\activate
+  ```
+
+- **Mac/Linux**:
+  ```shell
+  source env/bin/activate
+  ```
+
+### Check and confirm the configuration files
+Ensure that the configuration file contains the full absolute path to the src folder. All other folders are set up with relative paths, so no further updates are needed as long as the folder structure remains consistent.
+
+After placing the raw data in the appropriate folder locations as described above, check the configuration file to ensure that the file names defined for each raw data item are up to date. If any input file names have changed, update the configuration file accordingly.
