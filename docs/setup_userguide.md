@@ -89,14 +89,14 @@ To set up the Python environment for this project, there is a batch file that au
 1. Navigate to the `3_etl` folder within the project directory:
 
    ```shell
-   transit_analytic_tools\\3_etl
+   transit_analytic_tools/3_etl
    ```
 
 2. Run the batch file called `setup.bat`. This will create a Python virtual environment and install the necessary dependencies:
    - Double-click the `setup.bat` file to run it.
    - Alternatively, you can run it from the command line:
      ```shell
-     transit_analytic_tools\3_ETL\setup.bat
+     transit_analytic_tools/3_etl/setup.bat
      ```
      The `setup.bat` file runs the following commands to set up the environment:
 
@@ -114,7 +114,7 @@ Once the environment is set up, you can activate it by running the following com
 
 - **Windows**:
   ```text
-  env\Scripts\activate
+  env/Scripts/activate
   ```
 
 - **Mac/Linux**:
