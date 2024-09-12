@@ -35,4 +35,4 @@ analyses.
 python,
 specify the part that is done in jupyter notebook_]
 
-![alt text](./media/img.png)
+![Alt text](assets/images/img.png)
