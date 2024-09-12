@@ -55,30 +55,30 @@ This will download the repository and create a folder named `transit_analytics_t
 Now, you can navigate into the repository folder and start working with the project.
 
 ### Set up folder structure and place the raw data in the appropriate folders:
-   When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory.
-    ```text
-    +-- Transit_Analytics_Tools_2024
-    |   +-- 1_raw_data
-    |   |   +-- 1_hastus
-    |   |   +-- 2_ gtfs
-    |   |   +-- 3_ticketing
-    |   +-- 2_input_data
-    |   |   +-- 1_reference_tables
-    |   |   +-- 2_corridor_definition
-    |   |   +-- 3_hastus
-    |   |   +-- 4_gtfs
-    |   |   +-- 5_transactions
-    |   |   +-- 6_trip_stop_timing
-    |   +-- 3_etl
-    |   |   +-- assets
-    |   |   +-- process
-    |   |   +-- src
-    |   +-- 4_outputs
-    |   |   +-- 1_stop_to_stop_outputs
-    |   |   +-- 2_travel_time_split
-    |   |   +-- 3_corridor_explorer
-    |   |   +-- 4_bcap
-    ```
+When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory.
+```text
++-- Transit_Analytics_Tools_2024
+|   +-- 1_raw_data
+|   |   +-- 1_hastus
+|   |   +-- 2_ gtfs
+|   |   +-- 3_ticketing
+|   +-- 2_input_data
+|   |   +-- 1_reference_tables
+|   |   +-- 2_corridor_definition
+|   |   +-- 3_hastus
+|   |   +-- 4_gtfs
+|   |   +-- 5_transactions
+|   |   +-- 6_trip_stop_timing
+|   +-- 3_etl
+|   |   +-- assets
+|   |   +-- process
+|   |   +-- src
+|   +-- 4_outputs
+|   |   +-- 1_stop_to_stop_outputs
+|   |   +-- 2_travel_time_split
+|   |   +-- 3_corridor_explorer
+|   |   +-- 4_bcap
+```
 
 ### Setting Up the Python Environment
 
