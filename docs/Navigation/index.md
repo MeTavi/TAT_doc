@@ -2,6 +2,8 @@
 layout: default
 title: Navigation
 nav_order: 5
+has_toc: false  # Disable the automatic Table of Contents
+
 ---
 
 # Navigation
@@ -19,3 +21,8 @@ See the following pages for how to specify these features, with illustrative exa
 ## Setting second title
 
 Some second level information is here.
+
+
+for more information refere to :
+- [Child Page 1 Title](page_one) - This page covers [description or summary].
+- [Child Page 2 Title](page_two) - This page explains [description or summary].
