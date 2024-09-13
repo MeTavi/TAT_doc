@@ -24,12 +24,8 @@ permalink: /
 
 ## Instruction
 
-The overall ETL is composed of multiple stages where the raw data are prepared into inputs and then curated at multiple
-stages before producing the outputs that are used for visualisation. This section of the document provides a
-step-by-step guide to setting up and running the Transit Analytic ETL process. This guide is intended for new users
-setting up this process on a local PC. For detailed
-descriptions and additional documentation, please refer to the other documentation sections. Following is the steps required to be undertaken:
-
+The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local PC. For detailed descriptions and additional documentation, please refer to the other sections of this document. The following are the steps that need to be undertaken:
+[customize]
 ### Cloning the Repository
 
 To clone the repository, you can use either GitHub Desktop or the command line.
@@ -99,10 +95,12 @@ There are three main datasets that must be provided for the process, as outlined
    - Trip stop timing reports 
 
 {: .important }
-> NOTE: 
 >
-> The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date acts as the version identifier and is consistently used across the folder structure and workflow. The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the proceeding sections.
+> The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. 
+> 
+> It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date serves as the version identifier and is consistently used across the folder structure and workflow. 
 
+The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the [data requirement] section.
 
 ### Setting Up the Python Environment
 
@@ -152,4 +150,8 @@ After placing the raw data in the appropriate folder locations as described abov
 
 ## More information
 for more information refer to :
-- [Data requirements](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
+- [Data requirement](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
+
+----
+[customize]: {% link docs/Overall_Workflow/index.md %}
+[data requirement]: {% link docs/Overall_Workflow/index.md %}
