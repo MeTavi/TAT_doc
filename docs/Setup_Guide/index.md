@@ -97,11 +97,11 @@ There are three main datasets that must be provided for the process, as outlined
    - Transaction data 
    - Trip stop timing reports 
 
-{: .note } 
-The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date acts as the version identifier and is consistently used across the folder structure and workflow. The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the proceeding sections.
+{: .important }
+> NOTE: 
+>
+> The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date acts as the version identifier and is consistently used across the folder structure and workflow. The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the proceeding sections.
 
-{: .highlight }
-A paragraph
 
 ### Setting Up the Python Environment
 
