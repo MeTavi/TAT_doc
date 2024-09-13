@@ -3,7 +3,6 @@ layout: default
 title: Data Requirement
 parent: Setup Guide
 nav_order: 2
-permalink: /
 ---
 # Data Requirement
 {: .no_toc }

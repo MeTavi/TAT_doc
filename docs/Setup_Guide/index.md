@@ -3,7 +3,6 @@ layout: default
 title: Setup Guide
 nav_order: 2
 has_toc: false  # Disable the automatic Table of Contents
-permalink: /
 ---
 
 # Setting up the process
