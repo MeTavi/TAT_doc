@@ -1,7 +1,7 @@
 title: Transit Analytics Tools
 description: A set of python based code analysing transit's ticketing and scheduling data.
 theme: just-the-docs
-
+color_scheme: dark
 url: https://github.com/tmr-tau/transit_analytics_tools
 
 repo_url: null  # This should remove the link
