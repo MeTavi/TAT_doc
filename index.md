@@ -17,8 +17,13 @@ The overall ETL process, shown in figure below, outlines the high-level steps in
 utilised in Corridor Explorer and BCAP.However, these outputs can also be adapted to support other custom dashboards and
 analyses.
 
+{: .note-title }
+> My note title
+>
+> A paragraph with a custom title callout
+
 ![Alt text](./assets/images/img.png)
 
 ----
 [^1]: Bus operators feedback data was obtained through direct engagement of TransLink service planning team with operators across the South East Queensland bus network in December 2020. The same data is used for all analysis period.
-{: .fs-1 }
+{: .fs-1 .fw-300 }
