@@ -23,14 +23,14 @@ has_toc: false  # Disable the automatic Table of Contents
 
 ## Instruction
 
-The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local PC. For detailed descriptions and additional documentation, please refer to the other sections of this document. The following are the steps that need to be undertaken:
-[customize]
+The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local computer.  For more information on a high-level view of the workflow refer to the [overall workflow] section. 
+The following are the steps that need to be undertaken to set up the process:
+
 ### Cloning the Repository
 
-To clone the repository, you can use either GitHub Desktop or the command line.
+Clone the repository to access the code on your local computer. You can use either GitHub Desktop or the command line.
 
 #### Option 1: Using GitHub Desktop
-
 
 1. Open **GitHub Desktop**.
 2. Go to **File** > **Clone Repository**.
@@ -60,7 +60,7 @@ Now, you can navigate into the repository folder and start working with the proj
 
 When the repository is cloned, it includes a high-level folder structure with empty placeholder files and folders, as shown below. However, since the raw data is not included in the repository, the user must transfer the raw data to the appropriate folders and ensure that subfolders are properly created and named under the raw data directory. 
 ```text
-    +-- Transit_Analytics_Tools_2024
+    +-- transit_analytics_tools
     |   +-- 1_raw_data
     |   |   +-- 1_hastus
     |   |   +-- 2_ gtfs
@@ -75,7 +75,7 @@ When the repository is cloned, it includes a high-level folder structure with em
     |   +-- 3_etl
     |   |   +-- assets
     |   |   +-- process
-    |   |   +-- src
+    |   |   +-- src 
     |   +-- 4_outputs
     |   |   +-- 1_stop_to_stop_outputs
     |   |   +-- 2_travel_time_split
@@ -83,15 +83,15 @@ When the repository is cloned, it includes a high-level folder structure with em
     |   |   +-- 4_bcap
 ```
 
-There are three main datasets that must be provided for the process, as outlined below and further explained in the [data requirements](data_requirement) section:
-1. HASTUS Data: This includes three key items:
-    - Itineraries 
-    - Street segment network 
-    - Stops Location
-2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
-3. Ticketing Data: This consists of two key data items:
-   - Transaction data 
-   - Trip stop timing reports 
+There are three main datasets that should be provided for the process, as outlined below and further explained in the [data requirement] section:
+1. [HASTUS Data]: This includes three key items:
+   - Itineraries
+   - Street segment network
+   - Stop locations
+2. [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
+3. [Ticketing Data]: This consists of two key data items:
+   - Transaction data
+   - Trip stop timing reports
 
 {: .important }
 >
@@ -99,7 +99,7 @@ There are three main datasets that must be provided for the process, as outlined
 > 
 > It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date serves as the version identifier and is consistently used across the folder structure and workflow. 
 
-The following sections describe the naming conventions and folder structure for each of these datasets. The content and processing of the raw data will be discussed in the [data requirement] section.
+
 
 ### Setting Up the Python Environment
 
@@ -132,25 +132,26 @@ To set up the Python environment for this project, there is a batch file that au
 Once the environment is set up, you can activate it by running the following command:
 
 - **Windows**:
-  ```text
+  ```shell
   env/Scripts/activate
   ```
 
 - **Mac/Linux**:
-  ```text
+  ```shell
   source env/bin/activate
   ```
 
 ### Check and confirm the configuration files
-
-Ensure that the configuration file contains the full absolute path to the src folder. All other folders are set up with relative paths, so no further updates are needed as long as the folder structure remains consistent.
-
-After placing the raw data in the appropriate folder locations as described above, check the configuration file to ensure that the file names defined for each raw data item are up to date. If any input file names have changed, update the configuration file accordingly.
+Ensure the configuration file includes the full absolute path to the `src` folder. Since all other folders are set up with relative paths, no further changes are required as long as the folder structure remains consistent.
+Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are current. If any file names have changed, update the configuration file accordingly.
 
 ## More information
-for more information refer to :
+for more information refer:
 - [Data requirement](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
 
 ----
-[customize]: {% link docs/Overall_Workflow/index.md %}
+[overall workflow]: {% link docs/Overall_Workflow/index.md %}
+[HASTUS Data]: {% link docs/Overall_Workflow/index.md %}#hastus-data
+[GTFS Data]: {% link docs/Overall_Workflow/index.md %}#gtfs-data
+[Ticketing Data]: {% link docs/Overall_Workflow/index.md %}#ticketing-data
 [data requirement]: {% link docs/Overall_Workflow/index.md %}
