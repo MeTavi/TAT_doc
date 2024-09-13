@@ -2,6 +2,7 @@
 title: Home
 layout: home
 nav_order: 1
+permalink: /
 ---
 
 ## Introduction
@@ -18,5 +19,6 @@ The overall ETL process, illustrated in the figure below, outlines the high-leve
 
 
 ![Alt text](./assets/images/img.png)
+
 ----
 [^1]: Bus operators feedback data was obtained through direct engagement of TransLink service planning team with operators across the South East Queensland bus network in December 2020. The same data is used for all analysis period.
