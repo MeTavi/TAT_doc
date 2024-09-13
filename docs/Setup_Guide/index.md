@@ -84,14 +84,16 @@ When the repository is cloned, it includes a high-level folder structure with em
 ```
 
 There are three main datasets that should be provided for the process, as outlined below and further explained in the [data requirement] section:
-1. [HASTUS Data]: This includes three key items:
+1. HASTUS Data [HASTUS Data]: This includes three key items:
    - Itineraries
    - Street segment network
    - Stop locations
-2. [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
-3. [Ticketing Data]: This consists of two key data items:
+2. GTFS Data [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
+3. Ticketing Data [Ticketing Data]: This consists of two key data items:
    - Transaction data
    - Trip stop timing reports
+
+link is [HASTUS Data]
 
 {: .important }
 >
