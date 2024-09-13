@@ -1,7 +1,6 @@
 title: Transit Analytics Tools
 description: A set of python based code analysing transit's ticketing and scheduling data.
 theme: just-the-docs
-color_scheme: dark
 url: https://github.com/tmr-tau/transit_analytics_tools
 
 repo_url: null  # This should remove the link
@@ -14,3 +13,42 @@ aux_links:
 nav_external_links:
   - title: View on GitHub
     url: https://github.com/tmr-tau/transit_analytics_tools
+
+# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
+color_scheme: nil
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
+kramdown:
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# For copy button on code
+enable_copy_code_button: true
+
+# Footer content
+# appears at the bottom of every page's main content
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer last edited timestamp
+last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
