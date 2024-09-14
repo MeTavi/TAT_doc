@@ -84,16 +84,16 @@ When the repository is cloned, it includes a high-level folder structure with em
 ```
 
 There are three main datasets that should be provided for the process, as outlined below and further explained in the [data requirement] section:
-1. HASTUS Data [HASTUS Data]: This includes three key items:
+1. HASTUS Data: This includes three key items:
    - Itineraries
    - Street segment network
    - Stop locations
-2. GTFS Data [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility.
+See more information about the [HASTUS Data] in the data_requirement section.
+2. GTFS Data [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the data_requirement section.
 3. Ticketing Data [Ticketing Data]: This consists of two key data items:
    - Transaction data
    - Trip stop timing reports
-
-link is [HASTUS Data]
+See more information about the [Ticketing Data] in the data_requirement section.
 
 {: .important }
 >
@@ -153,7 +153,7 @@ for more information refer:
 
 ----
 [overall workflow]: {% link docs/Overall_Workflow/index.md %}
-[HASTUS Data]: {% link docs/Overall_Workflow/index.md %}#hastus-data
-[GTFS Data]: {% link docs/Overall_Workflow/index.md %}#gtfs-data
-[Ticketing Data]: {% link docs/Overall_Workflow/index.md %}#ticketing-data
+[HASTUS Data]: {% link docs/Setup_Guide/data_requirement.md %}#hastus-data
+[GTFS Data]: {% link docs/Setup_Guide/data_requirement.md %}#gtfs-data
+[Ticketing Data]: {% link docs/Setup_Guide/data_requirement.md %}#ticketing-data
 [data requirement]: {% link docs/Overall_Workflow/index.md %}
