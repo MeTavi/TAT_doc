@@ -13,8 +13,9 @@ nav_order: 2
 {:toc}
 
 ---
-# High-level folder structure
-The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
+# Data Folder Structure Overview
+
+The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data folder in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
 
 ```shell
     +-- transit_analytics_tools
@@ -36,10 +37,10 @@ The raw data comes mainly from three different sources:
 ### HASTUS data
 HASTUS extracts, including itineraries, network data, and stop locations, are used to transfer transit metrics estimated at the stop-to-stop level to the underlying road network.
 
-For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
+For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date as described in the [setup guide]. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
 1. Itineraries
-- Folder Name: `1_itineraries`
-- File Naming Convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
+- Folder name: `1_itineraries`
+- File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
 - Example:
     ```sh
         1_raw_data/
@@ -52,12 +53,12 @@ For each analysis period, the user must store these three data items in a new fo
     ```
 2. Network
 
-- **Folder Name**: `2_streetsegment_network`
-- **Required Shapefiles**: Underlying street segments used within HASTUS at different resolutions covering the whole of Queensland.
-- **File Naming Convention**:
-    - `production_streetsegment_high.shp`
+- **Folder name**: `2_streetsegment_network`
+- **Required shapefiles**: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
+    - `production_streetsegment_high.shp` 
     - `production_streetsegment_medium.shp`
-    - `production_streetsegment_low.shp`
+    - `production_streetsegment_low.shp` , 
+- **File naming convention**: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
 - **Example**:
     ```sh
     1_raw_data/
@@ -71,19 +72,17 @@ For each analysis period, the user must store these three data items in a new fo
     │          ├── production_streetsegment_medium.shp
     │          ├── production_streetsegment_medium.dbf
     │          ├── production_streetsegment_medium.shx
-    │          ├── production_streetsegment_low.shp
-    │          ├── production_streetsegment_low.dbf
-    │          └── production_streetsegment_low.shx    
+    │          ├── production_streetsegment_low.shp  
     │          └── (related .dbf and .shx files)
     ```
 
 3. Stops
 
-- Folder Name: `3_stops`
-- Required Files:
-    - `stops_location.txt`
-    - `stops_main.txt`
-    - `stops_period.txt`
+- Folder name: `3_stops`
+- Required files:
+    - `stops_location.txt` (required)
+    - `stops_main.txt` (optional)
+    - `stops_period.txt` (optional)
 - Example:
     ```sh
     1_raw_data/
@@ -99,7 +98,7 @@ For each analysis period, the user must store these three data items in a new fo
 
 
 ### GTFS data 
-It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data is
+It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region. 
 
 - **Folder Name**: `2_gtfs\2_cubic`
 - **Folder Structure**: `<YYYYMMDD>`.
@@ -224,3 +223,5 @@ Once the itinerary data has been processed, the spatial itinerary data is prepar
 4. Ticketing Data Preparation
 The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
 
+----
+[setup guide]: {% link docs/Setup_Guide/index.md %}
