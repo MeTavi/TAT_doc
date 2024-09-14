@@ -26,7 +26,7 @@ has_toc: false  # Disable the automatic Table of Contents
 The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local computer.  For more information on a high-level view of the workflow refer to the [overall design] section. 
 The following are the steps that need to be undertaken to set up the process:
 
-![Alt text](/assets/images/setting_up_steps.png)
+![Setting Up Steps]({{ "/assets/images/setting_up_steps.png" | relative_url }})
 
 ### Cloning the Repository
 
@@ -145,7 +145,7 @@ Once the environment is set up, you can activate it by running the following com
   source env/bin/activate
   ```
 
-### Update the configuration files
+### Update the Configuration Files
 Ensure the configuration file includes the full absolute path to the `src` folder. Since all other folders are set up with relative paths, no further changes are required as long as the folder structure remains consistent.
 Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are current. If any file names have changed, update the configuration file accordingly.
 
