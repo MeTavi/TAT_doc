@@ -89,19 +89,19 @@ There are three main datasets that should be provided for the process, as outlin
 1. HASTUS Data: This includes three key items:
    - Itineraries
    - Street segment network
-   - Stop locations
-See more information about the [HASTUS Data] in the data_requirement section.
-2. GTFS Data [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the data_requirement section.
+   - Stop locations  
+See more information about the [HASTUS Data] in the data requirement section.
+2. GTFS Data [GTFS Data]: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the data requirement section.
 3. Ticketing Data [Ticketing Data]: This consists of two key data items:
    - Transaction data
-   - Trip stop timing reports
-See more information about the [Ticketing Data] in the data_requirement section.
+   - Trip stop timing reports  
+See more information about the [Ticketing Data] in the data requirement section.
 
 {: .important }
 >
 > The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. 
 > 
-> It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. As a result, the GTFS release date serves as the version identifier and is consistently used across the folder structure and workflow. 
+> As a result, the GTFS release date serves as the version identifier and is consistently used across the entire folder structure within the Transit Analytics Tools. 
 
 
 
