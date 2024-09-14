@@ -23,8 +23,10 @@ has_toc: false  # Disable the automatic Table of Contents
 
 ## Instruction
 
-The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local computer.  For more information on a high-level view of the workflow refer to the [overall workflow] section. 
+The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local computer.  For more information on a high-level view of the workflow refer to the [overall design] section. 
 The following are the steps that need to be undertaken to set up the process:
+
+![Alt text](./assets/images/setting_up_steps.png)
 
 ### Cloning the Repository
 
@@ -152,7 +154,7 @@ for more information refer:
 - [Data requirement](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
 
 ----
-[overall workflow]: {% link docs/Overall_Workflow/index.md %}
+[overall design]: {% link docs/Overall_Workflow/index.md %}
 [HASTUS Data]: {% link docs/Setup_Guide/data_requirement.md %}#hastus-data
 [GTFS Data]: {% link docs/Setup_Guide/data_requirement.md %}#gtfs-data
 [Ticketing Data]: {% link docs/Setup_Guide/data_requirement.md %}#ticketing-data
