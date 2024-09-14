@@ -39,51 +39,50 @@ HASTUS extracts, including itineraries, network data, and stop locations, are us
 
 For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date as described in the [setup guide]. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
 1. Itineraries
-- Folder name: `1_itineraries`
-- File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
-- Example:
-    ```sh
-        1_raw_data/
-        ├── 1_hastus/
-        │   └── [YYYYMMDD]/
-        │      └── 1_itineraries/
-        │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
-        │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
-        │           └── ...
-    ```
+   - Folder name: `1_itineraries`
+   - File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
+   - Example:
+       ```sh
+           1_raw_data/
+           ├── 1_hastus/
+           │   └── [YYYYMMDD]/
+           │      └── 1_itineraries/
+           │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
+           │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
+           │           └── ...
+       ```
 
-{: .important-title }
-> Itineraries and GTFS Compatibility
-> 
-> It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
->
-
+   {: .important-title }
+    >    Itineraries and GTFS Compatibility
+    > 
+    >    It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
+    >
 
 2. Network
 
-- **Folder name**: `2_streetsegment_network`
-- **Required shapefiles**: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
-    - `production_streetsegment_high.shp` 
-    - `production_streetsegment_medium.shp`
-    - `production_streetsegment_low.shp` , 
-- **File naming convention**: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
-- **Example**:
-    ```sh
-    1_raw_data/
-    ├── 1_hastus/
-    │   └── [YYYYMMDD]/
-    │      └── 1_itineraries/
-    │      └── 2_streetsgment_network/
-    │          ├── production_streetsegment_high.shp
-    │          ├── production_streetsegment_high.dbf
-    │          ├── production_streetsegment_high.shx
-    │          ├── production_streetsegment_medium.shp
-    │          ├── production_streetsegment_medium.dbf
-    │          ├── production_streetsegment_medium.shx
-    │          ├── production_streetsegment_low.shp  
-    │          └── (related .dbf and .shx files)
-    ```
-
+   - **Folder name**: `2_streetsegment_network`
+   - **Required shapefiles**: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
+       - `production_streetsegment_high.shp` 
+       - `production_streetsegment_medium.shp`
+       - `production_streetsegment_low.shp` 
+   - **File naming convention**: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
+   - **Example**:
+       ```sh
+       1_raw_data/
+       ├── 1_hastus/
+       │   └── [YYYYMMDD]/
+       │      └── 1_itineraries/
+       │      └── 2_streetsgment_network/
+       │          ├── production_streetsegment_high.shp
+       │          ├── production_streetsegment_high.dbf
+       │          ├── production_streetsegment_high.shx
+       │          ├── production_streetsegment_medium.shp
+       │          ├── production_streetsegment_medium.dbf
+       │          ├── production_streetsegment_medium.shx
+       │          ├── production_streetsegment_low.shp  
+       │          
+       ```
+     
 3. Stops
 
 - Folder name: `3_stops`
@@ -199,25 +198,26 @@ The Data Preparation module is responsible for transforming raw data into input 
     The data preparation stage corrected the direction of spatial objects as following:
     - It reverses the direction of links with `FLOW` values equal to `DO`, `DOB` to correct the link directions to be the direction of travel. 
     - It also generates a new spatial object for two-way links, so that the end result contains one link per direction. 
-    - Links with `FLOW` values equal to 'OD', 'ODB' remains unchanged as the direction in which they are drawn is the same the direction of travel. 
-   Table blow shows attributes of the raw network files that is used within the Transit Analytics Tools.
-
-| Attribute | Description                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ID        | Identifies a unique link within the HASTUS system. These links IDs comes from HASTUS network source (Street Pro Nav) which over time has been modified. New links created within HASTUS has a prefix of "GIRO" and a same link ID in two different versions of the HASTUS extract may differ, especially when an old link is split.In such cases, part of the link retains the original ID, while the other part(s) receive a new ID prefixed with “GIRO. |
-| Flow      | The direction of the link that is, the direction in which the link is drawn.                                                                                                                                                                                                                                                                                                                                                                              |
-| NODE_O    | This is the origin node number. Similar to the ID field above, there may be inconsistencies for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                  |
-| NODE_D    | This is the destination node number. Similar to the ID field above, there may be inconsistences for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                              |
-| SPEED2    | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                          | 
-| LENGTH    | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                        |  
-                                                                                                                                                                                                                                                                                                                                                                                                         | 
+    - Links with `FLOW` values equal to 'OD', 'ODB' remains unchanged as the direction in which they are drawn is the same the direction of travel.
+   
+    Table below shows attributes of the raw network files that is used within the Transit Analytics Tools.
+    
+    | Attribute | Description                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+    |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | ID        | Identifies a unique link within the HASTUS system. These links IDs comes from HASTUS network source (Street Pro Nav) which over time has been modified. New links created within HASTUS has a prefix of "GIRO" and a same link ID in two different versions of the HASTUS extract may differ, especially when an old link is split.In such cases, part of the link retains the original ID, while the other part(s) receive a new ID prefixed with “GIRO. |
+    | Flow      | The direction of the link that is, the direction in which the link is drawn.                                                                                                                                                                                                                                                                                                                                                                              |
+    | NODE_O    | This is the origin node number. Similar to the ID field above, there may be inconsistencies for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                  |
+    | NODE_D    | This is the destination node number. Similar to the ID field above, there may be inconsistences for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                              |
+    | SPEED2    | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                          | 
+    | LENGTH    | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                        |  
+                                                                                                                                                                                                                                                                                                                                                                                                             | 
 
 2. Itinerary Data Preparation:
-    Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant stop sequence as follows:
+    Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
-      - The last link of the segment number (n-1) corresponds with the nth stop. 
-      With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in a standardised format for further use in the ETL process. Table below shows the required attributes in the raw itinerary:
+      - The last link of the segment number (n-1) corresponds with the nth stop.     
+    With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence in the relative trip. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in csv format for further use in the ETL process. Table below shows the required attributes in the raw itinerary:
     
     | Attribute | Description                                                                                                                                                   |
     |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -230,6 +230,7 @@ The Data Preparation module is responsible for transforming raw data into input 
 
 3. Spatial Itinerary Data Preparation
 Once the itinerary data has been processed, the spatial itinerary data is prepared by joining the spatial objects (from the full network) with the corresponding itinerary data. This ensures that the geospatial details are integrated into the itineraries, making the process of reading the spatial network much easier, as only the part of the network relevant to the region of interest is loaded into memory, rather than the full network.
+
 4. Ticketing Data Preparation
 The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
 
