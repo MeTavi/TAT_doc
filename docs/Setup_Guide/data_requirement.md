@@ -103,7 +103,7 @@ For each analysis period, the user must store these three data items in a new fo
 
 
 ### GTFS data 
-It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region. 
+It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
 - **Folder Name**: `2_gtfs\2_cubic`
 - **Folder Structure**: `<YYYYMMDD>`.
@@ -123,7 +123,7 @@ It is used to capture scheduled services within the analysis period.GTFS data sh
 ### Ticketing data 
 Ticketing data includes transactions and trip stop timing data, provided in separate files, each containing one month's worth of data. This data captures the details of actual trips and serves as the main source for estimating load and travel time, which are reported at different levels of aggregation in the final visualisation.
 
-Since there is no clear naming convention when the files are received, the user should create a folder named in the format `<YYYYMM>`, corresponding to the data's month and year, and place both files in that folder. The files must then be renamed according to the naming conventions explained below and placed in the appropriate folders.
+Since there is no clear naming convention when the files are received, the user should create a folder named in the format `<YYYYMM>`, corresponding to the data's month and year, and place both files in that folder. The files must then be renamed according to the naming conventions explained below.
 
 - **Folder Structure**: `<YYYYMM>`
 - **File Naming Convention**: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
