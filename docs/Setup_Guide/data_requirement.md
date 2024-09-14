@@ -107,38 +107,38 @@ For each analysis period, the user must store these three data items in a new fo
 ### GTFS data 
 It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
-- **Folder Name**: `2_gtfs\2_cubic`
-- **Folder Structure**: `<YYYYMMDD>`.
-- **File Naming Convention**: `<region>_GTFS.zip`
-- **NOTE**: The region names must be explicitly included in the file names, as the process iterates through the regions. 
-    ```sh
-    1_raw_data/
-    ├── 1_hastus/
-    ├── 2_gtfs/
-    │   └── 2_cubic/
-    │       └──[YYYYMMDD]/
-    │          ├── region1_GTFS.zip
-    │          ├── region2_GTFS.zip
-    │          └── ...
-    ```
+  - **Folder Name**: `2_gtfs\2_cubic`
+  - **Folder Structure**: `<YYYYMMDD>`.
+  - **File Naming Convention**: `<region>_GTFS.zip`
+  - **NOTE**: The region names must be explicitly included in the file names, as the process iterates through the regions. 
+      ```sh
+      1_raw_data/
+      ├── 1_hastus/
+      ├── 2_gtfs/
+      │   └── 2_cubic/
+      │       └──[YYYYMMDD]/
+      │          ├── region1_GTFS.zip
+      │          ├── region2_GTFS.zip
+      │          └── ...
+      ```
 
 ### Ticketing data 
 Ticketing data includes transactions and trip stop timing data, provided in separate files, each containing one month's worth of data. This data captures the details of actual trips and serves as the main source for estimating load and travel time, which are reported at different levels of aggregation in the final visualisation.
 
 Since there is no clear naming convention when the files are received, the user should create a folder named in the format `<YYYYMM>`, corresponding to the data's month and year, and place both files in that folder. The files must then be renamed according to the naming conventions explained below.
 
-- **Folder Structure**: `<YYYYMM>`
-- **File Naming Convention**: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
-- **Example**:
-    ```sh
-    data/
-    ├── 1_hastus/
-    ├── 2_gtfs/
-    ├── 3_ticketing/
-    │   └──[YYYYMMDD]/
-    │      ├── transactions_daily_202403.csv
-    │      └── tripstoptiming_daily_202403.csv
-    ```
+  - **Folder Structure**: `<YYYYMM>`
+  - **File Naming Convention**: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
+  - **Example**:
+      ```sh
+      data/
+      ├── 1_hastus/
+      ├── 2_gtfs/
+      ├── 3_ticketing/
+      │   └──[YYYYMMDD]/
+      │      ├── transactions_daily_202403.csv
+      │      └── tripstoptiming_daily_202403.csv
+      ```
 
 The ETL process is designed to validate, read and transform the raw data into the input data. This process is heavily
 relying on the data schema that is defined for each data item above. If any change to the content of the raw data is
@@ -164,6 +164,9 @@ Three main reference tables are used in the system, as outlined below:
     | direction_id     | direction id as it appears in GTFS corresponding the route direction                          |
     | type             | Indicating if a service is a school service or not                                            |
     | include          | A binary field indicating if the service should be included or excluded from further analysis |
+
+    {: .note }
+    Transaction to gtfs data is used by the `TransactionProcessor` to (1) getting the agency id and direction ids of each route so they can letter be joined with the scheduling data, (2) to exclude temporary routes such as rail replacement services, (3) exclude the school services from the process. 
 
 2. Trip Stop Timing to GTFS: Similar to the Transaction to GTFS table, this table is used to join the trip stop timing data with the GTFS data for the same route, direction, and operators, despite differing nomenclature. It also includes columns to specify school services and whether a service should be excluded from analysis. Temporary services such as rail replacements or event-specific services are excluded from processing, and these exclusions can be modified by updating the reference table. The trip stop timing to gtfs reference file follows an identical structure as the transaction to gtfs reference table with the difference that the content of this file corresponds to the trip stop timing report instead of transactions. 
 3. Ticket Status: This table is used to exclude transactions where the boardings or alightings are invalid based on the ticket types. Although invalid boardings or alightings are rare in a typical day, including them in the process could result in outliers in travel time estimation, which would adversely impact the aggregated metrics used in output visualisations. Therefore, it is crucial to exclude these records from the analysis. Table below shows the structure of this reference table: 
@@ -235,4 +238,4 @@ Once the itinerary data has been processed, the spatial itinerary data is prepar
 The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
 
 ----
-[setup guide]: {% link docs/Setup_Guide/index.md %}#setting-up-the-raw-data-directory
+[setup guide]: {% link docs/Setup_Guide/index.md %}#ticketing-data
