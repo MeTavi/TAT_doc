@@ -51,7 +51,8 @@ For each analysis period, the user must store these three data items in a new fo
         │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
         │           └── ...
     ```
-{: .important }
+{: .important-title }
+> Itineraries and GTFS Compatibility
 > 
 > It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
 

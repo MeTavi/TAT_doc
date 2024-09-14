@@ -97,7 +97,8 @@ See more information about the [HASTUS Data] in the data requirement section.
    - Trip stop timing reports  
 See more information about the [Ticketing Data] in the data requirement section.
 
-{: .important }
+{: .important-title }
+> GTFS Release Date as Version Identifier 
 >
 > The entire folder structure and naming conventions used within the transit analytics tool are based on the GTFS release date. 
 > 
