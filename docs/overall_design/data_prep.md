@@ -17,17 +17,22 @@ nav_order: 1
 ---
 
 
-## Data Preparation Module
+## Data Preparation Workflow
 
-The Data Preparation module is responsible for converting raw data into a format suitable for further processing. A Jupyter notebook named `1_prepare_input_data.ipynb` is used. This notebook creates an instance of `DataPreparation` and runs the following methods:
-   - `prepare_full_network()`
-   - `prepare_all_itineraries()`
-   - `prepare_spatial_itinerary()`
-   - `prepare_stop_location()`
-   - `prepare_transactions()`
-   - `prepare_trip_stop_timing()`
+The Data Preparation module is responsible for converting raw data into a format suitable for further processing.  
 
-Each method calls a specific preparation class, encapsulated under the Data Preparation interface. Once prepared, the data is saved locally in the input data folder, ready for use in subsequent steps. Below is a brief description data preparation occurs at each step:
+To prepare the inputs a Jupyter notebook named `1_prepare_input_data.ipynb` can be used. This notebook creates an instance of `DataPreparation` and runs the following methods:  
+
+   - `prepare_full_network()`  
+   - `prepare_all_itineraries()`  
+   - `prepare_spatial_itinerary()`  
+   - `prepare_stop_location()`  
+   - `prepare_transactions()`  
+   - `prepare_trip_stop_timing()`  
+
+Each method calls a specific preparation class, encapsulated under the Data Preparation interface. Once prepared, the data is saved locally in the input data folder, ready for use in subsequent steps.   
+
+Below is a brief description data preparation occurs at each step:
 
 ### Prepare Full Network
 
