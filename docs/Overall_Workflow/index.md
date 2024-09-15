@@ -47,7 +47,7 @@ The ETL tool adheres to four core principles:
 The ETL process is structured around a set of modular components. The folder structure shown below introduces the different components of the ETL process. This section provides an overview of the various modules within the ETL, and the next section, [High-Level Workflow] will link these components based on their roles within the workflow.
 
 ```shell
-+-- Transit_Analytics_Tools_2024
++-- transit_analytics_tools
 |   +-- 3_etl
 |   |   +-- assets
 |   |   |   +-- main_config_file
