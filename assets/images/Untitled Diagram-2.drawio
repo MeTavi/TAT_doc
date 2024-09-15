@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" version="24.7.14">
+  <diagram name="Page-1" id="AbDPYmgCW3kklSsv66WI">
+    <mxGraphModel dx="1059" dy="693" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7FAkaqfFapLBABRm9oj5-9" value="Transit Metric Aggregation" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#B1C7DE;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="350" y="370" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-8" value="Transit Metric Estimation" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#93A6B8;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="170" y="370" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-6" value="Update the Configuration File" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#97AABD;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="530" y="250" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-5" value="Setting Up the Python Env." style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#B1C7DE;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="350" y="250" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-4" value="Setting Up the Raw Data" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#93A6B8;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="170" y="250" width="210" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-3" value="Clone the Repository&amp;nbsp;" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#C6DEF7;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="30" y="250" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7FAkaqfFapLBABRm9oj5-7" value="Data Preparation" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0;dx=24;notch=0;fillColor=#C6DEF7;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="30" y="370" width="170" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
