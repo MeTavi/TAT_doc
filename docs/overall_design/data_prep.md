@@ -68,7 +68,7 @@ The `prepare_stop_location` method within the `DataPreparation`, processes stop 
 - Inferring Direction: It then infers the direction of the link where each stop is located by analysing the loca_segment_side attribute, which indicates the side of the road or link the stop is positioned on.
 The processed stop location data is then saved in csv format for further use in the ETL process. 
 
-### Ticketing Data Preparation
+### Prepare Ticketing Data
 
 The `prepare_transactions` and `prepare_trip_stop_timing` methods from the `DataPreparation` class perform a similar function for their respective datasets. These methods call the `prepare` method from the `PrepareTicketing` class, where the data is read and partitioned by the year, month, and day of the `period dates`. The partitioned data is then stored locally in a structured format, allowing for efficient access and processing in subsequent sections of the ETL.
 
