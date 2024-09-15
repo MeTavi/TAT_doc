@@ -21,7 +21,7 @@ HASTUS extracts, including itineraries, network data, and stop locations, are us
 
 For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date as described in the [setup guide]. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
 1. Itineraries  
-   - Contents: Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
+   - Description: Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
       - The last link of the segment number (n-1) corresponds with the n<sup>th</sup> stop.
@@ -43,7 +43,7 @@ For each analysis period, the user must store these three data items in a new fo
 
    - Folder name: `1_itineraries`
    - File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
-   - Example:
+   - Folder structure:
      ```sh
          1_raw_data/
          ├── 1_hastus/
@@ -60,48 +60,72 @@ For each analysis period, the user must store these three data items in a new fo
         >  All `shape_id`s from the selected GTFS feed for an analysis period must be included in the itinerary table for that same period.
 2. Network
 
+   - Description: The raw network data is provided at three different resolution levels (low, medium, and high) in shape file format. Each layer represents underlying spatial road network (at different resolution level) across the entire state. 
+   - Schema: The raw network data contains several attributes that are not used within the Transit Analytics Tools; below shows only the attributes required by the process the datatypes of each column based on pandas dtypes:
+       
+      | Attribute | Data Type | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+      |:---------:|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      |   `ID`    | `str`     | Identifies a unique link within the HASTUS system. These links IDs comes from HASTUS network source (Street Pro Nav) which over time has been modified. New links created within HASTUS has a prefix of "GIRO" and a same link ID in two different versions of the HASTUS extract may differ, especially when an old link is split.In such cases, part of the link retains the original ID, while the other part(s) receive a new ID prefixed with “GIRO". |
+      |  `Flow`   | `str`     | The direction of the link that is the direction in which the link is drawn.                                                                                                                                                                                                                                                                                                                                                                                |
+      | `NODE_O`  | `str`     | This is the origin node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                         |
+      | `NODE_D`  | `str`     | This is the destination node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                    |
+      | `SPEED2`  | `int64`   | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                           |
+      | `LENGTH`  | `float64` | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links.                                                                                                                                                                                                                                                                               |
+
    - Folder name: `2_streetsegment_network`
    - Required shapefiles: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
        - `production_streetsegment_high.shp` 
        - `production_streetsegment_medium.shp`
        - `production_streetsegment_low.shp` 
    - File naming convention: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
-   - Example:
-       ```sh
-       1_raw_data/
-       ├── 1_hastus/
-       │   └── [YYYYMMDD]/
-       │      └── 1_itineraries/
-       │      └── 2_streetsgment_network/
-       │          ├── production_streetsegment_high.shp
-       │          ├── production_streetsegment_high.dbf
-       │          ├── production_streetsegment_high.shx
-       │          ├── production_streetsegment_medium.shp
-       │          ├── production_streetsegment_medium.dbf
-       │          ├── production_streetsegment_medium.shx
-       │          ├── production_streetsegment_low.shp  
-       │          
-       ```
-     
+   - Folder structure:
+     ```sh
+      1_raw_data/
+      ├── 1_hastus/
+      │   └── [YYYYMMDD]/
+      │      └── 1_itineraries/
+      │      └── 2_streetsgment_network/
+      │          ├── production_streetsegment_high.shp
+      │          ├── production_streetsegment_high.dbf
+      │          ├── production_streetsegment_high.shx
+      │          ├── production_streetsegment_medium.shp
+      │          ├── production_streetsegment_medium.dbf
+      │          ├── production_streetsegment_medium.shx
+      │          ├── production_streetsegment_low.shp  
+      │          
+     ```
 3. Stops
+   - description: The Stops information is part of the HASTUS extract, which contains three distinct files providing details on stop locations and whether a stop is active or inactive across the entire state. For the purpose of Transit Analytics Tools, only stop_location files is utilised. 
+   - Schema: The raw stop_location data contains several attributes that are not used within the Transit Analytics Tools; below shows only the attributes required by the process the datatypes of each column based on pandas dtypes:
+       
+    | Attribute                     | Data Type | Description                                                                              |
+    |-------------------------------|-----------|------------------------------------------------------------------------------------------|
+    | `stp_identifier`              | `str`     | Equivalent to the GTFS stop ID.                                                          |
+    | `sloc_description_specified`  | `str`     | Contains the stop name and the associated street name.                                   |
+    | `loca_longitude`              | `float64` | Longitude of the stop.                                                                   |
+    | `loca_latitude`               | `float64` | Latitude of the stop.                                                                    |
+    | `loca_segment_ext_id`         | `str`     | Unique link identifier corresponding to the `ID` field in the HASTUS network.            |
+    | `loca_dist_inter1`            | `float64` | Distance from the start of the link.                                                     |
+    | `loca_dist_inter2`            | `float64` | Distance from the end of the link.                                                       |
+    | `loca_segment_side`           | `int64`   | Indicates which side of the road the stop is on, with 0 indicating 'To Destination'.     |
 
-- Folder name: `3_stops`
-- Required files:
-    - `stops_location.txt` (required)
-    - `stops_main.txt` (optional)
-    - `stops_period.txt` (optional)
-- Example:
-    ```sh
-    1_raw_data/
-    ├── 1_hastus/
-    │   └── [YYYYMMDD]/
-    │      └── 1_itineraries/
-    │      └── 2_streetsgment_network/
-    │      └── 3_stops/
-    │          ├── stops_location.txt
-    │          ├── stops_main.txt
-    │          └── stops_period.txt
-    ```
+  - Folder name: `3_stops`
+  - Required files:
+      - `stops_location.txt` (required)
+      - `stops_main.txt` (optional)
+      - `stops_period.txt` (optional)
+  - Folder structure:
+     ```sh
+     1_raw_data/
+     ├── 1_hastus/
+     │   └── [YYYYMMDD]/
+     │      └── 1_itineraries/
+     │      └── 2_streetsgment_network/
+     │      └── 3_stops/
+     │          ├── stops_location.txt
+     │          ├── stops_main.txt
+     │          └── stops_period.txt
+     ```
 
 
 ### GTFS data 
@@ -223,16 +247,6 @@ The Data Preparation module is responsible for transforming raw data into input 
     - It also generates a new spatial object for two-way links, so that the end result contains one link per direction. 
     - Links with `FLOW` values equal to `OD`, `ODB` remains unchanged as the direction in which they are drawn is the same the direction of travel.
    
-    Table below shows attributes of the raw network files that is used within the Transit Analytics Tools.
-    
-    | Attribute  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-    |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | `ID`       | Identifies a unique link within the HASTUS system. These links IDs comes from HASTUS network source (Street Pro Nav) which over time has been modified. New links created within HASTUS has a prefix of "GIRO" and a same link ID in two different versions of the HASTUS extract may differ, especially when an old link is split.In such cases, part of the link retains the original ID, while the other part(s) receive a new ID prefixed with “GIRO". |
-    | `Flow`     | The direction of the link that is the direction in which the link is drawn.                                                                                                                                                                                                                                                                                                                                                                                |
-    | `NODE_O`   | This is the origin node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                         |
-    | `NODE_D`   | This is the destination node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                    |
-    | `SPEED2`   | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                           | 
-    | `LENGTH`   | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                         | 
 
 2. Itinerary Data Preparation
 
