@@ -45,13 +45,17 @@ Below is the folder structure where the outputs of the transit metrics are saved
 
 ## Travel Time Estimation 
 
-Following hig-level steps are undertaken to estimate the travel time.
+### High-Level Steps for Estimating Travel Time
 
-1.Estimating the Actual Arrival and Departure Time: Actual (or estimated) Arrival and Departure times are transaction times when available otherwise, approximated using mid-geofence time added to vehicle times as indicated the trip stop timing report (see StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time).
-2.Identifying Stops within the First and Last Actual Stops: Actual arrival and departure times are not always available. The First and Last Actual Stops are defined as the initial and final stops in a trip where both the actual arrival and departure times are available.
-3.Handling Null Values in Actual Arrival and Departure Times within the First and Last Actual Stops: Where the actual arrival and departure times are not available for any of the stops between the first and last actual stops, the values of actual and departure times are interpolated to fill the gaps in the data. As part of this process the sequence of stops are grouped into SectionIDs that is used for the interpolating the travel time.
-4.Estimate Travel Time (per Sections): Travel time per section is estimated using the updated actual arrival and departure times. This is the travel time per section. Where a section could be as small as one stop to stop segment of a given trip or comprise multiple consecutive segments in a trip. (see StopToStopTravelTime.estimated_sections_travel_time_df)
-5.Interpolating Travel Time (Link Level): Travel time (by sections) is transferred to the Street Segment Links using the link length to proportionally distribute the travel time proportional to the links’ length within each section.
+1. **Estimating the Actual Arrival and Departure Time**: Actual (or estimated) arrival and departure times are based on transaction times when available. Otherwise, they are approximated using the mid-geofence time added to vehicle times, as indicated in the trip stop timing report (see `StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time`).
+
+2. **Identifying Stops within the First and Last Actual Stops**: Actual arrival and departure times are not always available. The first and last actual stops are defined as the initial and final stops in a trip where both actual arrival and departure times are available.
+
+3. **Handling Null Values in Actual Arrival and Departure Times within the First and Last Actual Stops**: When actual arrival and departure times are missing for stops between the first and last actual stops, the missing values are interpolated. The stops are grouped into `SectionIDs`, which are used to interpolate the travel time.
+
+4. **Estimating Travel Time (per Section)**: Travel time per section is estimated using the updated actual arrival and departure times. A section could be as small as one stop-to-stop segment or could consist of multiple consecutive segments in a trip (see `StopToStopTravelTime.estimated_sections_travel_time_df`).
+
+5. **Interpolating Travel Time (Link Level)**: Travel time per section is distributed to the street segment links proportionally based on the link length, with travel time allocated according to each link's length within the section.
 
 [//]: # (Each method instantiates additional backend classes to handle specific data processing tasks. The **Ticketing Module** processes the ticketing data, while the **GTFS Module** generates the scheduled timetable data from the GTFS input. These two modules independently process their respective data, which are then combined in the `StopToStopMeasures` class within the **Transit Metrics Module**.)
 
