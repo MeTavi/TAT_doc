@@ -123,7 +123,7 @@ Since there is no clear naming convention when the files are received, the user 
       ├── 1_hastus/
       ├── 2_gtfs/
       ├── 3_ticketing/
-      │   └──[YYYYMMDD]/
+      │   └──[YYYYMM]/
       │      ├── transactions_daily_202403.csv
       │      └── tripstoptiming_daily_202403.csv
       ```
@@ -140,7 +140,8 @@ To combine scheduling data (GTFS) with ticketing data (transactions and trip sto
 
 Three main reference tables are used in the system, as outlined below:
 
-1. Transaction to GTFS: This table is used to join the transaction data and GTFS data for the same route, direction, and operators, even if different names have been used in the two sources to indicate the same direction of travel or operator. Additionally, this table includes two columns that specify whether a service is a school service and whether it should be excluded from analysis. Temporary services, such as rail replacements or services introduced for specific events, are excluded from processing. This exclusion can be adjusted by updating the reference table. Table below shows the required fields in the transaction to gtfs reference file.
+1. Transaction to GTFS 
+    This table is used to join the transaction data and GTFS data for the same route, direction, and operators, even if different names have been used in the two sources to indicate the same direction of travel or operator. Additionally, this table includes two columns that specify whether a service is a school service and whether it should be excluded from analysis. Temporary services, such as rail replacements or services introduced for specific events, are excluded from processing. This exclusion can be adjusted by updating the reference table. Table below shows the required fields in the transaction to gtfs reference file.
 
     | Attribute          | Description                                                                                     |
     |--------------------|-------------------------------------------------------------------------------------------------|
@@ -156,8 +157,12 @@ Three main reference tables are used in the system, as outlined below:
     {: .note }
     Transaction to gtfs data is used by the `TransactionProcessor` for (1) getting the agency id and direction ids of each route, so they can later be joined with the scheduling data. (2) excluding temporary routes such as rail replacement services and other irregular services. (3) excluding the school services from the process. 
 
-2. Trip Stop Timing to GTFS: Similar to the Transaction to GTFS table, this table is used to join the trip stop timing data with the GTFS data for the same route, direction, and operators, despite differing nomenclature. It also includes columns to specify school services and whether a service should be excluded from analysis. Temporary services such as rail replacements or event-specific services are excluded from processing, and these exclusions can be modified by updating the reference table. The trip stop timing to gtfs reference file follows an identical structure as the transaction to gtfs reference table with the difference that the content of this file corresponds to the trip stop timing report instead of transactions. 
-3. Ticket Status: This table is used to exclude transactions where the boardings or alightings are invalid based on the ticket types. Although invalid boardings or alightings are rare in a typical day, including them in the process could result in outliers in travel time estimation, which would adversely impact the aggregated metrics used in output visualisations. Therefore, it is crucial to exclude these records from the analysis. Table below shows the structure of this reference table: 
+2. Trip Stop Timing to GTFS
+
+   Similar to the Transaction to GTFS table, this table is used to join the trip stop timing data with the GTFS data for the same route, direction, and operators, despite differing nomenclature. It also includes columns to specify school services and whether a service should be excluded from analysis. Temporary services such as rail replacements or event-specific services are excluded from processing, and these exclusions can be modified by updating the reference table. The trip stop timing to gtfs reference file follows an identical structure as the transaction to gtfs reference table with the difference that the content of this file corresponds to the trip stop timing report instead of transactions. 
+3. Ticket Status   
+
+   This table is used to exclude transactions where the boardings or alightings are invalid based on the ticket types. Although invalid boardings or alightings are rare in a typical day, including them in the process could result in outliers in travel time estimation, which would adversely impact the aggregated metrics used in output visualisations. Therefore, it is crucial to exclude these records from the analysis. Table below shows the structure of this reference table: 
 
     | Attribute         | Description                                                                                             |
     |-------------------|---------------------------------------------------------------------------------------------------------|
