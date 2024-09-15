@@ -17,9 +17,26 @@ has_toc: false  # Disable the automatic Table of Contents
 
 ## Prerequisites
 
-1. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
-2. **Folder Structure**: A template of empty folders in the required structure is created when cloning the repository; however, the user should set it up by renaming the folders based on the period being analysed. More details can be found in the following section titled 'Folder Structure.'.
-3. **Git account**: Access to TMR-TAU Git account.
+1. **Git account**: Access to the TMR-TAU Git account.
+2. **Software**:
+   - Python (version 3.9)
+   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code)
+   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional)
+3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
+
+## New section:
+
+testing something new 
+{: .fs-6 .fw-300 }
+
+1. Git account: {: .fs-1 .fw-500 } 
+   Access to the TMR-TAU Git account. {: .fs-1 .fw-300 }
+2. Software: {: .fs-2 .fw-500 }
+   - Python (version 3.9){: .fs-1 .fw-300 }
+   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code){: .fs-1 .fw-300 }
+   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional){: .fs-1 .fw-300 }
+3. Raw Data Files: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
+
 
 ## Instruction
 
@@ -91,13 +108,13 @@ There are three main datasets that should be provided for the process, as outlin
    - Street segment network
    - Stop locations      
 
-   See more information about the [HASTUS Data] in the Data Requirements section.
-2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the Data Requirements section.
+   See more information about the [HASTUS Data] in the Data Requirement section.
+2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the Data Requirement section.
 3. Ticketing Data: This consists of two key data items:
    - Transaction data
    - Trip stop timing reports  
    
-   See more information about the [Ticketing Data] in the Data Requirements section.
+   See more information about the [Ticketing Data] in the Data Requirement section.
 
 {: .important-title }
 > GTFS Release Date as Version Identifier 
@@ -152,7 +169,7 @@ Once the raw data is placed in the correct folder locations, review the configur
 
 ## More information
 for more information refer:
-- [Data requirement](data_requirement) - This section introduces the various data requirements and provides details on the naming conventions the user should follow when placing the raw data.
+- [Data requirement](data_requirement) - This section introduces the various Data Requirement and provides details on the naming conventions the user should follow when placing the raw data.
 
 ----
 [overall design]: {% link docs/Overall_Workflow/index.md %}
