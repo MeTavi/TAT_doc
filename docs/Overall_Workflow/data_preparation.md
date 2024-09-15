@@ -2,8 +2,8 @@
 ---
 layout: default
 title: Data Preparation
-parent: Overall Design
-nav_order: 3
+parent: Workflow
+nav_order: 1
 ---
 
 

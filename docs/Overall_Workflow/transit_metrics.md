@@ -2,8 +2,8 @@
 ---
 layout: default
 title: Transit Metric Estimation
-parent: Overall Design
-nav_order: 4
+parent: Workflow
+nav_order: 2
 ---
 
 

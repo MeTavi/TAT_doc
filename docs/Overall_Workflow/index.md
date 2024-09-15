@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Overall Design
+title: Workflow
 nav_order: 3
 has_toc: false  # Disable the automatic Table of Contents
 ---
