@@ -24,20 +24,6 @@ has_toc: false  # Disable the automatic Table of Contents
    - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional)
 3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
 
-## New section:
-
-testing something new 
-{: .fs-6 .fw-300 }
-
-1. Git account: {: .fs-1 .fw-500 } 
-   Access to the TMR-TAU Git account. {: .fs-1 .fw-300 }
-2. Software: {: .fs-2 .fw-500 }
-   - Python (version 3.9){: .fs-1 .fw-300 }
-   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code){: .fs-1 .fw-300 }
-   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional){: .fs-1 .fw-300 }
-3. Raw Data Files: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
-
-
 ## Instruction
 
 The overall ETL process consists of multiple stages, where the raw data are prepared into inputs and then curated at various stages before producing the outputs used for visualisation. This section of the document provides a step-by-step guide to setting up and running the Transit Analytics ETL process. This guide is intended for new users setting up this process on a local computer.  For more information on a high-level view of the workflow refer to the [overall design] section. 
@@ -164,8 +150,11 @@ Once the environment is set up, you can activate it by running the following com
   ```
 
 ### Update the Configuration Files
-Ensure the configuration file includes the full absolute path to the `src` folder. Since all other folders are set up with relative paths, no further changes are required as long as the folder structure remains consistent.
-Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are current. If any file names have changed, update the configuration file accordingly.
+The user should review and update the configuration file as follows: 
+
+1. Update the src folder path: Ensure the configuration file includes the full absolute path to the src folder. Since all other folders use relative paths, no further changes are needed as long as the folder structure remains consistent.
+2. Verify and update file names: Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are accurate. If any file names have changed, update the configuration file accordingly.
+
 
 ## More information
 for more information refer:
