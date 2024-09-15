@@ -18,7 +18,7 @@ nav_order: 1
 ---
 
 
-### Data Preparation Module
+## Data Preparation Module
 
 The Data Preparation module is responsible for converting raw data into a format suitable for further processing. A Jupyter notebook named `1_prepare_input_data.ipynb` is used. This notebook creates an instance of `DataPreparation` and runs the following methods:
    - `prepare_full_network()`
