@@ -2,8 +2,8 @@
 ---
 layout: default
 title: Transit Metric Estimation
-parent: Overall Design of the ETL Tool
-nav_order: 1
+parent: Overall Design
+nav_order: 2
 ---
 
 

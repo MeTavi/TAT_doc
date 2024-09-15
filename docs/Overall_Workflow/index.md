@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Overall Design of the ETL Tool
+title: Overall Design
 nav_order: 3
 has_toc: false  # Disable the automatic Table of Contents
 ---

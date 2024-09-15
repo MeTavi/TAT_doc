@@ -19,9 +19,9 @@ has_toc: false  # Disable the automatic Table of Contents
 
 1. **Git account**: Access to the TMR-TAU Git account.
 2. **Software**:
-   - Python (version 3.9)
-   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code)
-   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional)
+   - Python (version 3.9).
+   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code).
+   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional).
 3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
 4. **Local Storage Space**: Approximately 100GB of local storage is required. However, this estimate may vary significantly depending on the number of analysis periods.
 

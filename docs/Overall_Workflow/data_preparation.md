@@ -2,7 +2,7 @@
 ---
 layout: default
 title: Data Preparation
-parent: Overall Design of the ETL Tool
+parent: Overall Design
 nav_order: 1
 ---
 
