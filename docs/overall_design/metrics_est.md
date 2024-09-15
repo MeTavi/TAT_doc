@@ -77,7 +77,7 @@ Below describes the steps undertaken to estimate these measures.
 
 [//]: # (Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.)
 
-### High-level steps for estimating patronage data
+### High-level Steps for Estimating Patronage Data
 
 1. First, the stop-level activities derived from transaction analysis (`ticketing.get_transaction_stop_load_dataframe`). 
 
