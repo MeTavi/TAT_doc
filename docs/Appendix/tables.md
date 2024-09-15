@@ -13,7 +13,7 @@ has_toc: false  # Disable the automatic Table of Contents
 1. TOC
 {:toc}
 
-## Table 1 - GTFS regions' name
+## Table 1 GTFS regions' name
 Region names as used in HASTUS extract and throughout the Transit Analytics Tools: 
 
 | REG | Region                        |
