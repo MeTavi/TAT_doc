@@ -24,8 +24,8 @@ For each analysis period, the user must store these three data items in a new fo
    - Contents: Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
-      - The last link of the segment number (n-1) corresponds with the nth stop.
-   - Schema: Table below shows the required attributes in the raw itinerary: 
+      - The last link of the segment number (n-1) corresponds with the n<sup>th</sup> stop.
+   - Schema: Table below shows the required attributes in the raw itinerary and the datatypes of each column based on pandas dtypes: 
     
       | Attribute       | Data Type  | Description                                                                                                                                                |
       |-----------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
