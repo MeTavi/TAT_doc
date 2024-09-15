@@ -95,7 +95,7 @@ For each analysis period, the user must store these three data items in a new fo
       │          
      ```
 3. Stops
-   - description: The Stops information is part of the HASTUS extract, which contains three distinct files providing details on stop locations and whether a stop is active or inactive across the entire state. For the purpose of Transit Analytics Tools, only stop_location files is utilised. 
+   - Description: The Stops information is part of the HASTUS extract, which contains three distinct files providing details on stop locations and whether a stop is active or inactive across the entire state. For the purpose of Transit Analytics Tools, only stop_location files is utilised. 
    - Schema: The raw stop_location data contains several attributes that are not used within the Transit Analytics Tools; below shows only the attributes required by the process the datatypes of each column based on pandas dtypes:
    
       | Attribute                     | Data Type | Description                                                                              |
