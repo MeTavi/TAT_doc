@@ -159,8 +159,11 @@ Three main reference tables are used in the system, as outlined below:
     > Usage:
     >
     > Reference Transaction to GTFS data is used by the `TransactionProcessor` for:
-    > (1) getting the agency id and direction ids of each route, so they can later be joined with the scheduling data. 
+    > 
+    > (1) getting the agency id and direction ids of each route, so they can later be joined with the scheduling data.  
+    > 
     > (2) excluding temporary routes such as rail replacement services and other irregular services.
+    >
     > (3) excluding the school services from the process.
   
 2. Trip Stop Timing to GTFS
