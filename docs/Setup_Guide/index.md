@@ -23,6 +23,8 @@ has_toc: false  # Disable the automatic Table of Contents
    - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code)
    - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional)
 3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
+4. **Local Storage Space**: Approximately 100GB of local storage is required. Depending on the number of analysis period this estimation may vary largely.    
+
 
 ## Instruction
 
@@ -88,7 +90,7 @@ When the repository is cloned, it includes a high-level folder structure with em
     |   |   +-- 4_bcap
 ```
 
-There are three main datasets that should be provided for the process, as outlined below and further explained in the [data requirement] section:
+There are three main datasets that should be provided for the process, as outlined below and further explained in the [Data Requirement] section:
 1. HASTUS Data: This includes three key items:
    - Itineraries
    - Street segment network
@@ -156,13 +158,36 @@ The user should review and update the configuration file as follows:
 2. Verify and update file names: Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are accurate. If any file names have changed, update the configuration file accordingly.
 
 
-## More information
-for more information refer:
-- [Data requirement](data_requirement) - This section introduces the various Data Requirement and provides details on the naming conventions the user should follow when placing the raw data.
+## Data Folder Structure Overview
+
+The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data folder in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
+
+```shell
+    +-- transit_analytics_tools
+    |   +-- 1_raw_data
+    |   |   +-- 1_hastus
+    |   |   +-- 2_ gtfs
+    |   |   +-- 3_ticketing
+    |   +-- 2_input_data
+    |   |   +-- 1_reference_tables
+    |   |   +-- 2_corridor_definition
+    |   |   +-- 3_hastus
+    |   |   +-- 4_gtfs
+    |   |   +-- 5_transactions
+    |   |   +-- 6_trip_stop_timing
+```
+
+The ETL process relies on a well-defined set of data, organised into three tiers: raw data, input data, and output data. The raw data, sourced by the user, serves as the foundation of the process. It is processed during the data preparation stage, and the results are saved into the input data folder, making them ready for the subsequent steps within the ETL process.
+
+Additionally, reference tables, which are also part of the input data, are essential for the ETL process to function properly. The user is responsible for keeping these reference tables up-to-date based on changes or updates in the incoming raw data.
+
+Once the inputs are prepared, they are stored locally for access and usage by the ETL process. The process then generates the output data at various stages, which is also stored locally on the drive.
+
+[Data requirement] section focuses on the different components of the raw data, explains the reference tables, and provides a high-level overview of how the input data is prepared. The details of the data produced by the ETL process, referred to as the outputs, will be described in another section.
 
 ----
 [overall design]: {% link docs/Overall_Workflow/index.md %}
 [HASTUS Data]: {% link docs/Setup_Guide/data_requirement.md %}#hastus-data
 [GTFS Data]: {% link docs/Setup_Guide/data_requirement.md %}#gtfs-data
 [Ticketing Data]: {% link docs/Setup_Guide/data_requirement.md %}#ticketing-data
-[data requirement]: {% link docs/Overall_Workflow/index.md %}
+[data requirement]: {% link docs/Setup_Guide/data_requirement.md %}
