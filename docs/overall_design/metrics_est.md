@@ -43,7 +43,7 @@ Below is the folder structure where the outputs of the transit metrics are saved
 
 ```
 
-## Travel Time Estimation 
+
 
 ### High-Level Steps for Estimating Travel Time
 
