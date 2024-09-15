@@ -149,6 +149,11 @@ GTFS data is used to capture scheduled services within the analysis period. GTFS
       │          ├── region2_GTFS.zip
       │          └── ...
       ```
+    
+  {: .note-title }
+  > Cubic GTFS files
+  >
+  >  Cubic versions of the GTFS feeds contain additional extract files used within the Transit Analytics Tools to update and maintain the reference tables. Specifically, the route_ext and trips_ext files. The former is used to identify school, Express, Flexi, and Night services, while the latter is used to assign direction names (in addition to the direction ID) to trip IDs. 
 
 ### Ticketing data  
 
