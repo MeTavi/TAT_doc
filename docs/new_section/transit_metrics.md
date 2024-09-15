@@ -2,7 +2,7 @@
 ---
 layout: default
 title: Transit Metric Estimation
-parent: Workflow
+parent: Sample Process
 nav_order: 2
 ---
 
@@ -30,21 +30,22 @@ nav_order: 2
    Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.
    Below is the folder structure where the outputs of the transit metrics are saved:
        
-      ```shell
-      |   +-- 4_outputs
-      |   |   +-- 1_stop_to_stop_output
-      |   |   |   +-- [YYYMMDD]
-      |   |   |   |   +-- region=SEQ
-      |   |   |   |   |   +-- Year=[YYYY]
-      |   |   |   |   |   |   +-- Month=[MM]
-      |   |   |   |   |   |   |   +-- Day=[dd]
-      |   |   |   |   |   |   |   |   +-- stop_to_stop_measures.parquet.gz
-      |   |   +-- 2_travel_time_split
-      |   |   |   +-- [YYYMMDD]
-      |   |   |   |   +-- region=SEQ
-      |   |   |   |   |   +-- Year=[YYYY]
-      |   |   |   |   |   |   +-- Month=[MM]
-      |   |   |   |   |   |   |   +-- Day=[dd]
-      |   |   |   |   |   |   |   |   +-- link_based_measures.parquet.gz
-      ```
+   ```shell
+   |   +-- 4_outputs
+   |   |   +-- 1_stop_to_stop_output
+   |   |   |   +-- [YYYMMDD]
+   |   |   |   |   +-- region=SEQ
+   |   |   |   |   |   +-- Year=[YYYY]
+   |   |   |   |   |   |   +-- Month=[MM]
+   |   |   |   |   |   |   |   +-- Day=[dd]
+   |   |   |   |   |   |   |   |   +-- stop_to_stop_measures.parquet.gz
+   |   |   +-- 2_travel_time_split
+   |   |   |   +-- [YYYMMDD]
+   |   |   |   |   +-- region=SEQ
+   |   |   |   |   |   +-- Year=[YYYY]
+   |   |   |   |   |   |   +-- Month=[MM]
+   |   |   |   |   |   |   |   +-- Day=[dd]
+   |   |   |   |   |   |   |   |   +-- link_based_measures.parquet.gz
+  
+   ```
 

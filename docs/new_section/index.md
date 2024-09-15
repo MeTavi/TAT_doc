@@ -99,4 +99,10 @@ The workflow is structured around a series of Python modules that handle the dif
 interact with these modules primarily through predefined Jupyter Notebooks. These notebooks serve as a practical
 interface for end users to ensure that the steps of the workflow can be executed in the correct order.
 
-The high-level design of the code is outlined below, explaining the corresponding Jupyter notebook process for each step.
+The high-level design of the code is shown in below image and explained further in the proceeding sections:
+
+![High-level workflow]({{ "/assets/images/overall_workflow.png" | relative_url }})
+
+1. Data Preparation: This process involves transforming raw data into a format that is ready for analysis or further processing.
+2. Transit Metric Estimation:  This process involves estimating key transit metrics, such as travel time (both estimated and scheduled) and passenger loading (including boarding and alighting at each stop). These metrics are calculated at the most granular level possible, specifically for each link along the travelled path of individual trips.
+3. Transit Metric Aggregation: This process involves aggregating the previously estimated metrics and calculating secondary measures such as speed, travel time reliability, and delays. The level of aggregation can be adjusted depending on the specific application. These calculations produce the required outputs for the Corridor Explorer and BCAP dashboards, providing valuable insights for analysis and decision-making. 

@@ -2,7 +2,7 @@
 ---
 layout: default
 title: Data Preparation
-parent: Workflow
+parent: Sample Process
 nav_order: 1
 ---
 
