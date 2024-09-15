@@ -23,8 +23,7 @@ has_toc: false  # Disable the automatic Table of Contents
    - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code)
    - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional)
 3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
-4. **Local Storage Space**: Approximately 100GB of local storage is required. Depending on the number of analysis period this estimation may vary largely.    
-
+4. **Local Storage Space**: Approximately 100GB of local storage is required. However, this estimate may vary significantly depending on the number of analysis periods.
 
 ## Instruction
 

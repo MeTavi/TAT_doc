@@ -13,10 +13,10 @@ nav_order: 2
 {:toc}
 
 ---
-# Raw Data Sources
+## Raw Data Sources
 
 The raw data comes mainly from three different sources:
-## HASTUS data
+### HASTUS data
 HASTUS extracts, including itineraries, network data, and stop locations, are used to transfer transit metrics estimated at the stop-to-stop level to the underlying road network.
 
 For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date as described in the [setup guide]. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
@@ -86,7 +86,7 @@ For each analysis period, the user must store these three data items in a new fo
     ```
 
 
-## GTFS data 
+### GTFS data 
   
 It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
@@ -109,7 +109,7 @@ It is used to capture scheduled services within the analysis period.GTFS data sh
       │          └── ...
       ```
 
-## Ticketing data  
+### Ticketing data  
 
 Ticketing data includes transactions and trip stop timing data, provided in separate files, each containing one month's worth of data. This data captures the details of actual trips and serves as the main source for estimating load and travel time, which are reported at different levels of aggregation in the final visualisation.
 
@@ -132,7 +132,7 @@ The ETL process is designed to validate, read and transform the raw data into th
 relying on the data schema that is defined for each data item above. If any change to the content of the raw data is
 detected, the schema for that data item needs to be updated accordingly. 
 
-# Reference tables
+## Reference tables
 
 Data from different sources may use varying conventions to refer to the same service details. For example, the direction names used in the Transactions and Trip Stop Timing Report may differ. Transactions might use Northbound, Southbound, Eastbound, or Westbound, while the Trip Stop Timing data might use North, South, East, and West. Similarly, operators name in the GTFS data may differ from those used in the ticketing data.
 
@@ -165,7 +165,7 @@ Three main reference tables are used in the system, as outlined below:
     | `boarding_valid`  | A binary field indicating if the corresponding ticket status is valid to be used as a boarding record.  |
     | `alighting_valid` | A binary field indicating if the corresponding ticket status is valid to be used as a alighting record. |
 
-# Input Data
+## Input Data
 
 The Data Preparation module is responsible for transforming raw data into input data, ensuring that the necessary transformations and data cleaning processes are applied. The module contains specific classes for each type of data, and the following outlines the high-level steps involved in preparing the input data from raw sources.
 
@@ -188,7 +188,7 @@ The Data Preparation module is responsible for transforming raw data into input 
     The `PrepareFullNetwork` class within the data preparation module is responsible for preforming the above-mentioned preparation step. The directional corrections of the links are performed as follows: 
     - It reverses the direction of links with `FLOW` values equal to `DO`, `DOB` to correct the link directions to be the direction of travel. 
     - It also generates a new spatial object for two-way links, so that the end result contains one link per direction. 
-    - Links with `FLOW` values equal to 'OD', 'ODB' remains unchanged as the direction in which they are drawn is the same the direction of travel.
+    - Links with `FLOW` values equal to `OD`, `ODB` remains unchanged as the direction in which they are drawn is the same the direction of travel.
    
     Table below shows attributes of the raw network files that is used within the Transit Analytics Tools.
     
@@ -196,7 +196,7 @@ The Data Preparation module is responsible for transforming raw data into input 
     |------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | `ID`       | Identifies a unique link within the HASTUS system. These links IDs comes from HASTUS network source (Street Pro Nav) which over time has been modified. New links created within HASTUS has a prefix of "GIRO" and a same link ID in two different versions of the HASTUS extract may differ, especially when an old link is split.In such cases, part of the link retains the original ID, while the other part(s) receive a new ID prefixed with “GIRO". |
     | `Flow`     | The direction of the link that is the direction in which the link is drawn.                                                                                                                                                                                                                                                                                                                                                                                |
-    | `NODE_O`   | This is the origin node number. Similar to the ID field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                           |
+    | `NODE_O`   | This is the origin node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                         |
     | `NODE_D`   | This is the destination node number. Similar to the `ID` field above, there may be inconsistencies for new links in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                    |
     | `SPEED2`   | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                           | 
     | `LENGTH`   | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                         | 
