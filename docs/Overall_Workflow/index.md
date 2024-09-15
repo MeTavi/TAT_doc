@@ -101,7 +101,9 @@ interface for end users to ensure that the steps of the workflow can be executed
 The high-level design of the code is outlined below, explaining the corresponding Jupyter notebook process for each step.
 
 
-1. **Data Preparation Module**: The Data Preparation module is responsible for converting raw data into a format suitable for further processing. A Jupyter notebook named `1_prepare_input_data.ipynb` is used. This notebook creates an instance of `DataPreparation` and runs the following methods:
+1. **Data Preparation Module**   
+
+   The Data Preparation module is responsible for converting raw data into a format suitable for further processing. A Jupyter notebook named `1_prepare_input_data.ipynb` is used. This notebook creates an instance of `DataPreparation` and runs the following methods:
    - `prepare_stop_location()`
    - `prepare_all_itineraries()`
    - `prepare_full_network()`
@@ -146,13 +148,17 @@ The high-level design of the code is outlined below, explaining the correspondin
    |   |   |   |   |   |   |   +-- trip_stop_timing.parquet.gz
    ```
 
-2. **Estimating Transit Metrics**: After the data is ingested by the data preparation stage above, a series of data cleaning and transformation operations are applied to estimate key transit metrics, such as travel time, load, boarding, and alighting. This phase is handled by the **Transit Metrics Module**, which first calculates the metrics at the stop-to-stop level and then maps them onto the corresponding road network. To generate these metrics, the Jupyter notebook `1_produce_curated_data.ipynb` is used. This notebook instantiates the **Transit Metrics** class and runs two primary methods:
+2. **Estimating Transit Metrics**   
+
+   After the data is ingested by the data preparation stage above, a series of data cleaning and transformation operations are applied to estimate key transit metrics, such as travel time, load, boarding, and alighting. This phase is handled by the **Transit Metrics Module**, which first calculates the metrics at the stop-to-stop level and then maps them onto the corresponding road network. To generate these metrics, the Jupyter notebook `1_produce_curated_data.ipynb` is used. This notebook instantiates the **Transit Metrics** class and runs two primary methods:
    - `produce_stop_to_stop_measures()`
-   - `produce_link_measures()`
-  The `produce_stop_to_stop_measures()` method calculates the transit metrics between stops. When this method is called, it saves its output (the stop-to-stop metrics) locally in the `4_outputs\1_stop_to_stop_outputs`, under a structured partition based on the analysis period, region, year, month, and day. Once the stop-to-stop metrics are saved, the `produce_link_measures()` method can be called. This method reads the outputs saved by the `produce_stop_to_stop_measures()` method from the local drive. It uses these stop-to-stop metrics as input to calculate the link-based measures, mapping them onto the road network. The link-based measures are then saved in the `4_outputs\2_travel_time_split` folder, with a similar partitioning structure as the stop to stop outputs.
-  Each method instantiates additional backend classes to handle specific data processing tasks. The **Ticketing Module** processes the ticketing data, while the **GTFS Module** generates the scheduled timetable data from the GTFS input. These two modules independently process their respective data, which are then combined in the `StopToStopMeasures` class within the **Transit Metrics Module**.
-  Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.
-  Below is the folder structure where the outputs of the transit metrics are saved:
+   - `produce_link_measures()`    
+
+   The `produce_stop_to_stop_measures()` method calculates the transit metrics between stops. When this method is called, it saves its output (the stop-to-stop metrics) locally in the `4_outputs\1_stop_to_stop_outputs`, under a structured partition based on the analysis period, region, year, month, and day.   
+   Once the stop-to-stop metrics are saved, the `produce_link_measures()` method can be called. This method reads the outputs saved by the `produce_stop_to_stop_measures()` method from the local drive. It uses these stop-to-stop metrics as input to calculate the link-based measures, mapping them onto the road network. The link-based measures are then saved in the `4_outputs\2_travel_time_split` folder, with a similar partitioning structure as the stop to stop outputs.
+   Each method instantiates additional backend classes to handle specific data processing tasks. The **Ticketing Module** processes the ticketing data, while the **GTFS Module** generates the scheduled timetable data from the GTFS input. These two modules independently process their respective data, which are then combined in the `StopToStopMeasures` class within the **Transit Metrics Module**.
+   Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.
+   Below is the folder structure where the outputs of the transit metrics are saved:
    
       ```shell
       |   +-- 4_outputs
@@ -173,8 +179,9 @@ The high-level design of the code is outlined below, explaining the correspondin
       
      ```
 
-3. Transit Metric Aggregation: The Data Aggregation stage occurs after transit metrics have been estimated at the link level. At this point, the process branches into two distinct streams, each responsible for aggregating the results into curated datasets for the two primary dashboards: the **Corridor Explorer (CE) Dashboards** and the **Bus Corridor Action Plan (BCAP) Dashboards**.
-Each of these streams has a dedicated module within the **Transit Metrics Aggregate** module. Additionally, separate Jupyter notebooks are provided for generating the outputs for each dashboard as described below:
+3. Transit Metric Aggregation   
+   The Data Aggregation stage occurs after transit metrics have been estimated at the link level. At this point, the process branches into two distinct streams, each responsible for aggregating the results into curated datasets for the two primary dashboards: the **Corridor Explorer (CE) Dashboards** and the **Bus Corridor Action Plan (BCAP) Dashboards**.
+   Each of these streams has a dedicated module within the **Transit Metrics Aggregate** module. Additionally, separate Jupyter notebooks are provided for generating the outputs for each dashboard as described below:
 
 
 
@@ -262,9 +269,6 @@ Similarly, to generate the required outputs for the **BCAP Dashboards**, the Jup
 The `produce_link_measures()` method calls the `BCAPLinksMeasure` class in the backend, which uses a YAML configuration file. This file specifies the list of transformations required to be performed on the input link-based measures produced in step 2 (the transit metrics estimation phase). The transformations ensure that the results align with the specific needs of the BCAP dashboards. The `produce_stop_measures()` method, on the other hand, uses a combination of **trip stop timing reports** and **GTFS data** to produce the required measures at the stop level for the BCAP dashboards. In the backend, this method calls the `BCAPStopMeasures` class, where the operations are performed sequentially to ensure accurate calculation and integration of the stop-level metrics.
 Once the **stop measures** and **link measures** are estimated for the BCAP dashboard, they are stored locally in a partitioned folder structure (by region and by analysis period). The output is saved in the `4_outputs/4_bcap/1_measures/[YYYYMMDD]/region=SEQ/` directory, where the `YYYYMMDD` is the analysis period. Inside this folder, the **segment measures** and **stop measures** are saved in **parquet** format. In the next stage, the Jupyter notebook named `BCAP_Attributes.ipynb` reads all the link and stop measures produced for BCAP across different periods. Several spatial boundaries, such as **Local Government Areas (LGAs)**, **suburbs**, **strategic road networks**, **busways**, **CBD**, **TMR regions** are then appended to the data through sequence of multiple spatial join processes. These spatial labels are added to each record in the two datasets of combined link and combined stops' measures and are used within the BCAP dashboard to filter and display the results accordingly.
 The final results are stored in two formats: **hyper files** for visualisation in **Tableau**, and **parquet files** for programmatic access in Python, if required for other processes.
-
-
-
 
 
 ### Producing Curated Data for BCAP Dashboard
