@@ -151,10 +151,14 @@ Once the environment is set up, you can activate it by running the following com
   ```
 
 ### Update the Configuration Files
-The user should review and update the configuration file as follows: 
+The user should review and update the configuration file that is located under `assets/main_config_files/config.yaml` as follows: 
 
 1. Update the src folder path: Ensure the configuration file includes the full absolute path to the src folder. Since all other folders use relative paths, no further changes are needed as long as the folder structure remains consistent.
 2. Verify and update file names: Once the raw data is placed in the correct folder locations, review the configuration file to confirm that the file names for each raw data item are accurate. If any file names have changed, update the configuration file accordingly.
+
+
+
+
 
 
 ## Data Folder Structure Overview
