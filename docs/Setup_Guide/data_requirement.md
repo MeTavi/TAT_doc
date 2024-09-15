@@ -25,38 +25,39 @@ For each analysis period, the user must store these three data items in a new fo
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
       - The last link of the segment number (n-1) corresponds with the nth stop.
+   - Schema: Table below shows the required attributes in the raw itinerary: 
+    
+      | Attribute       | Data Type  | Description                                                                                                                                                |
+      |-----------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+      | `shape_id`      | `str`      | This uniquely identifies a route variant by direction and matches shape_id in GTFS.                                                                        |
+      | `segment`       | `int64`    | This identifies stop to stop movements. The number of segments is one less than the number of stops in the raw itinerary file.                             |
+      | `order`         | `int64`    | This identifies the order of links in a Segment.                                                                                                           |
+      | `seg_id`        | `str`      | This identifies the link. This is the same as the `ID` field in the network.                                                                               |
+      | `seg_direction` | `category` | This identifies the direction of a link and corresponds with the direction field in the network. Valid values are `To Destination`, `To Origin` and `To `. |
+
    {: .important-title }
     >    Itineraries and GTFS Compatibility
     > 
     >    It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
     >
-    - Schema: Table below shows the required attributes in the raw itinerary: 
-
-    | Attribute       | Data Type  | Description                                                                                                                                                |
-    |-----------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | `shape_id`      | `str`      | This uniquely identifies a route variant by direction and matches shape_id in GTFS.                                                                        |
-    | `segment`       | `int64`    | This identifies stop to stop movements. The number of segments is one less than the number of stops in the raw itinerary file.                             |
-    | `order`         | `int64`    | This identifies the order of links in a Segment.                                                                                                           |
-    | `seg_id`        | `str`      | This identifies the link. This is the same as the `ID` field in the network.                                                                               |
-    | `seg_direction` | `category` | This identifies the direction of a link and corresponds with the direction field in the network. Valid values are `To Destination`, `To Origin` and `To `. |
 
    - Folder name: `1_itineraries`
    - File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
    - Example:
-       ```sh
-           1_raw_data/
-           ├── 1_hastus/
-           │   └── [YYYYMMDD]/
-           │      └── 1_itineraries/
-           │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
-           │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
-           │           └── ...
-       ```
-   {: .note-title }
-    > Data Validation Hint
-    >
-    >  All `shape_id`s from the selected GTFS feed for an analysis period must be included in the itinerary table for that same period.  
-
+     ```sh
+         1_raw_data/
+         ├── 1_hastus/
+         │   └── [YYYYMMDD]/
+         │      └── 1_itineraries/
+         │           ├── region1_YYYYMMDD_GTFS_Itineraries.csv
+         │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
+         │           └── ...
+     ```
+     
+       {: .note-title }
+        > Data Validation Hint
+        >
+        >  All `shape_id`s from the selected GTFS feed for an analysis period must be included in the itinerary table for that same period.
 2. Network
 
    - Folder name: `2_streetsegment_network`
