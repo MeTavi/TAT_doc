@@ -18,7 +18,7 @@ nav_order: 2
 ---
 
 
-### Estimating Transit Metrics  
+## Estimating Transit Metrics  
 
    After the data is ingested by the data preparation stage above, a series of data cleaning and transformation operations are applied to estimate key transit metrics, such as travel time, load, boarding, and alighting. This phase is handled by the **Transit Metrics Module**, which first calculates the metrics at the stop-to-stop level and then maps them onto the corresponding road network. To generate these metrics, the Jupyter notebook `1_produce_curated_data.ipynb` is used. This notebook instantiates the **Transit Metrics** class and runs two primary methods:
    - `produce_stop_to_stop_measures()`
