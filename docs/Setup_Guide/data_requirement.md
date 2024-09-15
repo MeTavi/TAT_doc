@@ -154,16 +154,16 @@ Three main reference tables are used in the system, as outlined below:
 
 1. Transaction to GTFS: This table is used to join the transaction data and GTFS data for the same route, direction, and operators, even if different names have been used in the two sources to indicate the same direction of travel or operator. Additionally, this table includes two columns that specify whether a service is a school service and whether it should be excluded from analysis. Temporary services, such as rail replacements or services introduced for specific events, are excluded from processing. This exclusion can be adjusted by updating the reference table. Table below shows the required fields in the transaction to gtfs reference file.
 
-    | Attribute        | Description                                                                                   |
-    |------------------|-----------------------------------------------------------------------------------------------|
-    | operator         | The operator name as it's shown in transaction files                                          |
-    | route            | This is the route short name as it appears in the transaction files                           |
-    | direction        | This is the route direction as it appears in the transation files                             |
-    | angency_id       | A numeric field corresponding the the agency id in the GTFS                                   |
-    | route_short_name | A route short name as it appears in the GTFS                                                  |
-    | direction_id     | direction id as it appears in GTFS corresponding the route direction                          |
-    | type             | Indicating if a service is a school service or not                                            |
-    | include          | A binary field indicating if the service should be included or excluded from further analysis |
+    | Attribute        | Description                                                                                    |
+    |------------------|------------------------------------------------------------------------------------------------|
+    | operator         | The operator name as it's shown in transaction files.                                          |
+    | route            | This is the route short name as it appears in the transaction files.                           |
+    | direction        | This is the route direction as it appears in the transaction files.                            |
+    | angency_id       | A numeric field corresponding the the agency id in the GTFS.                                   |
+    | route_short_name | A route short name as it appears in the GTFS.                                                  |
+    | direction_id     | direction id as it appears in GTFS corresponding the route direction.                          |
+    | type             | Indicating if a service is a school service or not.                                            |
+    | include          | A binary field indicating if the service should be included or excluded from further analysis. |
 
     {: .note }
     Transaction to gtfs data is used by the `TransactionProcessor` to (1) getting the agency id and direction ids of each route so they can letter be joined with the scheduling data, (2) to exclude temporary routes such as rail replacement services, (3) exclude the school services from the process. 
@@ -173,7 +173,7 @@ Three main reference tables are used in the system, as outlined below:
 
     | Attribute       | Description                                                                                             |
     |-----------------|---------------------------------------------------------------------------------------------------------|
-    | ticket_status   | ticket_status as shown in the transactions                                                              |
+    | ticket_status   | ticket_status as shown in the transactions.                                                             |
     | boarding_valid  | A binary field indicating if the corresponding ticket status is valid to be used as a boarding record.  |
     | alighting_valid | A binary field indicating if the corresponding ticket status is valid to be used as a alighting record. |
 
@@ -187,18 +187,17 @@ The Data Preparation module is responsible for transforming raw data into input 
     The data preparation stage combines these three different resolutions networks into a single dataset, and corrects the directionality by creating a separate link per direction for the entire network. Additionally, the `LENGTH` attributes of the links are updated to reflect the correct spatial objects' length.
     The final processed data is stored in Parquet format, which is significantly more efficient for both processing and storage compared to raw spatial file formats like shapefiles.
     
+    In the raw network files, the direction of the link either `To Destination` (that is, the link is drawn in the direction of travel for a one way link), `To Origin` (that is, the link is drawn against the direction of travel for a one way link. This is less common), or in `Both` directions (for two-way links) is indicated in `FLOW` attributes as shown in table below.
+    
+   | `FLOW` | `Direction`     | Description                                        |
+   |--------|-----------------|----------------------------------------------------|
+   | OD     | To Destination  | from origin node to destination                    |
+   | ODB    | To Destination  | from origin node to destination (except for bikes) |
+   | DO     | To Origin       | from destination node to origin (except for bikes) |
+   | DOB    | To Origin       | from destination node to origin (except for bikes) |
+   | Null   | Both            | both directions                                    |
+    
     The `PrepareFullNetwork` class within the data preparation module is responsible for preforming the above-mentioned preparation step. The directional corrections of the links are performed as follows: 
-    - In the raw network files, the direction of the link either `To Destination` (that is, the link is drawn in the direction of travel for a one way link), `To Origin` (that is, the link is drawn against the direction of travel for a one way link. This is less common), or in `Both` directions (for two-way links) is indicated in `FLOW` attributes as shown in table below.
-    
-       | `FLOW` | `Direction`     | Description                                        |
-       |--------|-----------------|----------------------------------------------------|
-       | OD     | To Destination  | from origin node to destination                    |
-       | ODB    | To Destination  | from origin node to destination (except for bikes) |
-       | DO     | To Origin       | from destination node to origin (except for bikes) |
-       | DOB    | To Origin       | from destination node to origin (except for bikes) |
-       | Null   | Both            | both directions                                    |
-    
-    The data preparation stage corrects the direction of spatial objects as following:
     - It reverses the direction of links with `FLOW` values equal to `DO`, `DOB` to correct the link directions to be the direction of travel. 
     - It also generates a new spatial object for two-way links, so that the end result contains one link per direction. 
     - Links with `FLOW` values equal to 'OD', 'ODB' remains unchanged as the direction in which they are drawn is the same the direction of travel.
@@ -222,14 +221,13 @@ The Data Preparation module is responsible for transforming raw data into input 
 
     With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence in the relative trip. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in csv format for further use in the ETL process. Table below shows the required attributes in the raw itinerary:
     
-    | Attribute   | Description                                                                                                                                                   |
-    |-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | `shape_id`  | This uniquely identifies a route variant by direction and matches shape_id in GTFS                                                                            |
-    | `segment`   | This identifies stop to stop movements. The number of segments is one less than the number of stops                                                           |
-    | `order`     | This identifies the order of links in a Segment                                                                                                               |
-    | `seg_id`    | This identifies the link. This is the same as the ID field in the network.                                                                                    |
-    | `direction` | This identifies the direction of a link and is the equivalent of SEG_FLOW in the HASTUS Links table. Which correspond with the direction field in the network |
-    
+    | Attribute   | Description                                                                                                                                                  |
+    |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | `shape_id`  | This uniquely identifies a route variant by direction and matches shape_id in GTFS.                                                                          |
+    | `segment`   | This identifies stop to stop movements. The number of segments is one less than the number of stops in the raw itinerary file.                               |
+    | `order`     | This identifies the order of links in a Segment.                                                                                                             |
+    | `seg_id`    | This identifies the link. This is the same as the `ID` field in the network.                                                                                 |
+    | `direction` | This identifies the direction of a link and is the equivalent of `FLOW` in the HASTUS Links table. Which correspond with the direction field in the network. |
 
 3. Spatial Itinerary Data Preparation
 Once the itinerary data has been processed, the spatial itinerary data is prepared by joining the spatial objects (from the full network) with the corresponding itinerary data. This ensures that the geospatial details are integrated into the itineraries, making the process of reading the spatial network much easier, as only the part of the network relevant to the region of interest is loaded into memory, rather than the full network.
@@ -237,4 +235,4 @@ Once the itinerary data has been processed, the spatial itinerary data is prepar
 4. Ticketing Data Preparation
 The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
 
-[setup guide]: {% link docs/Setup_Guide/index.md %}#ticketing-data
+[setup guide]: {% link docs/Setup_Guide/index.md %}#setting-up-the-raw-data
