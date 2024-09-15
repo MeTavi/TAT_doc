@@ -47,7 +47,10 @@ Below is the folder structure where the outputs of the transit metrics are saved
 
 ```
 Below image shows the class relationship between the `TransitMetric` interface and the two other classes of the `StopToStopMeasures` and `SegmentLink` classes using the products of `Ticketing` class to perform their operation.  
+
 ![Metrics Estimation ERD]({{ "/assets/images/measure_estimation_ERD.png" | relative_url }})
+![Metrics Estimation ERD2]({{ "/assets/images/UML-2.png" | relative_url }})
+
 
 Primary measures such as estimated and scheduled travel times between the stops as well as the actual boarding and alighting per stop, per trip is produced before they are transferred to the link network (HASTUS street segments). 
 
