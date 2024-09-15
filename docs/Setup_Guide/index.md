@@ -89,13 +89,15 @@ There are three main datasets that should be provided for the process, as outlin
 1. HASTUS Data: This includes three key items:
    - Itineraries
    - Street segment network
-   - Stop locations  
-See more information about the [HASTUS Data] in the Data Requirements section.
+   - Stop locations      
+
+   See more information about the [HASTUS Data] in the Data Requirements section.
 2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the Data Requirements section.
 3. Ticketing Data: This consists of two key data items:
    - Transaction data
-   - Trip stop timing reports
-See more information about the [Ticketing Data] in the Data Requirements section.
+   - Trip stop timing reports  
+   
+   See more information about the [Ticketing Data] in the Data Requirements section.
 
 {: .important-title }
 > GTFS Release Date as Version Identifier 

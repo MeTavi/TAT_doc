@@ -60,13 +60,13 @@ For each analysis period, the user must store these three data items in a new fo
 
 2. Network
 
-   - **Folder name**: `2_streetsegment_network`
-   - **Required shapefiles**: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
+   - Folder name: `2_streetsegment_network`
+   - Required shapefiles: Underlying street segments used within HASTUS at different resolutions, covering the whole of Queensland, including .shp files and their related .dbf and .shx files as follows:
        - `production_streetsegment_high.shp` 
        - `production_streetsegment_medium.shp`
        - `production_streetsegment_low.shp` 
-   - **File naming convention**: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
-   - **Example**:
+   - File naming convention: File names should be kept as listed above. If the received raw file names are different, the user should rename them accordingly.
+   - Example:
        ```sh
        1_raw_data/
        ├── 1_hastus/
@@ -107,10 +107,12 @@ For each analysis period, the user must store these three data items in a new fo
 ### GTFS data 
 It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
-  - **Folder Name**: `2_gtfs\2_cubic`
-  - **Folder Structure**: `<YYYYMMDD>`.
-  - **File Naming Convention**: `<region>_GTFS.zip`
-  - **NOTE**: The region names must be explicitly included in the file names, as the process iterates through the regions. 
+  - Folder name: `2_cubic\<YYYYMMDD>`
+  - File naming convention: `<region>_GTFS.zip`
+  {: .note }
+  The region names must be explicitly included in the file names, as the process iterates through the regions.
+  - Example:
+
       ```sh
       1_raw_data/
       ├── 1_hastus/
@@ -127,9 +129,9 @@ Ticketing data includes transactions and trip stop timing data, provided in sepa
 
 Since there is no clear naming convention when the files are received, the user should create a folder named in the format `<YYYYMM>`, corresponding to the data's month and year, and place both files in that folder. The files must then be renamed according to the naming conventions explained below.
 
-  - **Folder Structure**: `<YYYYMM>`
-  - **File Naming Convention**: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
-  - **Example**:
+  - Folder name: `<YYYYMM>`
+  - File naming convention: `transactions_daily_<YYYYMM>.csv` and `tripstoptiming_daily_<YYYYMM>.csv`
+  - Example:
       ```sh
       data/
       ├── 1_hastus/
@@ -213,7 +215,8 @@ The Data Preparation module is responsible for transforming raw data into input 
     | `SPEED2`   | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                           | 
     | `LENGTH`   | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                         | 
 
-2. Itinerary Data Preparation:
+2. Itinerary Data Preparation
+
     Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
@@ -230,9 +233,11 @@ The Data Preparation module is responsible for transforming raw data into input 
     | `direction` | This identifies the direction of a link and is the equivalent of `FLOW` in the HASTUS Links table. Which correspond with the direction field in the network. |
 
 3. Spatial Itinerary Data Preparation
-Once the itinerary data has been processed, the spatial itinerary data is prepared by joining the spatial objects (from the full network) with the corresponding itinerary data. This ensures that the geospatial details are integrated into the itineraries, making the process of reading the spatial network much easier, as only the part of the network relevant to the region of interest is loaded into memory, rather than the full network.
+
+   Once the itinerary data has been processed, the spatial itinerary data is prepared by joining the spatial objects (from the full network) with the corresponding itinerary data. This ensures that the geospatial details are integrated into the itineraries, making the process of reading the spatial network much easier, as only the part of the network relevant to the region of interest is loaded into memory, rather than the full network.
 
 4. Ticketing Data Preparation
-The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
+
+   The ticketing data, which includes transaction and trip stop timing data, is processed in a structured way. The preparation stage reads the raw ticketing data and organises it by partitioning the data based on the date. This enables the ETL process to efficiently handle ticketing data on a day-by-day basis, optimising performance and storage.
 
 [setup guide]: {% link docs/Setup_Guide/index.md %}#setting-up-the-raw-data
