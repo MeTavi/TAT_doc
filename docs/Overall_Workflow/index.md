@@ -50,7 +50,7 @@ The ETL process is structured around a set of modular components. The folder str
 +-- Transit_Analytics_Tools_2024
 |   +-- 3_etl
 |   |   +-- assets
-|   |   |   +-- config_files
+|   |   |   +-- main_config_file
 |   |   |   +-- calculation_config
 |   |   |   +-- schema_files
 |   |   +-- jupyter_notebooks
@@ -73,23 +73,23 @@ The ETL process is structured around a set of modular components. The folder str
 
 The following high-level folders provide the core structure for the ETL process:
 
-- assets: Contains static files such as different configuration files, and data schemas. Below are the key items under this folder:
-  - main configuration file: A yaml file that is defined to specify the folder locations and different data items used throughout the ETL process. For more information about the content and maintenance of this file see `main configuration` section.  
-  - calculation configuration files: Three different yaml files containing a list of all the operations that is sequentially applied on the curated datasets for estimating the link based and stop based measures of corridor explorer and the segment measures in BCAP. 
-  - schema files: Several yaml file containing the data schema of each data item. For more information about the content and maintenance of these schema files refer to the 'Data Schema' section. 
-- Jupyter notebooks: Contains all Jupyter notebooks used for running the ETL pipeline. These notebooks provide a hands-on approach to executing workflows and is further explained in next section High-Level Workflow.
-- source: This folder contains the main ETL code and is subdivided into several key subfolders:
-  - configuration: Contains modules responsible for managing main configurations. Validates the main config yaml file and provides method to easily access attributes of each data item.
-  - data_preparation: A module responsible for converting raw data into intput data.
-  - gtfs: A module responsible for processing and transforming GTFS data.
-  - ticketing: A module handling transformation of the ticketing-related data.
-  - transit_metrics: A module responsible for calculating and aggregating transit metrics.
-  - transit_metrics_aggregation: A module responsible for summarising and aggregating transit metrics data to be used for either of the CE or BCAP dashboards.
-- utilities: This folder contains general-purpose utility functions used across the ETL pipeline for tasks such as loading, validation, and common operations. Below are some of the important components found in this folder:
-  - data_reader: A module responsible for reading data from various formats, including CSV, Parquet, GeoPackage, and more. It can be extended to handle cloud-based databases or additional file formats. The data reader also performs schema validation during the reading process and supports basic data cleaning operations, such as renaming headers, as specified by the run time configuration file.
-  - data_writer: A module responsible for writing data, supporting formats such as CSV, Parquet, Hyperfile, and GeoPackage. It can be extended to write to cloud-based storage solutions. 
-  - data_frame_operation: This utility provides methods for common operations on data frames, particularly focusing on joins and filtering. It is designed to assist in the validation of these operations, allowing access to both the left and right components of the join operation. The standardised approach makes it easier to reuse this class for performing data frame operations consistently across the ETL pipeline.
-  - logger: Handles logging throughout the ETL process. 
+- `assets`: Contains static files such as different configuration files, and data schemas. Below are the key items under this folder:
+  - `main_config_file`: A yaml file that is defined to specify the folder locations and different data items used throughout the ETL process. For more information about the content and maintenance of this file see `main configuration` section.  
+  - `calculation_config`: Three different yaml files containing a list of all the operations that is sequentially applied on the curated datasets for estimating the link based and stop based measures of corridor explorer and the segment measures in BCAP. 
+  - `schema_files`: Several yaml file containing the data schema of each data item. For more information about the content and maintenance of these schema files refer to the 'Data Schema' section. 
+- `jupyter_notebooks`: Contains all Jupyter notebooks used for running the ETL pipeline. These notebooks provide a hands-on approach to executing workflows and is further explained in next section High-Level Workflow.
+- `src`: This folder contains the main ETL code and is subdivided into several key subfolders:
+  - `configuration`: Contains modules responsible for managing main configurations. Validates the main config yaml file and provides method to easily access attributes of each data item.
+  - `data_preparation`: A module responsible for converting raw data into intput data.
+  - `gtfs`: A module responsible for processing and transforming GTFS data.
+  - `ticketing`: A module handling transformation of the ticketing-related data.
+  - `transit_metrics`: A module responsible for calculating and aggregating transit metrics.
+  - `transit_metrics_aggregation`: A module responsible for summarising and aggregating transit metrics data to be used for either of the CE or BCAP dashboards.
+- `utils`: This folder contains general-purpose utility functions used across the ETL pipeline for tasks such as loading, validation, and common operations. Below are some of the important components found in this folder:
+  - `data_reader`: A module responsible for reading data from various formats, including CSV, Parquet, GeoPackage, and more. It can be extended to handle cloud-based databases or additional file formats. The data reader also performs schema validation during the reading process and supports basic data cleaning operations, such as renaming headers, as specified by the run time configuration file.
+  - `data_writer`: A module responsible for writing data, supporting formats such as CSV, Parquet, Hyperfile, and GeoPackage. It can be extended to write to cloud-based storage solutions. 
+  - `data_frame_operation`: This utility provides methods for common operations on data frames, particularly focusing on joins and filtering. It is designed to assist in the validation of these operations, allowing access to both the left and right components of the join operation. The standardised approach makes it easier to reuse this class for performing data frame operations consistently across the ETL pipeline.
+  - `logger`: Handles logging throughout the ETL process. 
 
 
 ## High-Level Workflow
