@@ -105,12 +105,15 @@ For each analysis period, the user must store these three data items in a new fo
 
 
 ### GTFS data 
+  
 It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
   - Folder name: `2_cubic\<YYYYMMDD>`
   - File naming convention: `<region>_GTFS.zip`
+
   {: .note }
-  The region names must be explicitly included in the file names, as the process iterates through the regions.
+  The region names must be explicitly included in the file names, as the process iterates through the regions.  
+
   - Example:
 
       ```sh
@@ -124,7 +127,8 @@ It is used to capture scheduled services within the analysis period.GTFS data sh
       │          └── ...
       ```
 
-### Ticketing data 
+### Ticketing data  
+
 Ticketing data includes transactions and trip stop timing data, provided in separate files, each containing one month's worth of data. This data captures the details of actual trips and serves as the main source for estimating load and travel time, which are reported at different levels of aggregation in the final visualisation.
 
 Since there is no clear naming convention when the files are received, the user should create a folder named in the format `<YYYYMM>`, corresponding to the data's month and year, and place both files in that folder. The files must then be renamed according to the naming conventions explained below.
@@ -156,28 +160,28 @@ Three main reference tables are used in the system, as outlined below:
 
 1. Transaction to GTFS: This table is used to join the transaction data and GTFS data for the same route, direction, and operators, even if different names have been used in the two sources to indicate the same direction of travel or operator. Additionally, this table includes two columns that specify whether a service is a school service and whether it should be excluded from analysis. Temporary services, such as rail replacements or services introduced for specific events, are excluded from processing. This exclusion can be adjusted by updating the reference table. Table below shows the required fields in the transaction to gtfs reference file.
 
-    | Attribute        | Description                                                                                    |
-    |------------------|------------------------------------------------------------------------------------------------|
-    | operator         | The operator name as it's shown in transaction files.                                          |
-    | route            | This is the route short name as it appears in the transaction files.                           |
-    | direction        | This is the route direction as it appears in the transaction files.                            |
-    | angency_id       | A numeric field corresponding the the agency id in the GTFS.                                   |
-    | route_short_name | A route short name as it appears in the GTFS.                                                  |
-    | direction_id     | direction id as it appears in GTFS corresponding the route direction.                          |
-    | type             | Indicating if a service is a school service or not.                                            |
-    | include          | A binary field indicating if the service should be included or excluded from further analysis. |
+    | Attribute          | Description                                                                                     |
+    |--------------------|-------------------------------------------------------------------------------------------------|
+    | `operator`         | The operator name as it's shown in transaction files.                                           |
+    | `route`            | This is the route short name as it appears in the transaction files.                            |
+    | `direction`        | This is the route direction as it appears in the transaction files.                             |
+    | `angency_id`       | A numeric field corresponding the the agency id in the GTFS.                                    |
+    | `route_short_name` | A route short name as it appears in the GTFS.                                                   |
+    | `direction_id`     | direction id as it appears in GTFS corresponding the route direction.                           |
+    | `type`             | Indicating if a service is a school service or not.                                             |
+    | `include`          | A binary field indicating if the service should be included or excluded from further analysis.  |
 
     {: .note }
-    Transaction to gtfs data is used by the `TransactionProcessor` to (1) getting the agency id and direction ids of each route so they can letter be joined with the scheduling data, (2) to exclude temporary routes such as rail replacement services, (3) exclude the school services from the process. 
+    Transaction to gtfs data is used by the `TransactionProcessor` for (1) getting the agency id and direction ids of each route, so they can later be joined with the scheduling data. (2) excluding temporary routes such as rail replacement services and other irregular services. (3) excluding the school services from the process. 
 
 2. Trip Stop Timing to GTFS: Similar to the Transaction to GTFS table, this table is used to join the trip stop timing data with the GTFS data for the same route, direction, and operators, despite differing nomenclature. It also includes columns to specify school services and whether a service should be excluded from analysis. Temporary services such as rail replacements or event-specific services are excluded from processing, and these exclusions can be modified by updating the reference table. The trip stop timing to gtfs reference file follows an identical structure as the transaction to gtfs reference table with the difference that the content of this file corresponds to the trip stop timing report instead of transactions. 
 3. Ticket Status: This table is used to exclude transactions where the boardings or alightings are invalid based on the ticket types. Although invalid boardings or alightings are rare in a typical day, including them in the process could result in outliers in travel time estimation, which would adversely impact the aggregated metrics used in output visualisations. Therefore, it is crucial to exclude these records from the analysis. Table below shows the structure of this reference table: 
 
-    | Attribute       | Description                                                                                             |
-    |-----------------|---------------------------------------------------------------------------------------------------------|
-    | ticket_status   | ticket_status as shown in the transactions.                                                             |
-    | boarding_valid  | A binary field indicating if the corresponding ticket status is valid to be used as a boarding record.  |
-    | alighting_valid | A binary field indicating if the corresponding ticket status is valid to be used as a alighting record. |
+    | Attribute         | Description                                                                                             |
+    |-------------------|---------------------------------------------------------------------------------------------------------|
+    | `ticket_status`   | ticket_status as shown in the transactions.                                                             |
+    | `boarding_valid`  | A binary field indicating if the corresponding ticket status is valid to be used as a boarding record.  |
+    | `alighting_valid` | A binary field indicating if the corresponding ticket status is valid to be used as a alighting record. |
 
 ## Input Data
 
