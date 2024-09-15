@@ -198,7 +198,7 @@ The Data Preparation module is responsible for transforming raw data into input 
        | DOB  | To Origin      | from destination node to origin (except for bikes) |
        | Null | Both           | both directions                                    |
     
-    The data preparation stage corrected the direction of spatial objects as following:
+    The data preparation stage corrects the direction of spatial objects as following:
     - It reverses the direction of links with `FLOW` values equal to `DO`, `DOB` to correct the link directions to be the direction of travel. 
     - It also generates a new spatial object for two-way links, so that the end result contains one link per direction. 
     - Links with `FLOW` values equal to 'OD', 'ODB' remains unchanged as the direction in which they are drawn is the same the direction of travel.
@@ -212,14 +212,14 @@ The Data Preparation module is responsible for transforming raw data into input 
     | NODE_O    | This is the origin node number. Similar to the ID field above, there may be inconsistencies for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                                  |
     | NODE_D    | This is the destination node number. Similar to the ID field above, there may be inconsistences for new links between in HASTUS. New nodes do not appear to be created when links are split and there are several records with null Node IDs. New or split links with a GIRO prefix generally have 0 as the Node identifier.                                                                                                                              |
     | SPEED2    | This appears to be the posted speed of the link.                                                                                                                                                                                                                                                                                                                                                                                                          | 
-    | LENGTH    | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                        |  
-                                                                                                                                                                                                                                                                                                                                                                                                             | 
+    | LENGTH    | A SEG_LENGTH field was included in the HASTUS export. This appears to be based on the Street Pro Nav length and does not appear to have been updated for new or split links. A new LENGTH field was calculated based on the spatial object length.                                                                                                                                                                                                        | 
 
 2. Itinerary Data Preparation:
     Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
       - The first link in the fist segment corresponds to the first stop.
       - The last link in the first segment corresponds to the second stop.
-      - The last link of the segment number (n-1) corresponds with the nth stop.     
+      - The last link of the segment number (n-1) corresponds with the nth stop.
+
     With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence in the relative trip. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in csv format for further use in the ETL process. Table below shows the required attributes in the raw itinerary:
     
     | Attribute | Description                                                                                                                                                   |
