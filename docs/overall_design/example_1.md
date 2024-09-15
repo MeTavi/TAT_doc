@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Data Preparation
-parent: Sample Process
+parent: Overall Design
 nav_order: 1
 ---
 

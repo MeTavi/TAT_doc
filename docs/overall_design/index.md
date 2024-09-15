@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Sample Process
-nav_order: 4
+title: Overall Design
+nav_order: 3
 has_toc: false  # Disable the automatic Table of Contents
 ---
 

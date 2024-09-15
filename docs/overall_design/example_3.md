@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Transit Metrics Estimation
-parent: Sample Process
-nav_order: 2
+title: Transit Metrics Aggregation
+parent: Overall Design
+nav_order: 3
 ---
 
-# Transit Metrics Estimation
+# Transit Metrics Aggregation
 {: .no_toc }
 ## Table of contents
 {: .no_toc .text-delta }
