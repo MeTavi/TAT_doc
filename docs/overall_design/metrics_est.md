@@ -46,22 +46,39 @@ Below is the folder structure where the outputs of the transit metrics are saved
 |   |   |   |   |   |   |   |   +-- link_based_measures.parquet.gz
 
 ```
+Below image shows the class relationship between the `TransitMetric` interface and the two other classes of the `StopToStopMeasures` and `SegmentLink` classes using the products of `Ticketing` class to perform their operation.  
+![Metrics Estimation ERD]({{ "/assets/images/measure_estimation_ERD.png" | relative_url }})
+
+Primary measures such as estimated and scheduled travel times between the stops as well as the actual boarding and alighting per stop, per trip is produced before they are transferred to the link network (HASTUS street segments). 
+
+Below describes the steps undertaken to estimate these measures.
 
 
 
 ### High-Level Steps for Estimating Travel Time
 
-1. **Estimating the Actual Arrival and Departure Time**: Actual (or estimated) arrival and departure times are based on transaction times when available. Otherwise, they are approximated using the mid-geofence time added to vehicle times, as indicated in the trip stop timing report (see `StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time`).
 
-2. **Identifying Stops within the First and Last Actual Stops**: Actual arrival and departure times are not always available. The first and last actual stops are defined as the initial and final stops in a trip where both actual arrival and departure times are available.
+1. **Estimating Vehicle Times**: Converting transaction times into vehicle arrival and departure times at each stop. First, the transaction times are matched with the GTFS timetable, resulting in a comprehensive dataset that includes all stops even if they were not recorded in the transaction records. Next, this dataset is merged with the vehicle timetables (`trip_stop_timing_vehicle_dataframe`) to incorporate the vehicle_arrival_time and vehicle_departure_time fields. These fields serve as estimated vehicle times in cases where transaction data is unavailable.
 
-3. **Handling Null Values in Actual Arrival and Departure Times within the First and Last Actual Stops**: When actual arrival and departure times are missing for stops between the first and last actual stops, the missing values are interpolated. The stops are grouped into `SectionIDs`, which are used to interpolate the travel time.
+2. **Estimating the Actual Arrival and Departure Time**: Actual (or estimated) arrival and departure times are based on transaction times when available. Otherwise, they are approximated using the mid-geofence time added to vehicle times, as indicated in the trip stop timing report (see `StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time`).
 
-4. **Estimating Travel Time (per Section)**: Travel time per section is estimated using the updated actual arrival and departure times. A section could be as small as one stop-to-stop segment or could consist of multiple consecutive segments in a trip (see `StopToStopTravelTime.estimated_sections_travel_time_df`).
+3. **Identifying Stops within the First and Last Actual Stops**: Actual arrival and departure times are not always available. The first and last actual stops are defined as the initial and final stops in a trip where both actual arrival and departure times are available.
 
-5. **Interpolating Travel Time (Link Level)**: Travel time per section is distributed to the street segment links proportionally based on the link length, with travel time allocated according to each link's length within the section.
+4. **Handling Null Values in Actual Arrival and Departure Times within the First and Last Actual Stops**: When actual arrival and departure times are missing for stops between the first and last actual stops, the missing values are interpolated. The stops are grouped into `SectionIDs`, which are used to interpolate the travel time.
+
+5. **Estimating Travel Time (per Section)**: Travel time per section is estimated using the updated actual arrival and departure times. A section could be as small as one stop-to-stop segment or could consist of multiple consecutive segments in a trip (see `StopToStopTravelTime.estimated_sections_travel_time_df`).
+
+6. **Interpolating Travel Time (Link Level)**: Travel time per section is distributed to the street segment links proportionally based on the link length, with travel time allocated according to each link's length within the section.
 
 [//]: # (Each method instantiates additional backend classes to handle specific data processing tasks. The **Ticketing Module** processes the ticketing data, while the **GTFS Module** generates the scheduled timetable data from the GTFS input. These two modules independently process their respective data, which are then combined in the `StopToStopMeasures` class within the **Transit Metrics Module**.)
 
 [//]: # (Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.)
 
+### High-level steps for estimating patronage data
+
+1. First, the stop-level activities derived from transaction analysis (`ticketing.get_transaction_stop_load_dataframe`). 
+
+2. Then, simple adjustments are made to the boarding and alighting numbers, as follows:
+   - No boarding is allowed at the last stop, so last stop boarding is set to zero. 
+   - At the first stop, the number of alighting passengers cannot exceed the number of boarding passengers. 
+   - The total boarding and alighting numbers are balanced for each trip
