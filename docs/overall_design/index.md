@@ -16,18 +16,6 @@ has_toc: false  # Disable the automatic Table of Contents
 
 ---
 
-## Overall Design
-
-The ETL tool of Transit Analytics is built with a modular design, focusing on separating data ingestion, processing, and
-output. Each stage of the ETL process is delineated to ensure maintainability, readability, and flexibility.
-Below, we provide an overview of the design and structure to guide users through how the tool functions and how it was
-intended to be used. 
-
-This section of the document is structured as follows: 
-1. Key Design Principles
-2. ETL Components and Folder Structure
-3. High-Level Workflow
-
 ## Key Design Principles
 
 The ETL tool adheres to four core principles:
@@ -43,7 +31,17 @@ The ETL tool adheres to four core principles:
     - Excluded analysis dates are handled through configurable settings.
     - The aggregation module for dashboard outputs includes a transparent listing of all formulas and calculations (calculation yaml files), allowing users to trace every step and add or remove measures easily if required.
 
-## ETL Components and Folder Structure
+
+## Overall Design
+
+The ETL tool of Transit Analytics is built with a modular design, focusing on separating data ingestion, processing, and
+output. Each stage of the ETL process is delineated to ensure maintainability, readability, and flexibility.
+Below, we provide an overview of the design and structure to guide users through how the tool functions and how it was
+intended to be used. 
+
+
+
+### ETL Components and Folder Structure
 
 The ETL process is structured around a set of modular components. The folder structure shown below introduces the different components of the ETL process. This section provides an overview of the various modules within the ETL, and the next section, [High-Level Workflow] will link these components based on their roles within the workflow.
 
@@ -93,7 +91,7 @@ The following high-level folders provide the core structure for the ETL process:
   - `logger`: Handles logging throughout the ETL process. 
 
 
-## High-Level Workflow
+### High-Level Workflow
 
 The workflow is structured around a series of Python modules that handle the different stages of the ETL process. Users
 interact with these modules primarily through predefined Jupyter Notebooks. These notebooks serve as a practical
