@@ -141,6 +141,7 @@ To combine scheduling data (GTFS) with ticketing data (transactions and trip sto
 Three main reference tables are used in the system, as outlined below:
 
 1. Transaction to GTFS 
+
     This table is used to join the transaction data and GTFS data for the same route, direction, and operators, even if different names have been used in the two sources to indicate the same direction of travel or operator. Additionally, this table includes two columns that specify whether a service is a school service and whether it should be excluded from analysis. Temporary services, such as rail replacements or services introduced for specific events, are excluded from processing. This exclusion can be adjusted by updating the reference table. Table below shows the required fields in the transaction to gtfs reference file.
 
     | Attribute          | Description                                                                                     |
