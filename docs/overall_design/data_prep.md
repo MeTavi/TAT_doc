@@ -110,3 +110,4 @@ Below is the folder structure where the data preparation stage saves the input d
 |   |   |   |   |   |   |   +-- trip_stop_timing.parquet.gz
 ```
 
+[GTFS regions]: {% link docs/Appendix/tables.md %}#table-1-gtfs-regions-name

@@ -101,7 +101,7 @@ interface for end users to ensure that the steps of the workflow can be executed
 
 The high-level design of the code is shown in below image and explained further in the proceeding sections:
 
-![High-level workflow]({{ "/assets/images/overall_workflow.png" | relative_url }})
+![High-level workflow diagram]({{ "/assets/images/overall_workflow.png" | relative_url }})
 
 1. [Data Preparation] ({% link docs/overall_design/data_prep.md %}): This process involves transforming raw data into a format that is ready for analysis or further processing.
 
@@ -112,3 +112,6 @@ The high-level design of the code is shown in below image and explained further 
 [Data Preparation]: {% link docs/overall_design/data_prep.md %}
 [Transit Metric Estimation]: {% link docs/overall_design/metrics_est.md %}
 [Transit Metric Aggregation]: {% link docs/overall_design/metrics_agg.md %}
+
+[High-Level Workflow]: {% link docs/overall_design/index.md %}#high-level-workflow
+
