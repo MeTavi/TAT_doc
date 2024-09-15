@@ -189,7 +189,7 @@ Once the inputs are prepared, they are stored locally for access and usage by th
 [Data requirement] section focuses on the different components of the raw data, explains the reference tables, and provides a high-level overview of how the input data is prepared. The details of the data produced by the ETL process, referred to as the outputs, will be described in another section.
 
 
-[overall design]: {% link docs/Overall_Workflow/index.md %}
+[overall design]: {% link docs/overall_design/index.md %}
 [HASTUS Data]: {% link docs/Setup_Guide/data_requirement.md %}#hastus-data
 [GTFS Data]: {% link docs/Setup_Guide/data_requirement.md %}#gtfs-data
 [Ticketing Data]: {% link docs/Setup_Guide/data_requirement.md %}#ticketing-data
