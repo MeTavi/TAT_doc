@@ -20,7 +20,26 @@ The raw data comes mainly from three different sources:
 HASTUS extracts, including itineraries, network data, and stop locations, are used to transfer transit metrics estimated at the stop-to-stop level to the underlying road network.
 
 For each analysis period, the user must store these three data items in a new folder named after the analysis period, which corresponds to the GTFS release date as described in the [setup guide]. The folder should be named using the GTFS release date format (`<YYYYMMDD>`), with subfolders for the HASTUS data items placed inside, as explained below.
-1. Itineraries
+1. Itineraries  
+   - Contents: Itineraries provide the ordered sequence of links that a bus must travel between stops for every route variant (shape_id in GTFS). The itineraries' segments corresponds with the relevant trip's stop sequence as follows:
+      - The first link in the fist segment corresponds to the first stop.
+      - The last link in the first segment corresponds to the second stop.
+      - The last link of the segment number (n-1) corresponds with the nth stop.
+   {: .important-title }
+    >    Itineraries and GTFS Compatibility
+    > 
+    >    It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
+    >
+    - Schema: Table below shows the required attributes in the raw itinerary: 
+
+    | Attribute       | Data Type  | Description                                                                                                                                                |
+    |-----------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | `shape_id`      | `str`      | This uniquely identifies a route variant by direction and matches shape_id in GTFS.                                                                        |
+    | `segment`       | `int64`    | This identifies stop to stop movements. The number of segments is one less than the number of stops in the raw itinerary file.                             |
+    | `order`         | `int64`    | This identifies the order of links in a Segment.                                                                                                           |
+    | `seg_id`        | `str`      | This identifies the link. This is the same as the `ID` field in the network.                                                                               |
+    | `seg_direction` | `category` | This identifies the direction of a link and corresponds with the direction field in the network. Valid values are `To Destination`, `To Origin` and `To `. |
+
    - Folder name: `1_itineraries`
    - File naming convention: `<region>_<YYYYMMDD>_GTFS_Itineraries.csv`.
    - Example:
@@ -33,12 +52,10 @@ For each analysis period, the user must store these three data items in a new fo
            │           ├── region2_YYYYMMDD_GTFS_Itineraries.csv
            │           └── ...
        ```
-
-   {: .important-title }
-    >    Itineraries and GTFS Compatibility
-    > 
-    >    It is essential that the itineraries are extracted on the same date as the GTFS data to ensure compatibility. 
+   {: .note-title }
+    > Data Validation Hint
     >
+    >  All `shape_id`s from the selected GTFS feed for an analysis period must be included in the itinerary table for that same period.  
 
 2. Network
 
@@ -223,15 +240,7 @@ The Data Preparation module is responsible for transforming raw data into input 
       - The last link in the first segment corresponds to the second stop.
       - The last link of the segment number (n-1) corresponds with the nth stop.
 
-    With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence in the relative trip. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in csv format for further use in the ETL process. Table below shows the required attributes in the raw itinerary:
-    
-    | Attribute   | Description                                                                                                                                                  |
-    |-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | `shape_id`  | This uniquely identifies a route variant by direction and matches shape_id in GTFS.                                                                          |
-    | `segment`   | This identifies stop to stop movements. The number of segments is one less than the number of stops in the raw itinerary file.                               |
-    | `order`     | This identifies the order of links in a Segment.                                                                                                             |
-    | `seg_id`    | This identifies the link. This is the same as the `ID` field in the network.                                                                                 |
-    | `direction` | This identifies the direction of a link and is the equivalent of `FLOW` in the HASTUS Links table. Which correspond with the direction field in the network. |
+    With the above description, the data preparation corrects segment orders so that they correspond to the stop sequence in the relative trip. This is done by the `PrepareItinerary` class within the data preparation module. The processed itinerary data is then saved in csv format for further use in the ETL process. 
 
 3. Spatial Itinerary Data Preparation
 
