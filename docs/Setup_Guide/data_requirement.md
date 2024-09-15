@@ -88,7 +88,7 @@ For each analysis period, the user must store these three data items in a new fo
 
 ### GTFS data 
   
-It is used to capture scheduled services within the analysis period.GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
+GTFS data is used to capture scheduled services within the analysis period. GTFS data should be organised by the date it was generated within HASTUS. This data comes in zipped files per region and usually are named as `<region>_GTFS.zip`. 
 
   - Folder name: `2_cubic\<YYYYMMDD>`
   - File naming convention: `<region>_GTFS.zip`
