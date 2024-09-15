@@ -97,17 +97,17 @@ For each analysis period, the user must store these three data items in a new fo
 3. Stops
    - description: The Stops information is part of the HASTUS extract, which contains three distinct files providing details on stop locations and whether a stop is active or inactive across the entire state. For the purpose of Transit Analytics Tools, only stop_location files is utilised. 
    - Schema: The raw stop_location data contains several attributes that are not used within the Transit Analytics Tools; below shows only the attributes required by the process the datatypes of each column based on pandas dtypes:
-       
-    | Attribute                     | Data Type | Description                                                                              |
-    |-------------------------------|-----------|------------------------------------------------------------------------------------------|
-    | `stp_identifier`              | `str`     | Equivalent to the GTFS stop ID.                                                          |
-    | `sloc_description_specified`  | `str`     | Contains the stop name and the associated street name.                                   |
-    | `loca_longitude`              | `float64` | Longitude of the stop.                                                                   |
-    | `loca_latitude`               | `float64` | Latitude of the stop.                                                                    |
-    | `loca_segment_ext_id`         | `str`     | Unique link identifier corresponding to the `ID` field in the HASTUS network.            |
-    | `loca_dist_inter1`            | `float64` | Distance from the start of the link.                                                     |
-    | `loca_dist_inter2`            | `float64` | Distance from the end of the link.                                                       |
-    | `loca_segment_side`           | `int64`   | Indicates which side of the road the stop is on, with 0 indicating 'To Destination'.     |
+   
+      | Attribute                     | Data Type | Description                                                                              |
+      |-------------------------------|-----------|------------------------------------------------------------------------------------------|
+      | `stp_identifier`              | `str`     | Equivalent to the GTFS stop ID.                                                          |
+      | `sloc_description_specified`  | `str`     | Contains the stop name and the associated street name.                                   |
+      | `loca_longitude`              | `float64` | Longitude of the stop.                                                                   |
+      | `loca_latitude`               | `float64` | Latitude of the stop.                                                                    |
+      | `loca_segment_ext_id`         | `str`     | Unique link identifier corresponding to the `ID` field in the HASTUS network.            |
+      | `loca_dist_inter1`            | `float64` | Distance from the start of the link.                                                     |
+      | `loca_dist_inter2`            | `float64` | Distance from the end of the link.                                                       |
+      | `loca_segment_side`           | `int64`   | Indicates which side of the road the stop is on, with 0 indicating 'To Destination'.     |
 
   - Folder name: `3_stops`
   - Required files:
