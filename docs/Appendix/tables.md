@@ -5,29 +5,38 @@ nav_order: 99
 has_toc: false  # Disable the automatic Table of Contents
 ---
 
+# Appendix
+{: .no_toc }
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Table 1 - GTFS regions' name
 Region names as used in HASTUS extract and throughout the Transit Analytics Tools: 
 
-| #  | REG | Region                        |
-|----|-----|-------------------------------|
-| 1  | SEQ | South East Queensland         |
-| 2  | BOW | Bowen                         |
-| 3  | BUN | Bundaberg                     |
-| 4  | CNS | Cairns                        |
-| 5  | GLT | Gladstone                     |
-| 6  | GYM | Gympie                        |
-| 7  | INN | Innisfail                     |
-| 8  | KIL | Kilcoy                        |
-| 9  | MAL | Maleny                        |
-| 10 | MBF | Magnetic Island Bus and Ferry |
-| 11 | MHB | Maryborough & Hervey Bay      |
-| 12 | MKY | Mackay-Landsborough           |
-| 13 | NSI | North Stradbroke Island       |
-| 14 | NTD | None Translink Division       |
-| 15 | ROK | Rockhampton                   |
-| 16 | TSV | Townsville                    |
-| 17 | TWB | Toowoomba                     |
-| 18 | WAR | Warwick                       |
-| 19 | WHT | Whitsunday                    |
-| 20 | YEP | Yeppoon                       |
+| REG | Region                        |
+|-----|-------------------------------|
+| SEQ | South East Queensland         |
+| BOW | Bowen                         |
+| BUN | Bundaberg                     |
+| CNS | Cairns                        |
+| GLT | Gladstone                     |
+| GYM | Gympie                        |
+| INN | Innisfail                     |
+| KIL | Kilcoy                        |
+| MAL | Maleny                        |
+| MBF | Magnetic Island Bus and Ferry |
+| MHB | Maryborough & Hervey Bay      |
+| MKY | Mackay-Landsborough           |
+| NSI | North Stradbroke Island       |
+| NTD | None Translink Division       |
+| ROK | Rockhampton                   |
+| TSV | Townsville                    |
+| TWB | Toowoomba                     |
+| WAR | Warwick                       |
+| WHT | Whitsunday                    |
+| YEP | Yeppoon                       |
 
 
