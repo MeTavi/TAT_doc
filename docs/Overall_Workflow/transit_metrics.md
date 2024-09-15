@@ -3,7 +3,7 @@
 layout: default
 title: Transit Metric Estimation
 parent: Overall Design
-nav_order: 2
+nav_order: 4
 ---
 
 
