@@ -1,19 +1,4 @@
----
-layout: default
-title: Workflow
-nav_order: 3
-has_toc: false  # Disable the automatic Table of Contents
----
 
-# Overall Design
-{: .no_toc }
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
 
 ## Overall Design
 
