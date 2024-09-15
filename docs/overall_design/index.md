@@ -103,15 +103,14 @@ The high-level design of the code is shown in below image and explained further 
 
 ![High-level workflow diagram]({{ "/assets/images/overall_workflow.png" | relative_url }})
 
-1. [Data Preparation] ({% link docs/overall_design/data_prep.md %}): This process involves transforming raw data into a format that is ready for analysis or further processing.
+1. [Data Preparation] process involves transforming raw data into a format that is ready for analysis or further processing.
 
-2. Transit Metric Estimation ([Transit Metric Estimation]): This process involves estimating key transit metrics, such as travel time (both estimated and scheduled) and passenger loading (including boarding and alighting at each stop). These metrics are calculated at the most granular level possible, specifically for each link along the travelled path of individual trips.
+2. [Transit Metric Estimation] process involves estimating key transit metrics, such as travel time (both estimated and scheduled) and passenger loading (including boarding and alighting at each stop). These metrics are calculated at the most granular level possible, specifically for each link along the travelled path of individual trips.
 
-3. Transit Metric Aggregation ([Transit Metric Aggregation]): This process involves aggregating the previously estimated metrics and calculating secondary measures such as speed, travel time reliability, and delays. The level of aggregation can be adjusted depending on the specific application. These calculations produce the required outputs for the Corridor Explorer and BCAP dashboards.
+3. [Transit Metric Aggregation] process involves aggregating the previously estimated metrics and calculating secondary measures such as speed, travel time reliability, and delays. The level of aggregation can be adjusted depending on the specific application. These calculations produce the required outputs for the Corridor Explorer and BCAP dashboards.
 
 [Data Preparation]: {% link docs/overall_design/data_prep.md %}
 [Transit Metric Estimation]: {% link docs/overall_design/metrics_est.md %}
 [Transit Metric Aggregation]: {% link docs/overall_design/metrics_agg.md %}
-
 [High-Level Workflow]: {% link docs/overall_design/index.md %}#high-level-workflow
 
