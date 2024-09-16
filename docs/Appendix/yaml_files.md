@@ -281,4 +281,133 @@ connections:
 ```
 
 
+## Calculations Configuration
 
+### Link Measures - CE 
+
+```yaml
+
+
+operations:
+  - type: calculation
+    name: extracting hour
+    formula: "hour = scheduled_start.dt.hour"
+    
+  - type: custom_transform
+    name: dropping null estimated travel time
+    formula: "df = df[df['link_actual_travel_time'].notnull()]"
+
+  - type: custom_transform
+    name: dropping any possible case of zero travel time
+    formula: "df = df[df['link_actual_travel_time']>0]"
+
+  - type: custom_transform
+    name: creating service column
+    formula: "df.loc[:, 'service'] = df['trip_id'] + '-' + df['scheduled_start'].astype(str)"
+
+  - type: aggregation
+    name: calculating free flow travel time
+    group_by: [ "region",  "hour", "corridor_type",   "corridor_desc", "corridor_id","corridor_direction","corridor_section", "corridor_seg_order", "seg_id", "seg_direction" ]
+    aggregations:
+      free_flow_travel_time:
+        column: link_actual_travel_time
+        function: "quantile"
+        params:
+          q: 0.15
+    transform: true
+
+  - type: custom_transform
+    name: calculating timetable delay per link
+    formula: "calculate_timetable_delay(df)"
+
+  - type: custom_transform
+    name: calculating estimated delay per link
+    formula: "calculate_link_estimated_delay(df)"
+
+  - type: calculation
+    name: estimating timetable delay per km
+    formula: "timetable_delay_per_km = link_timetable_delay / seg_length"
+
+  - type: calculation
+    name: estimating timetable delay per km
+    formula: "link_estimated_delay_per_km = link_estimated_delay / seg_length"
+
+  - type: aggregation
+    name: estimating aggregate measures
+    group_by: [ "region", "hour", "corridor_type", "corridor_desc",  "corridor_id","corridor_direction", "corridor_section", "corridor_seg_order",  "seg_id", "seg_direction" ]
+    aggregations:
+      seg_length:
+        column: "seg_length"
+        function: "first"
+      count_date:
+        column: "date"
+        function: "nunique"
+      travel_time_link_avg_hourly:
+        column: "link_actual_travel_time"
+        function: "non_zero_mean"
+      travel_time_link_Median_hourly:
+        column: "link_actual_travel_time"
+        function: "non_zero_median"
+      StdDevNo0_estimated_travel_time:
+        column: "link_actual_travel_time"
+        function: "non_zero_std"
+      CountNonNull_estimated_travel_time:
+        column: "link_actual_travel_time"
+        function: "non_null_count"
+      count_services_link_hour:
+        column: "service"
+        function: "nunique"
+      total_stop_load_per_link_hourly:
+        column: "stop_load"
+        function: "sum"
+      std_stop_load_per_service_hourly:
+        column: "stop_load"
+        function: "non_zero_std"
+      timetable_delay_per_km:
+        column: "timetable_delay_per_km"
+        function: "median"
+      link_estimated_delay_per_km:
+        column: "link_estimated_delay_per_km"
+        function: "median"
+
+
+  - type: aggregation
+    name: estimating corridor length
+    group_by: [ "region", "hour", "corridor_type", "corridor_id", "corridor_direction" ]
+    aggregations:
+      corridor_length:
+        column: seg_length
+        function: "sum"
+    transform: true
+
+  - type: aggregation
+    name: estimating corridor length threshold
+    group_by: [ "region", "hour", "corridor_type", "corridor_id",  "corridor_direction" ]
+    aggregations:
+      corridor_length_threshold:
+        column: corridor_length
+        function: "mode"
+    transform: true
+
+  - type: custom_transform
+    name: assigning accept_hour
+    formula: "assign_accept_hour(df)"
+
+  - type: calculation
+    name: estimating segment speed
+    formula: "seg_speed = seg_length* 3.6/ travel_time_link_avg_hourly"
+
+  - type: calculation
+    name: estimating hourly travel time per km on links
+    formula: "travel_time_per_km_hourly_link = travel_time_link_avg_hourly/ seg_length"
+
+  - type: aggregation
+    group_by: [ "region",  "hour", "corridor_type" , "corridor_id", "corridor_direction" ]
+    name: estimating aggregate hourly average travel time on links
+    aggregations:
+      travel_time_corridor_avg_hourly:
+        column: travel_time_link_avg_hourly
+        function: "sum"
+    transform: true
+
+```
