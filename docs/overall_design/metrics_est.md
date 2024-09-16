@@ -48,22 +48,21 @@ Below is the folder structure where the outputs of the transit metrics are saved
 ```
 Below image shows the class relationship between the `TransitMetric` interface and the two other classes of the `StopToStopMeasures` and `SegmentLink` classes using the products of `Ticketing` class to perform their operation.  
 
-![Metrics Estimation ERD]({{ "/assets/images/measure_estimation_ERD.png" | relative_url }})
 ![Metrics Estimation ERD2]({{ "/assets/images/UML-2.png" | relative_url }})
 
 
 Primary measures such as estimated and scheduled travel times between the stops as well as the actual boarding and alighting per stop, per trip is produced before they are transferred to the link network (HASTUS street segments). 
 
-Below describes the steps undertaken to estimate these measures.
+Below describes the steps undertaken to estimate these measures in more detail.
 
 
 
 ### High-Level Steps for Estimating Travel Time
 
 
-1. **Estimating Vehicle Times**: Converting transaction times into vehicle arrival and departure times at each stop. First, the transaction times are matched with the GTFS timetable, resulting in a comprehensive dataset that includes all stops even if they were not recorded in the transaction records. Next, this dataset is merged with the vehicle timetables (`trip_stop_timing_vehicle_dataframe`) to incorporate the vehicle_arrival_time and vehicle_departure_time fields. These fields serve as estimated vehicle times in cases where transaction data is unavailable.
+1. **Estimating Vehicle Times**: Converting transaction times into vehicle arrival and departure times at each stop. Then transactions' vehicle times are matched with the GTFS timetable, resulting in a comprehensive dataset that includes all stops even if they were not recorded in the transaction records. Next, this dataset is merged with the trip stop timing vehicle data (`trip_stop_timing_vehicle_dataframe`) to incorporate the vehicle_arrival_time and vehicle_departure_time fields. These fields are used in the next step to estimate the actual arrival and departure time in cases where transaction data is unavailable.
 
-2. **Estimating the Actual Arrival and Departure Time**: Actual (or estimated) arrival and departure times are based on transaction times when available. Otherwise, they are approximated using the mid-geofence time added to vehicle times, as indicated in the trip stop timing report (see `StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time`).
+2. **Estimating the Actual Arrival and Departure Time**: Actual (or estimated) arrival and departure times are based on transactions' vehicle times when available. Otherwise, they are approximated using the mid-geofence time added to vehicle times, as indicated in the trip stop timing report (see `StopToStopVehicleTime.enriched_transaction_veh_arrival_departure_time`).
 
 3. **Identifying Stops within the First and Last Actual Stops**: Actual arrival and departure times are not always available. The first and last actual stops are defined as the initial and final stops in a trip where both actual arrival and departure times are available.
 
