@@ -94,3 +94,33 @@ The `connection` section contains configuration details for database connections
     - Example: `user`
 - `password` (Required): The password for the database connection.
     - Example: `password`
+
+
+
+
+## Configuration Module
+
+The configuration module provides a structured way to manage and access various configuration settings for different data types (raw, input, output). It revolves around the **ConfigReader** class, which is responsible for loading and interpreting YAML files  (the main configuration explained above) to provide configurations for different tables used in the ETL process. This module also defines entities like data types, storage types, and regions, which collectively determine how data is processed, stored, and accessed.
+
+### ConfigReader Class
+
+The main class that users interact with is `ConfigReader`. When instantiated, it takes a path to a YAML configuration file and loads the necessary settings. The class provides an interface for retrieving configurations for raw data, input data, and output data, based on the structure defined in the YAML file. 
+Following is how this class initialised within different stages of the ETL tools which loads the configuration from the specified YAML file. 
+
+```python
+from src.configuration.config_reader import ConfigReader
+        
+config_file_path = r"path/to/transit_analytics_tools/3_etl/assets/config_files/config_v2024.0.xx.yaml"
+config_reader = ConfigReader(config_file_path)
+```
+- Key Method:
+   - `get_table_config`: This method retrieves the configuration of a particular data item (raw, input, or output). It returns details like file paths, storage types, partitioning information, and schema details, depending on the data type being queried. 
+   Example:
+   
+    ```python
+   
+    config = config_reader.raw.get_table_config( name="itinerary")
+   
+    ```
+   For data that requires regional and version-based partitioning, the module allows specifying default variables like `region`, `version`, and `schema_version`. These are replaced dynamically when constructing file paths or querying data configurations. 
+   The YAML file defines folder locations for various data types. For example, it specifies the paths to raw data, input data, schema files, configuration files, and output data. These folder paths are used to locate and manage the data throughout the ETL process.
