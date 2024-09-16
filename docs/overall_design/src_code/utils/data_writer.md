@@ -16,7 +16,7 @@ nav_order: 2
 
 ## Overview
 
-The DataWriter module is designed to facilitate writing data to various output formats using an Object-Oriented Programming (OOP) approach. It supports multiple file formats including `CSV`, `HYPER`, `GeoPackage`, `Parquet` and `Shapefile`, each handled by dedicated writer classes.  This modular approach allows for extending the functionality of the package to support additional formats with minimal changes to the existing codebase.
+The Data Writer module is designed to facilitate writing data to various output formats using an Object-Oriented Programming (OOP) approach. It supports multiple file formats including `CSV`, `HYPER`, `GeoPackage`, `Parquet` and `Shapefile`, each handled by dedicated writer classes.  This modular approach allows for extending the functionality of the package to support additional formats with minimal changes to the existing codebase.
 
 Different methods within the `DataWriter` class instantiate relative writers to direct data write operations to the appropriate format-specific method.
 
@@ -53,7 +53,7 @@ data_writer.to_csv(
 ```
 
 
-Depending on the writer, the user may need to provide different set of arguments to the writer method, see table below for more details:
+Depending on the writer method, the user may need to provide different set of arguments to the writer method, see table below for more details:
 
 | Writer Method | Required Arguments                    |
 |---------------|---------------------------------------|

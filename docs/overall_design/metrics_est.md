@@ -23,7 +23,27 @@ To generate these metrics, the Jupyter notebook `1_produce_curated_data.ipynb` i
    - `produce_stop_to_stop_measures()`
    - `produce_link_measures()`    
 
-The `produce_stop_to_stop_measures()`method calculates the transit metrics between stops. When this method is called, it saves its output (the stop-to-stop metrics) locally in the `4_outputs\1_stop_to_stop_outputs`, under a structured partition based on the analysis period, region, year, month, and day.     
+The `produce_stop_to_stop_measures()`method generates stop-to-stop metrics as below:
+
+- Stop-to-stop travel times   
+  The time it takes for a vehicle to travel between two consecutive stops.
+- Stop-to-stop scheduled travel times  
+  The time scheduled for a vehicle to travel between two consecutive stops. 
+- Passenger load   
+  The number of passengers boarding or alighting at each stop and the number of passengers on board of a vehicle two consecutive stops. 
+
+To generate the above metrics, following inputs are required:  
+
+- GTFS Timetable Data (`gtfs_timetable_df`)  
+  This contains scheduled stop sequences and times for each transit service (trip). It's used to estimate the scheduled travel time and align that with actual travel time of services.
+- Transaction Stop Time Data (`transaction_stop_time_df`)  
+  Ticketing data showing the time vehicle arrives at each stop calculated based on the transaction times.
+- Trip Stop Timing Data (`trip_stop_timing_vehicle_time_df`)     
+  Provides vehicles' arrival and departure times at each stop. This is used in conjunction with the transactions' vehicles time to form the actual arrival and actual departure times.
+- Transaction Stop Load Data (`transaction_stop_load_df`)   
+  Contains the number of passengers boarding or alighting at each stop. This helps calculate the load at each stop.
+
+When the `produce_stop_to_stop_measures()` method is called, it saves its output (the stop-to-stop metrics) locally in the `4_outputs\1_stop_to_stop_outputs`, under a structured partition based on the analysis period, region, year, month, and day.
 
 Once the stop-to-stop metrics are saved, the `produce_link_measures()` method can be called. This method reads the outputs saved by the `produce_stop_to_stop_measures()` method from the local drive and maps them onto the road network. The link-based measures are then saved in the `4_outputs\2_travel_time_split` folder, using a partitioning structure similar to the stop-to-stop outputs.  
 
@@ -72,9 +92,6 @@ Below describes the steps undertaken to estimate these measures in more detail.
 
 6. **Interpolating Travel Time (Link Level)**: Travel time per section is distributed to the street segment links proportionally based on the link length, with travel time allocated according to each link's length within the section.
 
-[//]: # (Each method instantiates additional backend classes to handle specific data processing tasks. The **Ticketing Module** processes the ticketing data, while the **GTFS Module** generates the scheduled timetable data from the GTFS input. These two modules independently process their respective data, which are then combined in the `StopToStopMeasures` class within the **Transit Metrics Module**.)
-
-[//]: # (Once combined, the stop-to-stop measures are integrated with the spatial itineraries using the **SegmentLink** class, also within the **Transit Metrics Module**.)
 
 ### High-level Steps for Estimating Patronage Data
 

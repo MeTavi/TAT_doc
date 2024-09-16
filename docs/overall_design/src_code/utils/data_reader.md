@@ -16,7 +16,7 @@ nav_order: 1
 
 ## Overview
 
-The DataReader module is responsible for reading, validating, and preparing data for the ETL process. It uses configuration files to understand the structure of the data, including file paths, data types, and schema requirements. This module supports various data readers, each designed to handle specific types of data, such as CSV files, geospatial data, and compressed zip archives. Additionally, this module incorporates validation mechanisms to ensure data integrity before proceeding to the next stages of processing.
+The Data Reader module is responsible for reading, validating, and preparing data for the ETL process. It uses configuration files to understand the structure of the data, including file paths, data types, and schema requirements. This module supports various data readers, each designed to handle specific types of data, such as CSV files, geospatial data, and compressed zip archives. Additionally, this module incorporates validation mechanisms to ensure data integrity before proceeding to the next stages of processing.
 
 The DataReader class, along with its extensions, utilises configuration files and input parameters to load, validate, and process data. These configuration files typically define the source, schema, and transformation rules for the data being ingested.
 

@@ -78,7 +78,7 @@ The following high-level folders provide the core structure for the ETL process:
   - `schema_files`: Several yaml file containing the data schema of each data item. For more information about the content and maintenance of these schema files refer to the 'Data Schema' section. 
 - `jupyter_notebooks`: Contains all Jupyter notebooks used for running the ETL pipeline. These notebooks provide a hands-on approach to executing workflows and is further explained in next section High-Level Workflow.
 - `src`: This folder contains the main ETL code and is subdivided into several key subfolders:
-  - `configuration`: Contains modules responsible for managing main configurations. Validates the main config yaml file and provides method to easily access attributes of each data item.
+  - `configuration`: Contains modules responsible for managing main configuration. Validates the main config yaml file and provides method to easily access attributes of each data item.
   - `data_preparation`: A module responsible for converting raw data into intput data.
   - `gtfs`: A module responsible for processing and transforming GTFS data.
   - `ticketing`: A module handling transformation of the ticketing-related data.
