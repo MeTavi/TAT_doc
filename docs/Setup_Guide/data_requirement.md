@@ -215,6 +215,8 @@ Three main reference tables are used in the system, as outlined below:
 2. Trip Stop Timing to GTFS
 
    Similar to the Transaction to GTFS table, this table is used to join the trip stop timing data with the GTFS data for the same route, direction, and operators, despite differing naming conventions in different sources. It also includes columns to specify school services and whether a service should be excluded from analysis. Temporary services such as rail replacements or event-specific services are excluded from processing, and these exclusions can be modified by updating the reference table. The trip stop timing to gtfs reference file follows an identical structure as the transaction to gtfs reference table with the difference that the content of this file corresponds to the trip stop timing report instead of transactions.
+   {: .warning}
+   > It is possible for the same combination of operator, route, and direction to refer to completely different services in two different regions. For example, route 600 in SEQ and Bundaberg, both operated by Sunbus. Although services under this operator name in regional QLD are often referred to as Sunbus-NQ, trip stop timing reports may still list them under Sunbus.
 
 3. Ticket Status   
 
