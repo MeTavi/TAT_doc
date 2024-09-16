@@ -33,3 +33,27 @@ The DataReader class, along with its extensions, utilises configuration files an
 5. Optional Filtering: 
    If specified explicitly, the data reader class filters the data to only required columns, based on the input schema.  
      
+
+**Usage Example**:
+
+
+The DataReader is extensively used within various stages of the Transit Analytics Tools, where it uses the configuration inputs for a specific data items and returns a validated dataframe. Here's a brief example to demonstrate the usage of the `DataReader`:
+
+```python
+    from src.utils.data_reader.data_reader import DataReader
+    from src.configuration.config_reader import ConfigReader
+    from datetime import date
+    
+    
+    config_file_path = r"path/to/transit_analytics_tools/3_etl/assets/config_files/config_v2024.0.xx.yaml"
+    config_reader = ConfigReader(config_file_path)
+    
+    link_based_config = config_reader.outputs.get_table_config(
+                "link_based_measures",
+                date(2023,3,8),
+                version='20230305',
+                region='SEQ',
+            )
+    data_reader = DataReader()
+    df = data_reader.read(**link_based_config)
+```
