@@ -26,7 +26,7 @@ The DataReader class, along with its extensions, utilises configuration files an
    After reading the data, if the data schema is provided, a series of validation checks are performed to ensure the data conforms to the expected schema and integrity rules. 
    This includes applying corrections that are defined within the schema. These corrections are generally very basics and often necessary for the data to be later interpreted into the correct data types. checking for null values, verifying data types, and applying custom validation rules specific to the data source.
 3. Renaming Columns:
-   Following the data correction, if it is specified in the schema file, the columns are renamed. This is useful for situations where the data provided to the process with a different set of column names than is required by the process.
+   Following the data correction stage, if it is specified in the schema file, the columns are renamed where required. This is useful for situations where the data provided to the process with a different set of column names than is required by the process.
 4. Schema Validation:
    Following the previous steps, the dataframes is validated against the input schema. The schema defines the structure of the data, including column names, data types, and nullability. Each DataReader class verifies that the loaded data conforms to the expected schema. 
    Certain columns are not allowed to contain null values. The validation step checks for nulls in these critical columns and raises exceptions if any are found. The DataReader can apply additional custom validation rules based on the configuration. For example, for geospatial data, it checks that all geometries in a GeoDataFrame are valid.
