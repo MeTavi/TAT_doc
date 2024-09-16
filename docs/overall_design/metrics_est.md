@@ -25,19 +25,22 @@ To generate these metrics, the Jupyter notebook `1_produce_curated_data.ipynb` i
 
 The `produce_stop_to_stop_measures()`method generates stop-to-stop metrics as below:
 
-- Stop-to-stop travel times: The time it takes for a vehicle to travel between two consecutive stops.
-- Stop-to-stop scheduled travel times: The time scheduled for a vehicle to travel between two consecutive stops. 
-- Passenger load: The number of passengers boarding or alighting at each stop and the number of passengers on board of a vehicle two consecutive stops. 
+- Stop-to-stop travel times   
+  The time it takes for a vehicle to travel between two consecutive stops.
+- Stop-to-stop scheduled travel times  
+  The time scheduled for a vehicle to travel between two consecutive stops. 
+- Passenger load   
+  The number of passengers boarding or alighting at each stop and the number of passengers on board of a vehicle two consecutive stops. 
 
 To generate the above metrics, following inputs are required:  
 
-- GTFS Timetable Data (gtfs_timetable_df):  
+- GTFS Timetable Data (`gtfs_timetable_df`)  
   This contains scheduled stop sequences and times for each transit service (trip). It's used to estimate the scheduled travel time and align that with actual travel time of services.
-- Transaction Stop Time Data (transaction_stop_time_df):  
+- Transaction Stop Time Data (`transaction_stop_time_df`)  
   Ticketing data showing the time vehicle arrives at each stop calculated based on the transaction times.
-- Trip Stop Timing Data (trip_stop_timing_vehicle_time_df):     
+- Trip Stop Timing Data (`trip_stop_timing_vehicle_time_df`)     
   Provides vehicles' arrival and departure times at each stop. This is used in conjunction with the transactions' vehicles time to form the actual arrival and actual departure times.
-- Transaction Stop Load Data (transaction_stop_load_df):   
+- Transaction Stop Load Data (`transaction_stop_load_df`)   
   Contains the number of passengers boarding or alighting at each stop. This helps calculate the load at each stop.
 
 When the `produce_stop_to_stop_measures()` method is called, it saves its output (the stop-to-stop metrics) locally in the `4_outputs\1_stop_to_stop_outputs`, under a structured partition based on the analysis period, region, year, month, and day.
