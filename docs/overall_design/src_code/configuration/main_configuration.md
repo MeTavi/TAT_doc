@@ -100,7 +100,7 @@ The `connection` section contains configuration details for database connections
 
 ## Configuration Module
 
-The configuration module provides a structured way to manage and access various configuration settings for different data types (raw, input, output). It revolves around the **ConfigReader** class, which is responsible for loading and interpreting YAML files  (the main configuration explained above) to provide configurations for different tables used in the ETL process. This module also defines entities like data types, storage types, and regions, which collectively determine how data is processed, stored, and accessed.
+The configuration module provides a structured way to manage and access various configuration settings defined within the main configuration file for different data types (raw, input, output). It revolves around the **ConfigReader** class, which is responsible for loading, validating and interpreting YAML config file. This module also defines entities like data types, storage types, and regions, which collectively determine how data is processed, stored, and accessed.
 
 ### ConfigReader Class
 
@@ -122,5 +122,15 @@ config_reader = ConfigReader(config_file_path)
     config = config_reader.raw.get_table_config( name="itinerary")
    
     ```
-   For data that requires regional and version-based partitioning, the module allows specifying default variables like `region`, `version`, and `schema_version`. These are replaced dynamically when constructing file paths or querying data configurations. 
-   The YAML file defines folder locations for various data types. For example, it specifies the paths to raw data, input data, schema files, configuration files, and output data. These folder paths are used to locate and manage the data throughout the ETL process.
+   For data that requires regional and version-based partitioning, the module allows specifying default variables like `region`, `version`, and `schema_version`. These are replaced dynamically when constructing file paths or querying data configurations. For example, accessing one of the outputs of the ETL process that is partinoned and stored locally is shown below: 
+    ```python
+    append_corridor_config = config_reader.outputs.get_table_config(
+                  "appended_corridors",
+                  corridor_type='Infrastructure',
+                  region='SEQ',
+                  corridor_id='1041',
+                  version='20240305',
+              ) 
+    ```
+  
+
