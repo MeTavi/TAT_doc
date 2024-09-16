@@ -100,7 +100,7 @@ The `connection` section contains configuration details for database connections
 
 ## Configuration Module
 
-The configuration module provides a structured way to manage and access various configuration settings defined within the main configuration file for different data types (raw, input, output). It revolves around the **ConfigReader** class, which is responsible for loading, validating and interpreting YAML config file. This module also defines entities like data types, storage types, and regions, which collectively determine how data is processed, stored, and accessed.
+The configuration module provides a structured way to manage and access various configuration settings defined within the [main configuration file] for different data types (raw, input, output). It revolves around the **ConfigReader** class, which is responsible for loading, validating and interpreting YAML config file. This module also defines entities like data types, storage types, and regions, which collectively determine how data is processed, stored, and accessed.
 
 ### ConfigReader Class
 
@@ -133,4 +133,8 @@ config_reader = ConfigReader(config_file_path)
               ) 
     ```
   
+
+
+
+[main configuration file]: {% link docs/Appendix/yaml_files.md %}#main-configuration
 
