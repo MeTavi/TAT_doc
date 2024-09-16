@@ -1,11 +1,13 @@
 ---
 layout: default
-title: Appendix
-nav_order: 99
+title: Appendix A
+parent: Appendix
+nav_order: 1
 has_toc: false  # Disable the automatic Table of Contents
 ---
 
-# Appendix
+
+# Appendix A - Tables
 {: .no_toc }
 ## Table of contents
 {: .no_toc .text-delta }
