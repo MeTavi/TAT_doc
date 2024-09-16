@@ -21,7 +21,7 @@ The YAML file defines a series of operations that are applied to the incoming Da
 
 ### Key Elements of the YAML
 
-1. Operation Type (`type`): 
+1. Operation Type
 
    Each operation is classified as one of the following:
       - **calculation**: A mathematical or logical operation that creates a new column or modifies an existing column. The formulas usually follow Pandas syntax and operate at the row level. In the backend these calculation is performed using pandas eval operator for increased efficiency, therefore this operation type is limited to what eval can do. For more custom operation use the custom transform.
@@ -30,19 +30,19 @@ The YAML file defines a series of operations that are applied to the incoming Da
       
       - **aggregation**: An operation that groups data by one or more columns and applies aggregation functions (e.g., sum, mean, or custom functions) to calculate summary statistics. 
    
-2. Operation Name (`name`):
+2. Operation Name
 
-   A human-readable name for each operation, describing its function.
+   A human-readable `name` for each operation, describing its function.
 
-3. Formula (`formula`):
+3. Formula
 
    The formula or expression used for calculations and custom transformations. In some cases, the formula refers to a custom function.
 
-4. Group By (`group_by`): 
+4. Group By
 
    For aggregation operations, this specifies the columns used to group the data. The result is aggregated at the level of the specified columns.
 
-5. Aggregation Details (`aggregations`): 
+5. Aggregation Details 
 
    For aggregation operations, defines the metrics calculated during aggregation, including:
 
@@ -58,8 +58,10 @@ The YAML file defines a series of operations that are applied to the incoming Da
  {: .important-title }
  >    Maintaining the Calculation Configuration YAML File
  > 
- >    Operations are executed sequentially, so the order in the YAML file matters. Make sure transformations happen before any aggregations that rely on transformed data.
- >    Use clear and descriptive names for each operation to make the YAML file easy to read and maintain.
+ >    Operations are executed sequentially, so the order in the YAML file matters. Make sure transformations happen before any aggregations that rely on transformed data.  
+ > 
+ >    Use clear and descriptive names for each operation to make the YAML file easy to read and maintain.  
+ > 
  >    After adding new operations, it is important to test the changes by running the ETL pipeline and verifying that the operations work as expected.
 
 
