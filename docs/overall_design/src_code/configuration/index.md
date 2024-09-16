@@ -18,7 +18,7 @@ The Run Configuration sets up the arguments needed to execute one or more steps 
 3. Calculation Configurations  
 The [Calculation Configurations] serves as a recipe for the sequential operations applied to incoming data. These configuration require minimal user intervention unless there is a need to update the formulation, change the order of operations, or add new operations. These files are read by the `transformer` module within the `transit_metrics_aggregate` module where the data validation occurs as part of the process.
 
-[Main Configuration]: {% docs/overall_design/src_code/configuration/main_configuration.md %}
-[Calculation Configurations]: {% docs/overall_design/src_code/configuration/calculation_configuration.md %}
+[Main Configuration]: {% link docs/overall_design/src_code/configuration/main_configuration.md %}
+[Calculation Configurations]: {% link docs/overall_design/src_code/configuration/calculation_configuration.md %}
 
 
