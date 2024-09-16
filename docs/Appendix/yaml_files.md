@@ -18,9 +18,10 @@ has_toc: false  # Disable the automatic Table of Contents
 
 ## Main Configuration
 
+
 ```yaml
 folder_locations:
-  src_path: 'C:/Modelling_Projects/transit_analytics_tools/3_etl/src'
+  src_path: 'C:/Modelling_Projects/2023_Corridor Analytics/corridor-explorer-2024/Corrdior_Explorer/3_ETL/src'
   raw_folder: "../../1_raw_data/"
   input_folder: "../../2_input_data/"
   schema_folder: "../assets/schema_files"
@@ -75,18 +76,12 @@ data_items:
         schema_version: '2024.0.0'
 
   inputs:
-    - name: "ref_gtfs_time_periods"
-      relative_path: '1_reference_tables/ref_{version}/ref_gtfs_time_periods.csv'
-      schema_file_name: "ref_gtfs_time_periods_schema_{schema_version}.yaml"
-      default_variables:
-        version: '2023.0.0'
-        schema_version: '2021.0.0'
 
     - name: "ref_transaction_ticket_status"
       relative_path: '1_reference_tables/ref_{version}/ref_ticket_status.csv'
       schema_file_name: "ref_ticket_status_schema_{schema_version}.yaml"
       default_variables:
-        version: '2023.0.0'
+        version: '2024.0.1'
         schema_version: '2021.0.0'
 
     - name: "ref_transaction_to_gtfs"
@@ -96,19 +91,18 @@ data_items:
       relative_path: '1_reference_tables/ref_{version}/ref_transaction_to_gtfs.csv'
       schema_file_name: "ref_transaction_to_gtfs_schema_{schema_version}.yaml"
       default_variables:
-        version: '2023.0.0'
+        version: '2024.0.1'
         schema_version: '2021.0.0'
 
     - name: "ref_trip_stop_timing_to_gtfs"
       storage_type: local_drive
       file_type: csv
       is_partitioned: false
-      relative_path: '1_reference_tables/ref_{version}/ref_trip_stop_timing_to_gtfs.csv'
+      relative_path: '1_reference_tables/ref_{version}/ref_trip_stop_timing_to_gtfs_{region}.csv'
       schema_file_name: 'ref_trip_stop_timing_to_gtfs_schema_{schema_version}.yaml'
       default_variables:
-        version: '2023.0.0'
+        version: '2024.0.1'
         schema_version: '2023.0.0'
-
 
     - name: "corridor_definition"
       storage_type: local_drive
@@ -118,7 +112,6 @@ data_items:
       default_variables:
         version: "2023.0.0"
         schema_version: '2024.0.0'
-
 
     - name: "transactions"
       is_partitioned: true
@@ -138,9 +131,9 @@ data_items:
 
     - name: "full_network"
       storage_type: "local_drive"
-      file_type: "geopackage"
+      file_type: "parquet"
       requires_region: false
-      relative_path: "3_hastus/{version}/2_streetsegment_network/hastus_network.gpkg"
+      relative_path: "3_hastus/{version}/2_streetsegment_network/hastus_network.parquet.gz"
       layer_name: 'processed_streetsegment'
       default_variables:
         schema_version: '2023.0.0'
@@ -185,6 +178,32 @@ data_items:
         region: "SEQ"
         version: "20230307"
 
+    - name: "feedback"
+      relative_path: "7_other_spatial_inputs/bus_operator_feedback.parquet.gz"
+
+    - name: "centers"
+      relative_path: "7_other_spatial_inputs/regional_activity_centres.parquet.gz"
+
+    - name: "lga"
+      relative_path: "7_other_spatial_inputs/local_government_areas.parquet.gz"
+
+    - name: "roads"
+      relative_path: "7_other_spatial_inputs/baseline_roads.parquet.gz"
+
+    - name: "suburbs"
+      relative_path: "7_other_spatial_inputs/suburbs.parquet.gz"
+
+    - name: "pt_needs"
+      relative_path: "7_other_spatial_inputs/pt_needs_index.parquet.gz"
+
+    - name: "strat_network"
+      relative_path: "7_other_spatial_inputs/corridors_shapes.parquet.gz"
+
+    - name: "busway"
+      relative_path: "7_other_spatial_inputs/busway_shapes_v3.parquet.gz"
+
+    - name: "cbd"
+      relative_path: "7_other_spatial_inputs/brisbane_city.parquet.gz"
 
 
   outputs:
@@ -217,7 +236,6 @@ data_items:
       file_type: "parquet"
       relative_path: "3_corridor_explorer/1_append_corridors/{version}/corridor_type={corridor_type}/region={region}/{corridor_id}_tt_estimated.parquet.gz"
       requires_region: true
-      #      schema_file_name: "appended_corridors_schema_{schema_version}.yaml"
       default_variables:
         version: "20221014"
         region: 'SEQ'
@@ -228,7 +246,6 @@ data_items:
       file_type: "parquet"
       relative_path: "3_corridor_explorer/2_measures/{version}/corridor_type={corridor_type}/region={region}/link_based_measures/{corridor_id}_link_based_estimates.parquet.gz"
       requires_region: true
-      #      schema_file_name: "corridors_link_based_measures_schema_{schema_version}.yaml"
       default_variables:
         version: "20221014"
         region: 'SEQ'
@@ -239,7 +256,16 @@ data_items:
       file_type: "parquet"
       relative_path: "3_corridor_explorer/2_measures/{version}/corridor_type={corridor_type}/region={region}/stop_based_measures/{corridor_id}_stop_based_estimates.parquet.gz"
       requires_region: true
-      #      schema_file_name: "corridors_estimated_stop_based_measures_schema_{schema_version}.yaml"
+      default_variables:
+        version: "20221014"
+        region: 'SEQ'
+        schema_version: '2024.0.0'
+
+    - name: "corridors_bus_bunching_measures"
+      storage_type: "local_drive"
+      file_type: "parquet"
+      relative_path: "3_corridor_explorer/2_measures/{version}/corridor_type={corridor_type}/region={region}/bus_bunching_measures/{corridor_id}_bus_bunching_measures.parquet.gz"
+      requires_region: true
       default_variables:
         version: "20221014"
         region: 'SEQ'
@@ -250,7 +276,6 @@ data_items:
       file_type: "parquet"
       relative_path: "4_bcap/1_measures/{version}/region={region}/segments_measures.parquet.gz"
       requires_region: true
-      #      schema_file_name: "bcap_segments_measures_schema_{schema_version}.yaml"
       default_variables:
         version: "20221014"
         region: 'SEQ'
@@ -261,7 +286,6 @@ data_items:
       file_type: "parquet"
       relative_path: "4_bcap/1_measures/{version}/region={region}/stops_measures.parquet.gz"
       requires_region: true
-      #      schema_file_name: "bcap_segment_measures_schema_{schema_version}.yaml"
       default_variables:
         version: "20221014"
         region: 'SEQ'
