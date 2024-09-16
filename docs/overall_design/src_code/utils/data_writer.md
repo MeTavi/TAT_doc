@@ -2,7 +2,7 @@
 layout: default
 title: Data Writer
 parent: Utilities
-nav_order: 1
+nav_order: 2
 ---
 # Data Writer
 {: .no_toc }
