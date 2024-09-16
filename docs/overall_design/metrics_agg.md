@@ -75,7 +75,7 @@ The results from these methods are saved in a structured format, similar to the 
    |   |   |   |   |   |   |   |   +-- [corridor_id]_link_based_estimated.parquet.gz
    ```
 
-#### Step 2: Producing the Hyper files for Corridor Explorer dashboards
+#### Step 2: Producing the Hyper Files for Corridor Explorer Dashboards
 
 The `CE_Export_to_Hyper.ipynb` notebook combines the link and stop measures from all corridors and all analysis periods. It then exports this consolidated data into Hyper files for use in the Corridor Explorer dashboard in Tableau.
 
@@ -93,7 +93,7 @@ The `CE_Export_to_Hyper.ipynb` notebook combines the link and stop measures from
    |   |   |   |   +-- stop_measure_[run_version].parquet.gz
    ```
 
-### Producing outputs for BCAP Dashboard
+### Producing Outputs for BCAP Dashboard
 
 To generate the outputs for the **BCAP Dashboards** dashboard, two Jupyter notebooks are used:
 
@@ -103,7 +103,7 @@ To generate the outputs for the **BCAP Dashboards** dashboard, two Jupyter noteb
 2. Appending spatial layers to the curated data and producing the Hyper files for the BCAP Dashboards: The **BCAP_Attributes** notebook reads and combines the link and stops measures produced in the previous step, appends various spatial labels to each record and creates a Hyper file that will be used for visualisation in the Corridor Explorer dashboard.
 
 
-#### Step 1: Producing curated data for the BCAP Dashboards
+#### Step 1: Producing Curated Data for the BCAP Dashboards
 
 Similarly, to generate the required data for the **BCAP Dashboards**, the Jupyter notebook named `BCAP_Measures.ipynb` is used. This notebook instantiates the `BusCorridorActionPlan` class and produces both link-based and stop-based measures using `produce_link_measures()` and `produce_stop_measures()` methods.
 
@@ -127,7 +127,7 @@ Once the **stop measures** and **link measures** are estimated for the BCAP dash
 ```
 
 
-#### Step 2: Appending spatial layers and Producing the Hyper files
+#### Step 2: Appending Spatial Layers and Producing the Hyper Files
 
 
 At this stage, the Jupyter notebook named `BCAP_Attributes.ipynb` reads all the link and stop measures produced for BCAP across different periods. 
