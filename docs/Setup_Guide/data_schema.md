@@ -62,31 +62,32 @@ Components:
 The `columns` section defines the specifications for each column in the table:
 
 - `dtype`: The expected data type of the column. This can be `int`, `float`, `str`, `date`, `date_time`, etc.
-- `format`: (Optional) For date and date-time columns, this specifies the expected format.
+- `format`: For date and date-time columns, this specifies the expected format.
 - `required`: Whether the column is mandatory in the table.
-- `correction`: (Optional) A transformation function written as a string, which will be applied to preprocess the column
+- `correction`: A transformation function written as a string, which will be applied to preprocess the column
   data upon reading.
-- `definition`: (Optional) A brief description of the column's content.
-- `note`: (Optional) Any additional explanatory notes for the column.
+- `rename_to`: A string to rename the column to. 
+- `definition`: A brief description of the column's content.
+- `note`:  Any additional explanatory notes for the column.
 
-### Schema Type
 
-The `schema_type` key indicates the type of data structure the schema is designed to validate. For our purposes, this is
-typically set to `dataframe`.
+## Creating and Maintaining Schemas
 
-Creating and Maintaining Schemas
--------------------------------
 
 1. **Reusing Existing Schemas**: If a new table is similar to an existing one, consider using the existing schema as a
-   starting point and then modify as needed.
+   starting point and then modify as needed.  
 
-2. **Testing the Schema**: After creating or modifying a schema, always test it with actual data to ensure it works as
+2. **Using Pandera**: If a totally new table, read it in pandas dataframe, convert the datatype as required in pandas. Use the infer_schema method from the Pandera library to generate the schema based on your DataFrame. Save the inferred schema to a YAML file locally. Review the generated schema to ensure it is correct and meets your requirements.
+
+3. **Corrections and Renames**: When defining a new schema, corrections and renames need to be added under appropriate columns manually. Ensure they are generic and applicable to all rows in the
+   table. Test these corrections thoroughly using sample data.
+
+4. **Testing the Schema**: After creating or modifying a schema, always test it with actual data to ensure it works as
    expected.
 
-3. **Versioning**: Whenever making significant changes to a schema, update the version number and document the changes
+5. **Versioning**: Whenever making any changes to a schema, update the version number and document the changes
    in the docstring of the yaml file. This ensures traceability and clarity about schema evolutions.
 
-4. **Collaboration**: Use a version control system like Git to manage schema files.
+6. **Collaboration**: Use a version control system like Git to manage schema files.
 
-5. **Corrections**: When defining corrections in the schema, ensure they are generic and applicable to all rows in the
-   table. Test these corrections thoroughly using sample data.
+
