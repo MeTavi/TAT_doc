@@ -874,3 +874,259 @@ operations:
     name: assign AvePassDelay flag
     formula: "assign_flag(df, 'AvePassDelay')"
 ```
+
+
+## Data Schemas
+
+### Raw Transactions Schema
+
+```yaml
+metadata:
+  author: MT
+  last_modified: '2023-10-12'
+  notes: raw schema does not have boarding_stop_id and alighting_stop_id fields instead they are part of the boarding and alighting_stop fields.
+schema_type: dataframe
+strict: false
+
+columns:
+  actual_end:
+    dtype: "object"
+    nullable: true
+    required: true
+  actual_start:
+    dtype: "object"
+    coerce: true
+    nullable: true
+    required: true
+  alighting_stop:
+    dtype: "object"
+    nullable: true
+    required: true
+    correction: "extract_stop_id(x)"
+    new_column: alighting_stop_id  # creating a new column from boarding stop using the above correction.
+  alighting_time:
+    dtype: "object"
+    nullable: true
+    required: true
+    coerce: true
+  boarding_stop:
+    dtype: "object"
+    nullable: true
+    required: true
+    correction: "extract_stop_id(x)"
+    new_column: boarding_stop_id  # creating a new column from boarding stop using the above correction.
+  boarding_time:
+    dtype: "object"
+    nullable: true
+    required: true
+    coerce: true
+  direction:
+    dtype: "object"
+    nullable: true
+    required: true
+  operator:
+    dtype: "object"
+    nullable: true
+    required: true
+  passenger_type_level_2:
+    dtype: "object"
+    nullable: true
+    required: true
+  passengers:
+    dtype: "object"
+    nullable: true
+    coerce: true
+    required: true
+  ticket_status:
+    dtype: "object"
+    nullable: true
+    coerce: true
+    required: true
+  period_date:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d'
+    nullable: true
+    required: true
+    coerce: true
+  route:
+    dtype: "object"
+    nullable: true
+    required: true
+  scheduled_start:
+    dtype: "object"
+    nullable: true
+    required: true
+    coerce: true
+  service:
+    dtype: "object"
+    nullable: true
+    required: true
+  ticket_type_level_3:
+    dtype: "object"
+    required: true
+  vehicle:
+    dtype: "object"
+    required: true
+```
+
+### Transaction Schema 
+```yaml
+# Transaction Data Schema
+#
+# This schema is used to validate and preprocess the transaction data before further analysis.
+# Below are the specifications for each column in the data, including their data types,
+# whether they are required, and any corrections that should be applied upon reading.
+#
+# YAML Schema is using strict=false This will allow Pandera to validate only
+# the columns defined in the schema and ignore any extra columns in the data.
+#
+
+
+metadata:
+  author: MT
+  last_modified: '2023-10-12'
+  notes: Initial schema with corrections for boarding_stop_id and alighting_stop_id.
+schema_type: dataframe
+strict: false
+
+columns:
+  actual_end:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d %H:%M:%S'
+    nullable: true
+    required: true
+    coerce: true
+  actual_start:
+    definition: this is the tap on time for the transaction
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d %H:%M:%S'
+    note: actual start is needed to calculate the travel time
+    coerce: true
+    nullable: true
+    required: true
+  alighting_stop:
+    dtype: "object"
+    nullable: true
+    required: true
+  alighting_stop_id:
+    correction: "str(x).rstrip('.0')"
+    dtype: "object"
+    required: true
+  alighting_time:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d %H:%M:%S'
+    nullable: true
+    required: true
+    coerce: true
+  boarding_stop:
+    dtype: "object"
+    nullable: true
+    required: true
+  boarding_stop_id:
+    correction: "str(x).rstrip('.0')"
+    dtype: "object"
+    required: true
+  boarding_time:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d %H:%M:%S'
+    nullable: true
+    required: true
+    coerce: true
+  direction:
+    dtype: "object"
+    nullable: true
+    required: true
+  operator:
+    dtype: "object"
+    nullable: true
+    required: true
+  passenger_type_level_2:
+    dtype: "object"
+    nullable: true
+    required: true
+  passengers:
+    dtype: 'Int64'
+    correction: "0 if pd.isna(x) else float(x)"
+    nullable: true
+    coerce: true
+    required: true
+  period_date:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d'
+    nullable: true
+    required: true
+    coerce: true
+  route:
+    dtype: "object"
+    nullable: true
+    required: true
+  scheduled_start:
+    dtype: "datetime64[ns]"
+    format: '%Y-%m-%d %H:%M:%S'
+    nullable: true
+    required: true
+    coerce: true
+  service:
+    dtype: "object"
+    nullable: true
+    required: true
+  ticket_status:
+    dtype: "object"
+    nullable: true
+    required: true
+  ticket_type_level_3:
+    nullable: true
+    dtype: "object"
+    required: true
+  vehicle:
+    nullable: true
+    dtype: "object"
+    required: true
+
+
+
+
+```
+
+### Raw Itinerary 
+
+```yaml
+
+# HASTUS Itinerary Schema
+#
+# In 2024 extract the Itinerary files provided has column headers (in all the previous versions there was no column names). These column headers should be renamed and adjusted.
+
+columns:
+  tpat_route_id:
+    nullable: false
+    required: true
+    rename_to: 'shape_id'
+    note: To estimate link-based travel time, all shape IDs in the analysis period must be found in the itinerary table of the input GTFS. If a shape ID is missing and it corresponds to an unimportant road for the analysis, it's okay.
+  itin_tpat_counter:
+    dtype: int64
+    coerce: true
+    required: true
+    nullable: false
+    rename_to: 'segment'
+    note: The segment is the distinct stop to stop portion of a trip.
+  itin_seg_counter:
+    dtype: int64
+    coerce: true
+    required: true
+    nullable: false
+    rename_to: 'order'
+    note: Order of the links between each segments.
+  itin_seg_direction:
+    required: true
+    nullable: false
+    coerce: true
+    dtype: category
+    enums: [ 'To Destination', 'To Origin', 'To ' ]
+    rename_to: 'seg_direction'
+    note: This is the direction in which the spatial line is drawn (as per the specification of the StreetSegmentNetwork) and is nothing to do with the direction of travel or the direction of trip.
+  itin_seg_external_id:
+    required: true
+    nullable: true
+    rename_to: 'seg_id'
+    note: This is the seg_id in the StreetSegmentNetwork. This ID is not unique link id unless it is combined with the direction field. There are records in the itinerary file that has no seg_id. A unique combination of seg_id and seg_direction appears multiple times in this dataset, as different shape ids are using the same link.
+```

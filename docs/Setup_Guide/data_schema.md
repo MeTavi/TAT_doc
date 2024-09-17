@@ -67,6 +67,7 @@ The `columns` section defines the specifications for each column in the table:
 - `correction`: A transformation function written as a string, which will be applied to preprocess the column
   data upon reading.
 - `rename_to`: A string to rename the column to. 
+- `new_column`: Only used in conjunction with correction. When it is provided, the result of correction is stored under a new column. This is used for raw transactions to extract the stop_id from the boarding and alighting stops. 
 - `definition`: A brief description of the column's content.
 - `note`:  Any additional explanatory notes for the column.
 
