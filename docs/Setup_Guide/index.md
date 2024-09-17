@@ -20,8 +20,8 @@ has_toc: false  # Disable the automatic Table of Contents
 1. **Git account**: Access to the TMR-TAU Git account.
 2. **Software**:
    - Python (version 3.9).
-   - Your selected Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code).
-   - Your selected GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional).
+   - Integrated Development Environment (IDE) (e.g. PyCharm, Visual Studio Code).
+   - GIS tool (e.g. QGIS, MapInfo, ArcGIS) (optional).
 3. **Raw Data Files**: Raw data files are not stored in the repository. Ensure you have access to the raw data files needed for processing.
 4. **Local Storage Space**: Approximately 100GB of local storage is required. However, this estimate may vary significantly depending on the number of analysis periods.
 
@@ -69,7 +69,7 @@ When the repository is cloned, it includes a high-level folder structure with em
     +-- transit_analytics_tools
     |   +-- 1_raw_data
     |   |   +-- 1_hastus
-    |   |   +-- 2_ gtfs
+    |   |   +-- 2_gtfs
     |   |   +-- 3_ticketing
     |   +-- 2_input_data
     |   |   +-- 1_reference_tables
@@ -96,7 +96,7 @@ There are three main datasets that should be provided for the process, as outlin
    - Stop locations      
 
    See more information about the [HASTUS Data] in the Data Requirement section.
-2. GTFS Data: The GTFS data used in this transit analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the Data Requirement section.
+2. GTFS Data: The GTFS data used in this Transit Analytics process is produced by CUBIC for maximum compatibility. See more information about the [GTFS Data] in the Data Requirement section.
 3. Ticketing Data: This consists of two key data items:
    - Transaction data
    - Trip stop timing reports  
@@ -163,13 +163,13 @@ The user should review and update the configuration file that is located under `
 
 ## Data Folder Structure Overview
 
-The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into input data folder in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
+The ETL process relies on a well-defined set of data. The data comes in a raw form and is processed by the data preparation stage, after which it is saved into the input data folder in a form that is ready to be used by the subsequent steps within the overall ETL process. Additionally, there are reference tables that are defined for the ETL process to function properly and should be maintained by the user. This section outlines the role of each of these data sources and how they are organised within the project folder structure in more detail. Below is a high-level folder structure that reflects how the data is stored under the project folder.
 
 ```shell
     +-- transit_analytics_tools
     |   +-- 1_raw_data
     |   |   +-- 1_hastus
-    |   |   +-- 2_ gtfs
+    |   |   +-- 2_gtfs
     |   |   +-- 3_ticketing
     |   +-- 2_input_data
     |   |   +-- 1_reference_tables
